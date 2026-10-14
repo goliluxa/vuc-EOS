@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { BrandLogo } from '../components/BrandLogo';
 import { BackgroundPattern } from '../components/BackgroundPattern';
 
 export const HomePage: React.FC = () => {
@@ -9,12 +8,8 @@ export const HomePage: React.FC = () => {
     <div className="relative min-h-screen flex flex-col justify-between bg-surface-bg text-content-primary overflow-x-hidden animate-fade-in">
       <BackgroundPattern />
 
-      {/* Top Navigation Bar with authentic VUC emblem */}
-      <header className="w-full pt-5 sm:pt-7 pb-3 sm:pb-4">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          <BrandLogo size="md" />
-        </div>
-      </header>
+      {/* Top spacer (header logo removed per user request) */}
+      <div className="w-full pt-6 sm:pt-10" aria-hidden="true" />
 
       {/* Main Single-Screen Hero Section - Left Aligned */}
       <main className="flex-1 flex items-center py-6 sm:py-10 lg:py-16">

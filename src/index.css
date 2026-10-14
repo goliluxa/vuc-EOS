@@ -124,6 +124,37 @@
   }
 }
 
+@keyframes starSheenSweep {
+  0% {
+    transform: translate3d(-130%, -130%, 0) rotate(30deg);
+  }
+  35% {
+    transform: translate3d(130%, 130%, 0) rotate(30deg);
+  }
+  100% {
+    transform: translate3d(130%, 130%, 0) rotate(30deg);
+  }
+}
+
+@keyframes starFloatSlow {
+  0%, 100% {
+    transform: translateY(-50%) translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translateY(-50%) translate3d(0, -10px, 0) scale(1.015);
+  }
+}
+
+.animate-star-sheen {
+  animation: starSheenSweep 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: transform;
+}
+
+.animate-star-float {
+  animation: starFloatSlow 8s ease-in-out infinite;
+  will-change: transform;
+}
+
 .animate-ambient-slow {
   animation: ambientDriftSlow 18s ease-in-out infinite alternate;
   will-change: transform, opacity;
