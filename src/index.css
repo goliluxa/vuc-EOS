@@ -71,6 +71,79 @@
   }
 }
 
+@keyframes ambientDriftSlow {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.45;
+  }
+  50% {
+    transform: translate3d(30px, -24px, 0) scale(1.08);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate3d(-20px, 20px, 0) scale(0.95);
+    opacity: 0.45;
+  }
+}
+
+@keyframes ambientDriftReverse {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translate3d(-35px, 28px, 0) scale(1.1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate3d(24px, -18px, 0) scale(0.96);
+    opacity: 0.35;
+  }
+}
+
+@keyframes subtleGradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes watermarkSubtlePulse {
+  0%, 100% {
+    opacity: 0.055;
+    transform: translateY(-50%) scale(1);
+  }
+  50% {
+    opacity: 0.085;
+    transform: translateY(-50%) scale(1.015);
+  }
+}
+
+.animate-ambient-slow {
+  animation: ambientDriftSlow 18s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+.animate-ambient-reverse {
+  animation: ambientDriftReverse 24s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+.animate-subtle-gradient {
+  background-size: 200% 200%;
+  animation: subtleGradientShift 16s ease-in-out infinite;
+}
+
+.animate-watermark-pulse {
+  animation: watermarkSubtlePulse 14s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
 .animate-fade-in {
   animation: fadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

@@ -7,16 +7,19 @@ export const BackgroundPattern: React.FC = () => {
       className="absolute inset-0 pointer-events-none overflow-hidden -z-10 select-none"
       aria-hidden="true"
     >
-      {/* Top subtle tricolor accent line */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-military-red/70 via-military-blue/60 to-transparent" />
+      {/* Top subtle tricolor accent line with gentle shimmer */}
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-military-red/70 via-military-blue/60 to-transparent bg-[length:200%_100%] animate-subtle-gradient" />
 
-      {/* Atmospheric lighting gradients */}
-      <div className="absolute -top-40 -left-40 w-[32rem] h-[32rem] bg-blue-100/60 rounded-full blur-3xl" />
-      <div className="absolute top-1/4 right-0 w-[42rem] h-[42rem] bg-slate-200/50 rounded-full blur-3xl" />
-      <div className="absolute -bottom-32 left-1/3 w-[28rem] h-[28rem] bg-blue-50/70 rounded-full blur-3xl" />
+      {/* Barely noticeable ambient gradient shimmering wash */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-100/20 via-transparent to-slate-200/25 animate-subtle-gradient" />
 
-      {/* Large authentic VUC star emblem watermark positioned on the right side */}
-      <div className="absolute -right-16 sm:right-0 lg:right-4 xl:right-12 top-1/2 -translate-y-1/2 w-[32rem] h-[32rem] sm:w-[40rem] sm:h-[40rem] lg:w-[46rem] lg:h-[46rem] xl:w-[50rem] xl:h-[50rem] opacity-[0.065] pointer-events-none">
+      {/* Atmospheric lighting gradients with slow organic drift */}
+      <div className="absolute -top-40 -left-40 w-[34rem] h-[34rem] bg-blue-100/60 rounded-full blur-3xl animate-ambient-slow" />
+      <div className="absolute top-1/4 right-0 w-[44rem] h-[44rem] bg-blue-50/70 rounded-full blur-3xl animate-ambient-reverse" />
+      <div className="absolute -bottom-32 left-1/3 w-[28rem] h-[28rem] bg-slate-200/50 rounded-full blur-3xl animate-ambient-slow" />
+
+      {/* Large authentic VUC star emblem watermark with subtle ambient breathing */}
+      <div className="absolute -right-16 sm:right-0 lg:right-4 xl:right-12 top-1/2 w-[32rem] h-[32rem] sm:w-[40rem] sm:h-[40rem] lg:w-[46rem] lg:h-[46rem] xl:w-[50rem] xl:h-[50rem] animate-watermark-pulse pointer-events-none">
         <img
           src={vucEmblem}
           alt=""
