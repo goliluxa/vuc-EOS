@@ -2,6 +2,7 @@ import React from 'react';
 import { Calendar, BookMarked, UserCircle, CalendarCheck, ChevronLeft, ChevronRight, BookOpen, ArrowLeft, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { libraryService } from '../../../services/libraryService';
+import { useSiteSettings } from '../../../context/SiteSettingsContext';
 
 export type CadetLmsSection = 'schedule' | 'courses' | 'profile' | 'events';
 
@@ -18,32 +19,64 @@ export const CadetSidebar: React.FC<CadetSidebarProps> = ({
   isCollapsed,
   onToggleCollapse,
 }) => {
+  const { logoUrl } = useSiteSettings();
+
   return (
     <aside
       className={`h-full bg-white border-r border-surface-border flex flex-col justify-between transition-all duration-200 select-none ${
         isCollapsed ? 'w-16' : 'w-64'
       }`}
     >
-      {/* Top Header */}
+      {/* Top Header with VUC Logo */}
       <div>
-        <div className="h-16 flex items-center justify-between px-3.5 border-b border-surface-border">
-          {!isCollapsed && (
-            <div className="flex flex-col min-w-0">
-              <span className="text-xs font-bold uppercase tracking-wider text-military-red">
-                ИОС ВУЦ LMS
-              </span>
-              <span className="text-[11px] text-content-secondary truncate">
-                Учебный портал курсанта
-              </span>
-            </div>
+        <div className={`h-16 flex items-center border-b border-surface-border px-3 ${
+          isCollapsed ? 'justify-center flex-col gap-1 py-2' : 'justify-between gap-2'
+        }`}>
+          {!isCollapsed ? (
+            <Link
+              to="/portal"
+              className="flex items-center gap-2.5 min-w-0 group"
+              title="Перейти в главное меню"
+            >
+              <img
+                src={logoUrl}
+                alt="Эмблема Военного учебного центра"
+                className="w-8 h-8 object-contain shrink-0 drop-shadow-xs transition-transform duration-200 group-hover:scale-105"
+                width={32}
+                height={32}
+              />
+              <div className="flex flex-col min-w-0">
+                <span className="text-xs font-bold uppercase tracking-wider text-military-red leading-tight truncate">
+                  ИОС ВУЦ
+                </span>
+                <span className="text-[11px] text-content-secondary leading-tight truncate">
+                  Учебный портал
+                </span>
+              </div>
+            </Link>
+          ) : (
+            <Link
+              to="/portal"
+              className="group flex items-center justify-center"
+              title="ИОС ВУЦ — Главное меню"
+            >
+              <img
+                src={logoUrl}
+                alt="Эмблема Военного учебного центра"
+                className="w-7 h-7 object-contain drop-shadow-xs transition-transform duration-200 group-hover:scale-105"
+                width={28}
+                height={28}
+              />
+            </Link>
           )}
+
           <button
             type="button"
             onClick={onToggleCollapse}
-            className="p-1.5 rounded text-content-secondary hover:text-navy-deep hover:bg-slate-100 transition-colors mx-auto"
+            className="p-1.5 rounded text-content-secondary hover:text-navy-deep hover:bg-slate-100 transition-colors shrink-0"
             title={isCollapsed ? 'Развернуть меню' : 'Свернуть меню'}
           >
-            {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+            {isCollapsed ? <ChevronRight className="w-3.5 h-3.5" /> : <ChevronLeft className="w-4 h-4" />}
           </button>
         </div>
 

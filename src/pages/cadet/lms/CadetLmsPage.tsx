@@ -100,7 +100,7 @@ export const CadetLmsPage: React.FC = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-2">
             <span>Военный учебный центр ЧГУ им. И. Н. Ульянова</span>
             <span className="text-[11px] font-mono text-content-secondary/70">
-              ИОС ВУЦ LMS • Этап 1.0
+              ИОС ВУЦ • Учебный процесс
             </span>
           </div>
         </footer>
