@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Building2, ShieldCheck, GraduationCap, Calendar, Lock } from 'lucide-react';
+import { ArrowRight, Building2, ShieldCheck } from 'lucide-react';
 import { BrandLogo } from '../components/BrandLogo';
 import { BackgroundPattern } from '../components/BackgroundPattern';
 import vucBuilding from '../assets/images/vuc-building.jpg';
@@ -44,26 +44,10 @@ export const HomePage: React.FC = () => {
               </div>
 
               {/* Concise, calm system description */}
-              <p className="text-base sm:text-lg text-content-secondary max-w-xl leading-relaxed mb-6 font-normal">
+              <p className="text-base sm:text-lg text-content-secondary max-w-xl leading-relaxed mb-8 sm:mb-10 font-normal">
                 Единое цифровое пространство для образовательной деятельности
                 Военного учебного центра Чувашского государственного университета.
               </p>
-
-              {/* Compact Key Modules Chips */}
-              <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 mb-8 sm:mb-10 text-xs text-slate-700">
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white/90 border border-slate-200 rounded-md shadow-xs">
-                  <GraduationCap className="w-3.5 h-3.5 text-military-blue" aria-hidden="true" />
-                  <span className="font-medium">Учебные программы</span>
-                </div>
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white/90 border border-slate-200 rounded-md shadow-xs">
-                  <Calendar className="w-3.5 h-3.5 text-military-blue" aria-hidden="true" />
-                  <span className="font-medium">Расписание и журнал</span>
-                </div>
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white/90 border border-slate-200 rounded-md shadow-xs">
-                  <Lock className="w-3.5 h-3.5 text-military-red" aria-hidden="true" />
-                  <span className="font-medium">Защищённый контур</span>
-                </div>
-              </div>
 
               {/* Primary Action Button with light sweep effect */}
               <div>
