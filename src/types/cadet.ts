@@ -51,8 +51,11 @@ export interface ScheduleSession {
 
 export interface ScheduleDay {
   id: string;
-  dayNumber: number; // 1 to 4 (4 training days per month)
+  dayNumber: number; // 1 to 16
   date: string;
+  isoDate?: string; // YYYY-MM-DD
+  monthKey?: 'sep' | 'oct' | 'nov' | 'dec';
+  monthName?: string;
   dayOfWeek: 'Понедельник' | 'Суббота';
   platoon: string;
   sessions: ScheduleSession[];
