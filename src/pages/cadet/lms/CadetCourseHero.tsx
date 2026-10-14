@@ -1,5 +1,5 @@
 import React from 'react';
-import { User, Clock, Layers, FileText, Award, Shield } from 'lucide-react';
+import { User, Clock, Layers, FileText, Award } from 'lucide-react';
 import { CadetCourse } from '../../../types/cadet';
 
 interface CadetCourseHeroProps {
@@ -18,14 +18,10 @@ export const CadetCourseHero: React.FC<CadetCourseHeroProps> = ({
       {/* Top Section: Title & Instructor */}
       <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-5">
         <div className="max-w-3xl space-y-2.5">
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-military-blue to-navy-deep text-white shadow-xs">
-              <Shield className="w-3.5 h-3.5" />
-              <span>{course.code}</span>
-            </span>
-            <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold text-military-blue bg-blue-50 border border-blue-200">
-              {course.department}
-            </span>
+          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md text-xs font-bold uppercase tracking-wider bg-blue-50 text-military-blue border border-blue-200">
+            <span>{course.code}</span>
+            <span>•</span>
+            <span>{course.department}</span>
           </div>
 
           <h1 className="text-xl sm:text-2xl font-extrabold text-navy-deep tracking-tight leading-tight">
@@ -64,9 +60,9 @@ export const CadetCourseHero: React.FC<CadetCourseHeroProps> = ({
           <span className="text-navy-deep">Прогресс освоения программы курса:</span>
           <span className="text-military-blue font-extrabold">{progressPercent}%</span>
         </div>
-        <div className="w-full h-2.5 bg-slate-200 rounded-full overflow-hidden">
+        <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-military-blue to-blue-500 rounded-full transition-all duration-500"
+            className="h-full bg-military-blue rounded-full transition-all duration-500"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
