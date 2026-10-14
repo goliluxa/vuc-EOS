@@ -1,19 +1,15 @@
 import React from 'react';
-import { User, Clock, Layers, FileText, Award, Download, FileSpreadsheet, Shield } from 'lucide-react';
+import { User, Clock, Layers, FileText, Award, Shield } from 'lucide-react';
 import { CadetCourse } from '../../../types/cadet';
 
 interface CadetCourseHeroProps {
   course: CadetCourse;
   totalMaterials: number;
-  onDownloadAll: () => void;
-  onDownloadSyllabus: () => void;
 }
 
 export const CadetCourseHero: React.FC<CadetCourseHeroProps> = ({
   course,
   totalMaterials,
-  onDownloadAll,
-  onDownloadSyllabus,
 }) => {
   const progressPercent = Math.round((course.completedHours / course.totalHours) * 100);
 
@@ -123,29 +119,6 @@ export const CadetCourseHero: React.FC<CadetCourseHeroProps> = ({
             <div className="font-bold text-navy-deep">Зачёт с оценкой</div>
           </div>
         </div>
-      </div>
-
-      {/* Action Buttons Row */}
-      <div className="flex flex-wrap items-center justify-end gap-2.5 pt-2">
-        <button
-          type="button"
-          onClick={onDownloadSyllabus}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-navy-deep bg-slate-100 hover:bg-slate-200/80 rounded-md transition-colors"
-          title="Скачать рабочую программу дисциплины"
-        >
-          <FileSpreadsheet className="w-3.5 h-3.5 text-slate-500" />
-          <span>Программа курса (РПД)</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={onDownloadAll}
-          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold text-white bg-military-blue hover:bg-navy-deep rounded-md shadow-xs transition-colors"
-          title="Скачать все материалы всех тем одним архивом"
-        >
-          <Download className="w-3.5 h-3.5" />
-          <span>Скачать все материалы (ZIP)</span>
-        </button>
       </div>
     </div>
   );

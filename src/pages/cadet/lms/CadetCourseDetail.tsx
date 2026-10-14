@@ -35,22 +35,6 @@ export const CadetCourseDetail: React.FC<CadetCourseDetailProps> = ({
     }, 4000);
   };
 
-  const handleDownloadAll = () => {
-    setActionNotice(
-      `Формируется единый архив материалов по дисциплине «${course.title}» (${totalMaterials} файлов)...`
-    );
-    setTimeout(() => {
-      setActionNotice(null);
-    }, 4500);
-  };
-
-  const handleDownloadSyllabus = () => {
-    setActionNotice(`Рабочая программа дисциплины «${course.code}» загружается...`);
-    setTimeout(() => {
-      setActionNotice(null);
-    }, 3500);
-  };
-
   const handleToggleAll = () => {
     if (expandedLessonId) {
       setExpandedLessonId('');
@@ -92,8 +76,6 @@ export const CadetCourseDetail: React.FC<CadetCourseDetailProps> = ({
       <CadetCourseHero
         course={course}
         totalMaterials={totalMaterials}
-        onDownloadAll={handleDownloadAll}
-        onDownloadSyllabus={handleDownloadSyllabus}
       />
 
       {/* Action Notification Toast */}
