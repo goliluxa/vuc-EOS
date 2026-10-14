@@ -12,16 +12,8 @@ export const HomePage: React.FC = () => {
 
       {/* Top Navigation Bar with authentic VUC emblem and system status */}
       <header className="w-full pt-5 sm:pt-7 pb-3 sm:pb-4">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           <BrandLogo size="md" />
-
-          {/* Institutional Status Badge */}
-          <div className="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 bg-white/85 border border-surface-border rounded-full text-xs font-medium text-content-secondary shadow-xs backdrop-blur-sm">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
-            <span className="text-navy-brand font-semibold">Система активна</span>
-            <span className="text-slate-300">•</span>
-            <span>2026/2027</span>
-          </div>
         </div>
       </header>
 
