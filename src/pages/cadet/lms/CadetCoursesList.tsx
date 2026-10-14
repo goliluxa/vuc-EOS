@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, User, Clock, FileText, ArrowRight, Layers } from 'lucide-react';
+import { User, Clock, FileText, ArrowRight } from 'lucide-react';
 import { CadetCourse } from '../../../types/cadet';
 
 interface CadetCoursesListProps {
@@ -11,45 +11,8 @@ export const CadetCoursesList: React.FC<CadetCoursesListProps> = ({
   courses,
   onSelectCourse,
 }) => {
-  const totalLessons = courses.reduce((acc, c) => acc + c.lessons.length, 0);
-  const totalMaterials = courses.reduce(
-    (acc, c) => acc + c.lessons.reduce((mAcc, l) => mAcc + l.materials.length, 0),
-    0
-  );
-  const totalHours = courses.reduce((acc, c) => acc + c.totalHours, 0);
-
   return (
-    <div className="space-y-6 animate-fade-in">
-      {/* Top Banner / Summary */}
-      <div className="bg-white border border-surface-border rounded-lg p-5 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h2 className="text-base sm:text-lg font-bold text-navy-deep">
-            Учебные дисциплины военной подготовки
-          </h2>
-          <p className="text-xs sm:text-sm text-content-secondary mt-1">
-            Выберите курс для просмотра программы, структуры занятий и скачивания лекционных презентаций
-          </p>
-        </div>
-
-        <div className="flex items-center gap-2 sm:gap-3 shrink-0 text-xs flex-wrap">
-          <div className="px-3 py-1.5 rounded-md bg-surface-bg border border-surface-border flex items-center gap-1.5 text-navy-deep font-semibold">
-            <BookOpen className="w-3.5 h-3.5 text-military-blue" />
-            <span>{courses.length} курса</span>
-          </div>
-          <div className="px-3 py-1.5 rounded-md bg-surface-bg border border-surface-border flex items-center gap-1.5 text-navy-deep font-semibold">
-            <Layers className="w-3.5 h-3.5 text-military-blue" />
-            <span>{totalLessons} занятий</span>
-          </div>
-          <div className="hidden sm:flex px-3 py-1.5 rounded-md bg-surface-bg border border-surface-border items-center gap-1.5 text-navy-deep font-semibold">
-            <FileText className="w-3.5 h-3.5 text-military-blue" />
-            <span>{totalMaterials} материалов</span>
-          </div>
-          <div className="px-3 py-1.5 rounded-md bg-surface-bg border border-surface-border flex items-center gap-1.5 text-navy-deep font-semibold">
-            <Clock className="w-3.5 h-3.5 text-military-blue" />
-            <span>{totalHours} ч.</span>
-          </div>
-        </div>
-      </div>
+    <div className="space-y-4 animate-fade-in">
 
       {/* Courses Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
