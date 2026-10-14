@@ -131,7 +131,7 @@ export const CadetPortalPage: React.FC = () => {
 
               <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-military-blue mt-4 pt-2.5 border-t border-surface-border/60">
                 <span>Перейти в библиотеку</span>
-                <ExternalLink className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+                <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
               </div>
             </a>
           </div>
