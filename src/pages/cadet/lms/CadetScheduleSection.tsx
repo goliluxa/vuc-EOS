@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Clock, MapPin, User, Info, CheckCircle2 } from 'lucide-react';
+import { Clock, MapPin, User, CheckCircle2 } from 'lucide-react';
 import { scheduleService } from '../../../services/scheduleService';
 
 interface CadetScheduleSectionProps {
@@ -18,23 +18,14 @@ export const CadetScheduleSection: React.FC<CadetScheduleSectionProps> = ({
   const isMonday = !selectedPlatoon.includes('142');
 
   return (
-    <div className="space-y-6 animate-fade-in">
-      {/* Informative Banner */}
-      <div className="bg-blue-50/70 border border-blue-200 rounded-lg p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <div className="flex items-start gap-3">
-          <Info className="w-5 h-5 text-military-blue shrink-0 mt-0.5" aria-hidden="true" />
-          <div>
-            <h2 className="text-xs sm:text-sm font-bold text-navy-deep">
-              Регламент военного дня ВУЦ (1 учебный день в неделю)
-            </h2>
-            <p className="text-xs text-content-secondary leading-relaxed">
-              Обучение в ВУЦ проводится методом «военного дня». В месяце предусмотрено 4 полных учебных дня по расписанию взвода.
-            </p>
-          </div>
+    <div className="space-y-4 animate-fade-in">
+      {/* Platoon Toggle Bar */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-1">
+        <div className="text-xs sm:text-sm font-semibold text-navy-deep">
+          График учебных дней ({selectedPlatoon})
         </div>
 
-        {/* Platoon Toggle */}
-        <div className="flex items-center gap-1.5 bg-white border border-surface-border p-1 rounded-md shrink-0 self-start sm:self-auto">
+        <div className="flex items-center gap-1 bg-white border border-surface-border p-1 rounded-md shrink-0 self-start sm:self-auto">
           <button
             type="button"
             onClick={() => {
