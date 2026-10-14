@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BookOpen, GraduationCap, LogOut, ArrowRight, User, ExternalLink } from 'lucide-react';
+import { BookOpen, GraduationCap, LogOut, ArrowRight, User, ExternalLink, Compass } from 'lucide-react';
 import { BrandLogo } from '../../components/BrandLogo';
 import { BackgroundPattern } from '../../components/BackgroundPattern';
 import { cadetAuthService } from '../../services/cadetAuthService';
@@ -19,10 +19,30 @@ export const CadetPortalPage: React.FC = () => {
     <div className="relative min-h-screen flex flex-col justify-between bg-surface-bg text-content-primary">
       <BackgroundPattern showStar={false} />
 
-      {/* Top Header */}
+      {/* Top Header with Navigation */}
       <header className="w-full bg-white/90 backdrop-blur-md border-b border-surface-border sticky top-0 z-20 shadow-xs">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
           <BrandLogo size="sm" asLink={false} />
+
+          {/* Quick Header Navigation */}
+          <nav aria-label="Навигация по сервисам" className="hidden md:flex items-center gap-1.5 text-xs">
+            <button
+              type="button"
+              onClick={() => navigate('/cadet/lms')}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md font-medium text-navy-deep hover:text-military-red hover:bg-slate-100 transition-colors"
+            >
+              <GraduationCap className="w-4 h-4 text-military-red" />
+              <span>Учебная программа</span>
+            </button>
+            <a
+              href={libraryService.getLibraryUrl()}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md font-medium text-navy-deep hover:text-military-blue hover:bg-slate-100 transition-colors"
+            >
+              <BookOpen className="w-4 h-4 text-military-blue" />
+              <span>Библиотека</span>
+              <ExternalLink className="w-3 h-3 text-content-secondary" />
+            </a>
+          </nav>
 
           <div className="flex items-center gap-3">
             <div className="hidden sm:flex items-center gap-2 pl-3 border-l border-surface-border text-xs">
@@ -52,77 +72,68 @@ export const CadetPortalPage: React.FC = () => {
         </div>
       </header>
 
-      {/* Main Choice Hub */}
-      <main className="flex-1 flex flex-col items-center justify-center max-w-4xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12">
-        <div className="text-center max-w-2xl mb-8 sm:mb-10">
-          <h1 className="text-2xl sm:text-3xl font-bold text-navy-deep tracking-tight mb-2">
-            Информационная образовательная система
-          </h1>
-          <p className="text-xs sm:text-sm text-content-secondary leading-relaxed">
-            Выберите необходимый сервис для работы с учебными материалами или расписанием военной подготовки
-          </p>
-        </div>
-
-        {/* 2 Primary Choice Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 w-full">
-          {/* Card 1: Электронная библиотека (Переход на действующую библиотеку) */}
-          <a
-            href={libraryService.getLibraryUrl()}
-            className="group relative bg-white border border-surface-border rounded-xl p-6 sm:p-7 shadow-card hover:shadow-cardHover hover:border-military-blue/60 transition-all duration-200 cursor-pointer flex flex-col justify-between text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-military-blue"
-          >
-            <div>
-              <div className="w-12 h-12 rounded-lg bg-blue-50 text-military-blue flex items-center justify-center mb-5 group-hover:scale-105 group-hover:bg-military-blue group-hover:text-white transition-all duration-200">
-                <BookOpen className="w-6 h-6" />
-              </div>
-              <div className="flex items-center justify-between mb-2">
-                <h2 className="text-lg font-bold text-navy-deep group-hover:text-military-blue transition-colors">
-                  Электронная библиотека
-                </h2>
-                <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded bg-blue-50 text-military-blue border border-blue-200 inline-flex items-center gap-1">
-                  <span>библиотека.вуц21.рф</span>
-                  <ExternalLink className="w-3 h-3" />
-                </span>
-              </div>
-              <p className="text-xs sm:text-sm text-content-secondary leading-relaxed mb-6">
-                Действующий электронный фонд учебных изданий, общевоинских уставов Вооруженных Сил РФ, наставлений по стрелковому делу и методических пособий.
-              </p>
+      {/* Main Navigation Hub */}
+      <main className="flex-1 flex flex-col items-center justify-center max-w-2xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <div className="w-full bg-white border border-surface-border rounded-xl shadow-card p-5 sm:p-7">
+          <div className="flex items-center justify-between pb-3.5 mb-5 border-b border-surface-border">
+            <div className="flex items-center gap-2">
+              <Compass className="w-4 h-4 text-military-blue" />
+              <h1 className="text-sm sm:text-base font-bold text-navy-deep tracking-tight">
+                Навигация по сервисам
+              </h1>
             </div>
+            <span className="text-[11px] text-content-secondary">
+              Выберите раздел для работы
+            </span>
+          </div>
 
-            <div className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-military-blue group-hover:text-navy-brand transition-colors pt-3 border-t border-surface-border/60">
-              <span>Перейти в библиотеку</span>
-              <ExternalLink className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-            </div>
-          </a>
-
-          {/* Card 2: Учебная программа (LMS) */}
-          <div
-            onClick={() => navigate('/cadet/lms')}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => e.key === 'Enter' && navigate('/cadet/lms')}
-            className="group relative bg-white border border-surface-border rounded-xl p-6 sm:p-7 shadow-card hover:shadow-cardHover hover:border-military-red/60 transition-all duration-200 cursor-pointer flex flex-col justify-between text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-military-red"
-          >
-            <div>
-              <div className="w-12 h-12 rounded-lg bg-red-50 text-military-red flex items-center justify-center mb-5 group-hover:scale-105 group-hover:bg-military-red group-hover:text-white transition-all duration-200">
-                <GraduationCap className="w-6 h-6" />
-              </div>
-              <div className="flex items-center justify-between mb-2">
-                <h2 className="text-lg font-bold text-navy-deep group-hover:text-military-red transition-colors">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Card 1: Учебная программа (LMS) */}
+            <button
+              type="button"
+              onClick={() => navigate('/cadet/lms')}
+              className="group flex flex-col justify-between p-4 sm:p-5 rounded-lg border border-surface-border bg-slate-50/50 hover:bg-white hover:border-military-red/60 hover:shadow-cardHover transition-all text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-military-red"
+            >
+              <div>
+                <div className="w-10 h-10 rounded-lg bg-red-50 text-military-red flex items-center justify-center mb-3 group-hover:scale-105 group-hover:bg-military-red group-hover:text-white transition-all">
+                  <GraduationCap className="w-5 h-5" />
+                </div>
+                <div className="text-sm sm:text-base font-bold text-navy-deep group-hover:text-military-red transition-colors mb-1">
                   Учебная программа
-                </h2>
-                <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded bg-blue-50 text-military-blue border border-blue-200">
-                  LMS
-                </span>
+                </div>
+                <p className="text-xs text-content-secondary leading-relaxed">
+                  Расписание военного дня, курсы военной подготовки и презентации
+                </p>
               </div>
-              <p className="text-xs sm:text-sm text-content-secondary leading-relaxed mb-6">
-                Расписание учебного военного дня (1 день в неделю), курсы военной подготовки (ОВП, тактика, огневая), презентации лекций и учебные материалы.
-              </p>
-            </div>
 
-            <div className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-military-red group-hover:text-military-redHover transition-colors pt-3 border-t border-surface-border/60">
-              <span>Открыть учебный процесс</span>
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </div>
+              <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-military-red mt-4 pt-2.5 border-t border-surface-border/60">
+                <span>Войти в LMS</span>
+                <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+              </div>
+            </button>
+
+            {/* Card 2: Электронная библиотека */}
+            <a
+              href={libraryService.getLibraryUrl()}
+              className="group flex flex-col justify-between p-4 sm:p-5 rounded-lg border border-surface-border bg-slate-50/50 hover:bg-white hover:border-military-blue/60 hover:shadow-cardHover transition-all text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-military-blue"
+            >
+              <div>
+                <div className="w-10 h-10 rounded-lg bg-blue-50 text-military-blue flex items-center justify-center mb-3 group-hover:scale-105 group-hover:bg-military-blue group-hover:text-white transition-all">
+                  <BookOpen className="w-5 h-5" />
+                </div>
+                <div className="text-sm sm:text-base font-bold text-navy-deep group-hover:text-military-blue transition-colors mb-1">
+                  Электронная библиотека
+                </div>
+                <p className="text-xs text-content-secondary leading-relaxed">
+                  Фонд учебных изданий, общевоинских уставов и методических пособий
+                </p>
+              </div>
+
+              <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-military-blue mt-4 pt-2.5 border-t border-surface-border/60">
+                <span>Перейти в библиотеку</span>
+                <ExternalLink className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+              </div>
+            </a>
           </div>
         </div>
       </main>
