@@ -5,32 +5,51 @@ import { CadetTopbar } from './CadetTopbar';
 import { CadetScheduleSection } from './CadetScheduleSection';
 import { CadetCoursesSection } from './CadetCoursesSection';
 import { cadetAuthService } from '../../../services/cadetAuthService';
+import { courseService } from '../../../services/courseService';
 
 export const CadetLmsPage: React.FC = () => {
   const navigate = useNavigate();
   const currentCadet = cadetAuthService.getCurrentCadet();
 
   const [activeSection, setActiveSection] = useState<CadetLmsSection>('schedule');
+  const [selectedCourseId, setSelectedCourseId] = useState<string | null>(null);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const selectedCourse = selectedCourseId
+    ? courseService.getCourseById(selectedCourseId)
+    : null;
 
   const handleLogout = () => {
     cadetAuthService.logoutCadet();
     navigate('/login');
   };
 
+  const handleSelectSection = (sec: CadetLmsSection) => {
+    setActiveSection(sec);
+    if (sec === 'courses') {
+      setSelectedCourseId(null);
+    }
+  };
+
   const getSectionTitle = () => {
+    if (activeSection === 'courses' && selectedCourse) {
+      return selectedCourse.title;
+    }
     switch (activeSection) {
       case 'schedule':
         return 'Расписание учебного военного дня';
       case 'courses':
-        return 'Курсы военной подготовки и презентации';
+        return 'Курсы военной подготовки и материалы';
       default:
         return 'Учебный процесс';
     }
   };
 
   const getSectionDescription = () => {
+    if (activeSection === 'courses' && selectedCourse) {
+      return `${selectedCourse.code} • ${selectedCourse.department}`;
+    }
     switch (activeSection) {
       case 'schedule':
         return '';
@@ -47,7 +66,7 @@ export const CadetLmsPage: React.FC = () => {
       <div className="hidden lg:block shrink-0 sticky top-0 h-screen z-30">
         <CadetSidebar
           activeSection={activeSection}
-          onSelectSection={(sec) => setActiveSection(sec)}
+          onSelectSection={handleSelectSection}
           isCollapsed={isSidebarCollapsed}
           onToggleCollapse={() => setIsSidebarCollapsed((prev) => !prev)}
         />
@@ -69,7 +88,7 @@ export const CadetLmsPage: React.FC = () => {
             <CadetSidebar
               activeSection={activeSection}
               onSelectSection={(sec) => {
-                setActiveSection(sec);
+                handleSelectSection(sec);
                 setIsMobileMenuOpen(false);
               }}
               isCollapsed={false}
@@ -93,7 +112,12 @@ export const CadetLmsPage: React.FC = () => {
           {activeSection === 'schedule' && (
             <CadetScheduleSection initialPlatoon={currentCadet?.unitOrDepartment} />
           )}
-          {activeSection === 'courses' && <CadetCoursesSection />}
+          {activeSection === 'courses' && (
+            <CadetCoursesSection
+              selectedCourseId={selectedCourseId}
+              onSelectCourse={(id) => setSelectedCourseId(id)}
+            />
+          )}
         </main>
       </div>
     </div>

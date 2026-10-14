@@ -162,6 +162,52 @@ export const courseService = {
               },
             ],
           },
+          {
+            id: 'ogn-les-2',
+            number: 2,
+            title: 'Правила и приёмы стрельбы из автомата. Меры безопасности',
+            description:
+              'Изготовка к стрельбе, прицеливание, производство выстрела, меры безопасности на стрельбище и в тире.',
+            hours: 4,
+            instructor: 'Подполковник Морозов В. Н.',
+            materials: [
+              {
+                id: 'm-ogn-3',
+                title: 'Презентация: Основы баллистики и правила меткой стрельбы',
+                type: 'presentation',
+                fileName: 'Лекция_Правила_стрельбы_АК.pptx',
+                fileSize: '18.2 МБ',
+                format: 'PPTX',
+              },
+              {
+                id: 'm-ogn-4',
+                title: 'Инструкция по мерам безопасности при проведении стрельб',
+                type: 'document',
+                fileName: 'Меры_безопасности_при_стрельбе.pdf',
+                fileSize: '2.4 МБ',
+                format: 'PDF',
+              },
+            ],
+          },
+          {
+            id: 'ogn-les-3',
+            number: 3,
+            title: '9-мм пистолет Макарова (ПМ): устройство и практическая стрельба',
+            description:
+              'Назначение, боевые характеристики, порядок неполной разборки и сборки, выполнение упражнений стрельб.',
+            hours: 4,
+            instructor: 'Подполковник Морозов В. Н.',
+            materials: [
+              {
+                id: 'm-ogn-5',
+                title: 'Презентация: Устройство 9-мм пистолета Макарова',
+                type: 'presentation',
+                fileName: 'Лекция_Пистолет_Макарова_ПМ.pptx',
+                fileSize: '15.9 МБ',
+                format: 'PPTX',
+              },
+            ],
+          },
         ],
       },
       {
@@ -190,6 +236,33 @@ export const courseService = {
                 type: 'presentation',
                 fileName: 'Тактика_Мотострелкового_Отделения.pptx',
                 fileSize: '16.7 МБ',
+                format: 'PPTX',
+              },
+              {
+                id: 'm-tak-2',
+                title: 'Боевой устав по подготовке и ведению общевойскового боя (Часть 3)',
+                type: 'manual',
+                fileName: 'Боевой_устав_Отделение_Взвод.pdf',
+                fileSize: '12.1 МБ',
+                format: 'PDF',
+              },
+            ],
+          },
+          {
+            id: 'tak-les-2',
+            number: 2,
+            title: 'Мотострелковое отделение в обороне опорного пункта',
+            description:
+              'Построение боевого порядка, карточка огня отделения, инженерное оборудование и маскировка окопов.',
+            hours: 4,
+            instructor: 'Майор Ковалёв Д. С.',
+            materials: [
+              {
+                id: 'm-tak-3',
+                title: 'Презентация: Отделение в обороне и схема карточки огня',
+                type: 'presentation',
+                fileName: 'Лекция_Отделение_в_обороне.pptx',
+                fileSize: '22.8 МБ',
                 format: 'PPTX',
               },
             ],
@@ -226,8 +299,39 @@ export const courseService = {
               },
             ],
           },
+          {
+            id: 'top-les-2',
+            number: 2,
+            title: 'Топографические карты: масштаб, условные знаки и определение координат',
+            description:
+              'Работа с картами масштаба 1:50 000 и 1:100 000, измерение расстояний, целеуказание по координатной сетке.',
+            hours: 4,
+            instructor: 'Капитан Ильин С. А.',
+            materials: [
+              {
+                id: 'm-top-2',
+                title: 'Презентация: Чтение топографических карт и условные знаки',
+                type: 'presentation',
+                fileName: 'Топографические_карты_и_координаты.pptx',
+                fileSize: '24.1 МБ',
+                format: 'PPTX',
+              },
+              {
+                id: 'm-top-3',
+                title: 'Справочник топографических условных знаков ВС РФ',
+                type: 'manual',
+                fileName: 'Условные_знаки_топокарт.pdf',
+                fileSize: '6.7 МБ',
+                format: 'PDF',
+              },
+            ],
+          },
         ],
       },
     ];
+  },
+
+  getCourseById(courseId: string): CadetCourse | undefined {
+    return this.getCadetCourses().find((c) => c.id === courseId);
   },
 };
