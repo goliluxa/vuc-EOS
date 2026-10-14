@@ -33,7 +33,7 @@ export const CadetLmsPage: React.FC = () => {
   const getSectionDescription = () => {
     switch (activeSection) {
       case 'schedule':
-        return '1 учебный день в неделю (4 занятия в месяц по графику взвода)';
+        return '';
       case 'courses':
         return 'Учебные программы, тематические занятия и презентации лекций';
       default:
