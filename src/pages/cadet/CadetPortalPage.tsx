@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BookOpen, GraduationCap, LogOut, ArrowRight, Shield, User, ExternalLink } from 'lucide-react';
+import { BookOpen, GraduationCap, LogOut, ArrowRight, User, ExternalLink } from 'lucide-react';
 import { BrandLogo } from '../../components/BrandLogo';
 import { BackgroundPattern } from '../../components/BackgroundPattern';
 import { cadetAuthService } from '../../services/cadetAuthService';
@@ -55,10 +55,6 @@ export const CadetPortalPage: React.FC = () => {
       {/* Main Choice Hub */}
       <main className="flex-1 flex flex-col items-center justify-center max-w-4xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <div className="text-center max-w-2xl mb-8 sm:mb-10">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-military-blue border border-blue-200 mb-3">
-            <Shield className="w-3.5 h-3.5 text-military-red" />
-            <span>Личный кабинет курсанта</span>
-          </div>
           <h1 className="text-2xl sm:text-3xl font-bold text-navy-deep tracking-tight mb-2">
             Информационная образовательная система
           </h1>
