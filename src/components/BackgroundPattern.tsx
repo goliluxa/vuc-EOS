@@ -15,8 +15,8 @@ export const BackgroundPattern: React.FC = () => {
       <div className="absolute top-1/4 right-0 w-[42rem] h-[42rem] bg-slate-200/50 rounded-full blur-3xl" />
       <div className="absolute -bottom-32 left-1/3 w-[28rem] h-[28rem] bg-blue-50/70 rounded-full blur-3xl" />
 
-      {/* Large authentic VUC star emblem watermark */}
-      <div className="absolute -right-16 top-1/2 -translate-y-1/2 w-[34rem] h-[34rem] lg:w-[42rem] lg:h-[42rem] opacity-[0.045] pointer-events-none">
+      {/* Large authentic VUC star emblem watermark centered behind the hero */}
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[34rem] h-[34rem] sm:w-[42rem] sm:h-[42rem] lg:w-[48rem] lg:h-[48rem] opacity-[0.045] pointer-events-none">
         <img
           src={vucEmblem}
           alt=""
