@@ -18,37 +18,13 @@ export const BackgroundPattern: React.FC = () => {
       <div className="absolute top-1/4 right-0 w-[44rem] h-[44rem] bg-blue-50/70 rounded-full blur-3xl animate-ambient-reverse" />
       <div className="absolute -bottom-32 left-1/3 w-[28rem] h-[28rem] bg-slate-200/50 rounded-full blur-3xl animate-ambient-slow" />
 
-      {/* Large authentic VUC colored star emblem with iridescent sheen animation */}
-      <div className="absolute -right-24 sm:-right-12 lg:right-0 xl:right-10 top-1/2 w-[28rem] h-[28rem] sm:w-[34rem] sm:h-[34rem] lg:w-[38rem] lg:h-[38rem] xl:w-[44rem] xl:h-[44rem] opacity-20 sm:opacity-25 lg:opacity-90 xl:opacity-95 animate-star-float pointer-events-none transition-opacity duration-500">
-        <div className="relative w-full h-full">
-          <img
-            src={vucEmblem}
-            alt=""
-            className="w-full h-full object-contain drop-shadow-[0_25px_60px_rgba(15,58,120,0.22)]"
-          />
-          {/* Iridescent Light Sheen Masked to Emblem */}
-          <div
-            className="absolute inset-0 pointer-events-none overflow-hidden"
-            style={{
-              WebkitMaskImage: `url(${vucEmblem})`,
-              WebkitMaskSize: 'contain',
-              WebkitMaskRepeat: 'no-repeat',
-              WebkitMaskPosition: 'center',
-              maskImage: `url(${vucEmblem})`,
-              maskSize: 'contain',
-              maskRepeat: 'no-repeat',
-              maskPosition: 'center',
-            }}
-          >
-            <div
-              className="absolute -inset-full w-[300%] h-[300%] animate-star-sheen pointer-events-none"
-              style={{
-                background:
-                  'linear-gradient(105deg, transparent 20%, rgba(147, 197, 253, 0.25) 40%, rgba(255, 255, 255, 0.75) 50%, rgba(254, 202, 202, 0.25) 60%, transparent 80%)',
-              }}
-            />
-          </div>
-        </div>
+      {/* Large authentic VUC colored star emblem (static, no animation) */}
+      <div className="absolute -right-24 sm:-right-12 lg:right-0 xl:right-10 top-1/2 -translate-y-1/2 w-[28rem] h-[28rem] sm:w-[34rem] sm:h-[34rem] lg:w-[38rem] lg:h-[38rem] xl:w-[44rem] xl:h-[44rem] opacity-20 sm:opacity-25 lg:opacity-90 xl:opacity-95 pointer-events-none transition-opacity duration-500">
+        <img
+          src={vucEmblem}
+          alt=""
+          className="w-full h-full object-contain drop-shadow-[0_25px_60px_rgba(15,58,120,0.22)]"
+        />
       </div>
 
       {/* Architectural technical grid lines */}
