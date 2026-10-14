@@ -1,7 +1,5 @@
-import React from 'react';
-import { Calendar, BookMarked, UserCircle, CalendarCheck, ChevronLeft, ChevronRight, BookOpen, ArrowLeft, ExternalLink } from 'lucide-react';
+import { Calendar, BookMarked, UserCircle, CalendarCheck, ChevronLeft, ChevronRight, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { libraryService } from '../../../services/libraryService';
 import { useSiteSettings } from '../../../context/SiteSettingsContext';
 
 export type CadetLmsSection = 'schedule' | 'courses' | 'profile' | 'events';
@@ -150,20 +148,8 @@ export const CadetSidebar: React.FC<CadetSidebarProps> = ({
         </nav>
       </div>
 
-      {/* Bottom Hub & Library links */}
-      <div className="p-2 border-t border-surface-border space-y-1">
-        <a
-          href={libraryService.getLibraryUrl()}
-          className="flex items-center justify-between px-3 py-2 rounded-md text-xs text-content-secondary hover:text-military-blue hover:bg-blue-50/60 transition-colors"
-          title="Открыть библиотеку ВУЦ (библиотека.вуц21.рф)"
-        >
-          <div className="flex items-center gap-3">
-            <BookOpen className="w-4 h-4 shrink-0" />
-            {!isCollapsed && <span>Библиотека ВУЦ</span>}
-          </div>
-          {!isCollapsed && <ExternalLink className="w-3 h-3 text-content-secondary/60" />}
-        </a>
-
+      {/* Bottom Main Menu link */}
+      <div className="p-2 border-t border-surface-border">
         <Link
           to="/portal"
           className="flex items-center gap-3 px-3 py-2 rounded-md text-xs text-content-secondary hover:text-navy-deep hover:bg-slate-100 transition-colors"

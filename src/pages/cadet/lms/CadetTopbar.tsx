@@ -1,7 +1,6 @@
 import React from 'react';
-import { Menu, LogOut, User, BookOpen, ExternalLink } from 'lucide-react';
+import { Menu, LogOut, User } from 'lucide-react';
 import { CadetSessionUser } from '../../../types/cadet';
-import { libraryService } from '../../../services/libraryService';
 
 interface CadetTopbarProps {
   title: string;
@@ -43,17 +42,7 @@ export const CadetTopbar: React.FC<CadetTopbarProps> = ({
       </div>
 
       <div className="flex items-center gap-3">
-        <a
-          href={libraryService.getLibraryUrl()}
-          className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium text-military-blue hover:bg-blue-50 rounded-md border border-blue-200 transition-colors"
-          title="Открыть действующую библиотеку ВУЦ (библиотека.вуц21.рф)"
-        >
-          <BookOpen className="w-3.5 h-3.5" />
-          <span>Библиотека</span>
-          <ExternalLink className="w-3 h-3" />
-        </a>
-
-        <div className="flex items-center gap-2 pl-3 border-l border-surface-border text-xs">
+        <div className="flex items-center gap-2 text-xs">
           <div className="w-7 h-7 rounded-full bg-blue-50 text-military-blue flex items-center justify-center font-bold">
             <User className="w-3.5 h-3.5" />
           </div>
