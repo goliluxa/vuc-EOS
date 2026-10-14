@@ -1,21 +1,37 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, Lock, User, Eye, EyeOff, Info } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ArrowLeft, Lock, User, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import { BrandLogo } from '../components/BrandLogo';
 import { BackgroundPattern } from '../components/BackgroundPattern';
+import { cadetAuthService } from '../services/cadetAuthService';
+import { adminAuthService } from '../services/adminAuthService';
 
 export const LoginPage: React.FC = () => {
+  const navigate = useNavigate();
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [notice, setNotice] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // На первом этапе Backend отсутствует — реальная авторизация будет подключена позднее.
-    // Никаких фиктивных администраторов, имитаций входа или токенов в localStorage.
-    setNotice(
-      'Модуль авторизации находится на стадии разработки. Подключение учётных записей курсантов и преподавателей будет выполнено на следующем этапе.'
+    setErrorMessage(null);
+
+    // 1. If admin credentials entered
+    if (adminAuthService.login(login, password)) {
+      navigate('/settingpanel');
+      return;
+    }
+
+    // 2. Cadet login check
+    const result = cadetAuthService.loginCadet(login, password);
+    if (result.success) {
+      navigate('/portal');
+      return;
+    }
+
+    setErrorMessage(
+      result.error || 'Неверный логин или пароль. Проверьте правильность введённых данных.'
     );
   };
 
@@ -49,14 +65,14 @@ export const LoginPage: React.FC = () => {
             </p>
           </div>
 
-          {/* Neutral Stage 1 Notice */}
-          {notice && (
+          {/* Error Message */}
+          {errorMessage && (
             <div
-              role="status"
-              className="mb-6 p-3.5 bg-blue-50/70 border border-blue-200 rounded-md text-xs sm:text-sm text-navy-brand flex items-start gap-2.5 animate-fade-in"
+              role="alert"
+              className="mb-6 p-3.5 bg-red-50 border border-red-200 rounded-md text-xs sm:text-sm text-military-red flex items-start gap-2.5 animate-fade-in"
             >
-              <Info className="w-4 h-4 text-military-blue shrink-0 mt-0.5" aria-hidden="true" />
-              <p className="leading-relaxed">{notice}</p>
+              <AlertCircle className="w-4 h-4 text-military-red shrink-0 mt-0.5" aria-hidden="true" />
+              <p className="leading-relaxed font-medium">{errorMessage}</p>
             </div>
           )}
 
@@ -129,6 +145,25 @@ export const LoginPage: React.FC = () => {
                 className="w-full py-2.5 px-4 text-sm font-semibold text-white bg-military-red hover:bg-military-redHover active:bg-red-800 rounded-md transition-colors duration-150 shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-military-red focus-visible:ring-offset-2"
               >
                 Войти
+              </button>
+            </div>
+
+            <div className="pt-3 border-t border-surface-border text-center">
+              <p className="text-[11px] text-content-secondary mb-1">
+                Тестовый аккаунт курсанта:{' '}
+                <span className="font-mono font-medium text-navy-deep">smirnov_av</span> /{' '}
+                <span className="font-mono font-medium text-navy-deep">cadet_pass_141</span>
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  setLogin('smirnov_av');
+                  setPassword('cadet_pass_141');
+                  setErrorMessage(null);
+                }}
+                className="text-xs font-semibold text-military-blue hover:text-navy-brand underline transition-colors"
+              >
+                Заполнить данные курсанта
               </button>
             </div>
           </form>
