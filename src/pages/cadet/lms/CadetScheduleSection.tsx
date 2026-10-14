@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Clock, MapPin, User, CheckCircle2, Calendar, Sparkles } from 'lucide-react';
+import { MapPin, User, CheckCircle2, Calendar, Sparkles, Coffee } from 'lucide-react';
 import { scheduleService, SEMESTER_MONTHS, MonthOption } from '../../../services/scheduleService';
 
 interface CadetScheduleSectionProps {
@@ -171,14 +171,20 @@ export const CadetScheduleSection: React.FC<CadetScheduleSectionProps> = ({
 
       {/* Daily Schedule Detailed Table */}
       <div className="bg-white border border-surface-border rounded-lg shadow-card overflow-hidden">
-        <div className="px-4 sm:px-5 py-3.5 bg-surface-bg/60 border-b border-surface-border flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        {/* Header */}
+        <div className="px-4 sm:px-6 py-4 bg-slate-50/70 border-b border-surface-border flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <h3 className="text-sm sm:text-base font-bold text-navy-deep">
-              Распорядок {currentDay.dayNumber}-го учебного дня ({currentDay.date}, {currentDay.dayOfWeek})
-            </h3>
-            <span className="text-xs text-content-secondary">
-              Учебная группа: {platoon} • {currentDay.monthName}
-            </span>
+            <div className="flex items-center gap-2 flex-wrap">
+              <h3 className="text-base sm:text-lg font-bold text-navy-deep">
+                {currentDay.date}, {currentDay.dayOfWeek}
+              </h3>
+              <span className="text-xs font-semibold px-2 py-0.5 rounded bg-white border border-surface-border text-military-blue">
+                День {currentDay.dayNumber}
+              </span>
+            </div>
+            <p className="text-xs text-content-secondary mt-1">
+              Учебная группа: {platoon} • 5 занятий (08:30 – 16:35)
+            </p>
           </div>
 
           <div className="flex items-center gap-2 text-xs">
@@ -190,83 +196,91 @@ export const CadetScheduleSection: React.FC<CadetScheduleSectionProps> = ({
             ) : isCurrentDayPast ? (
               <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-xs font-medium text-slate-600 bg-slate-100 border border-slate-200">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                <span>Учебный день проведён</span>
+                <span>День проведён</span>
               </span>
             ) : (
               <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-xs font-medium text-slate-500 bg-slate-50 border border-slate-200">
-                <span>Запланировано по учебному плану</span>
+                <span>Запланировано</span>
               </span>
             )}
           </div>
         </div>
 
+        {/* Sessions Timetable */}
         <div className="divide-y divide-surface-border">
           {currentDay.sessions.map((sess) => {
             const isInspection = sess.sessionNumber === 0;
+
             return (
-              <div
-                key={sess.id}
-                className={`p-3.5 sm:p-4 flex flex-col md:flex-row md:items-center justify-between gap-3.5 transition-colors ${
-                  isInspection ? 'bg-slate-50/50' : 'hover:bg-slate-50/40'
-                }`}
-              >
-                {/* Left: Time and Pair */}
-                <div className="flex items-start gap-3 md:w-52 shrink-0">
-                  <div
-                    className={`w-7 h-7 sm:w-8 sm:h-8 rounded-md flex items-center justify-center text-xs font-bold shrink-0 ${
-                      isInspection
-                        ? 'bg-slate-200 text-slate-700'
-                        : 'bg-blue-50 text-military-blue'
-                    }`}
-                  >
-                    {isInspection ? '★' : `${sess.sessionNumber}`}
+              <React.Fragment key={sess.id}>
+                <div
+                  className={`p-4 sm:p-5 flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-5 transition-colors ${
+                    isInspection ? 'bg-slate-50/40' : 'hover:bg-slate-50/50'
+                  }`}
+                >
+                  {/* Left: Time & Session Name */}
+                  <div className="sm:w-36 shrink-0 flex sm:flex-col items-baseline sm:items-start justify-between sm:justify-start gap-1">
+                    <span className="font-mono text-sm sm:text-base font-bold text-navy-deep tracking-tight">
+                      {sess.time}
+                    </span>
+                    <span className="text-xs font-medium text-content-secondary">
+                      {isInspection ? 'Построение' : `${sess.sessionNumber}-я пара`}
+                    </span>
                   </div>
-                  <div>
-                    <div className="flex items-center gap-1.5 text-xs font-bold text-navy-deep">
-                      <Clock className="w-3.5 h-3.5 text-content-secondary" />
-                      <span>{sess.time}</span>
+
+                  {/* Right: Subject, Type, Classroom, Topic, Instructor */}
+                  <div className="flex-1 min-w-0 space-y-1.5">
+                    {/* Top Row: Subject + Type + Classroom */}
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <h4 className="text-sm sm:text-base font-bold text-navy-deep">
+                          {sess.subject}
+                        </h4>
+                        <span
+                          className={`text-[11px] font-medium px-2 py-0.5 rounded-md ${
+                            sess.type === 'Лекция'
+                              ? 'bg-blue-50 text-military-blue border border-blue-200/60'
+                              : sess.type === 'Практическое занятие'
+                              ? 'bg-emerald-50 text-emerald-800 border border-emerald-200/60'
+                              : 'bg-slate-100 text-slate-700 border border-slate-200/60'
+                          }`}
+                        >
+                          {sess.type}
+                        </span>
+                      </div>
+
+                      {/* Classroom */}
+                      <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-700 bg-slate-100 px-2.5 py-1 rounded-md">
+                        <MapPin className="w-3.5 h-3.5 text-military-blue" />
+                        <span>{sess.classroom}</span>
+                      </div>
                     </div>
-                    <span className="text-[11px] text-content-secondary">
-                      {isInspection ? 'Построение' : `${sess.sessionNumber} пара`}
-                    </span>
+
+                    {/* Topic */}
+                    <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                      {sess.topic}
+                    </p>
+
+                    {/* Instructor */}
+                    <div className="flex items-center gap-1.5 text-xs text-content-secondary pt-0.5">
+                      <User className="w-3.5 h-3.5 text-slate-400" />
+                      <span>{sess.instructor}</span>
+                    </div>
                   </div>
                 </div>
 
-                {/* Center: Subject and Topic */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1 flex-wrap">
-                    <span className="text-xs sm:text-sm font-bold text-navy-deep">
-                      {sess.subject}
-                    </span>
-                    <span
-                      className={`text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded border ${
-                        sess.type === 'Лекция'
-                          ? 'bg-blue-50 text-military-blue border-blue-200'
-                          : sess.type === 'Практическое занятие'
-                          ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
-                          : 'bg-slate-100 text-slate-600 border-slate-200'
-                      }`}
-                    >
-                      {sess.type}
-                    </span>
+                {/* Lunch Break banner between pair 2 (ends 12:20) and pair 3 (starts 13:15) */}
+                {sess.sessionNumber === 2 && (
+                  <div className="py-2 px-4 sm:px-6 bg-amber-50/50 border-y border-amber-200/50 flex items-center justify-between text-xs">
+                    <div className="flex items-center gap-2">
+                      <Coffee className="w-3.5 h-3.5 text-amber-700" />
+                      <span className="font-semibold text-amber-950">Обеденный перерыв</span>
+                      <span className="text-amber-800/80">• 55 минут</span>
+                    </div>
+                    <span className="font-mono text-xs font-medium text-amber-900">12:20 – 13:15</span>
                   </div>
-                  <p className="text-xs text-content-secondary leading-relaxed">
-                    {sess.topic}
-                  </p>
-                </div>
-
-                {/* Right: Classroom and Instructor */}
-                <div className="flex flex-col sm:flex-row md:flex-col md:items-end gap-1 text-xs text-content-secondary shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-surface-border/50">
-                  <div className="flex items-center gap-1.5 font-medium text-navy-deep">
-                    <MapPin className="w-3.5 h-3.5 text-military-red" />
-                    <span>{sess.classroom}</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <User className="w-3.5 h-3.5 text-content-secondary/70" />
-                    <span>{sess.instructor}</span>
-                  </div>
-                </div>
-              </div>
+                )}
+              </React.Fragment>
             );
           })}
         </div>
