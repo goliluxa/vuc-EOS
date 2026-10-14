@@ -84,10 +84,10 @@ export const CadetSidebar: React.FC<CadetSidebarProps> = ({
           <button
             type="button"
             onClick={() => onSelectSection('schedule')}
-            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-md text-xs sm:text-sm font-medium transition-colors ${
+            className={`w-full flex items-center gap-3 px-3 py-2 rounded-md text-xs sm:text-sm transition-colors ${
               activeSection === 'schedule'
-                ? 'bg-military-blue text-white shadow-xs'
-                : 'text-content-primary hover:bg-slate-100'
+                ? 'bg-navy-deep text-white shadow-xs font-semibold'
+                : 'text-content-primary hover:bg-slate-100 font-medium'
             }`}
             title="Расписание занятий"
           >
@@ -99,10 +99,10 @@ export const CadetSidebar: React.FC<CadetSidebarProps> = ({
           <button
             type="button"
             onClick={() => onSelectSection('courses')}
-            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-md text-xs sm:text-sm font-medium transition-colors ${
+            className={`w-full flex items-center gap-3 px-3 py-2 rounded-md text-xs sm:text-sm transition-colors ${
               activeSection === 'courses'
-                ? 'bg-military-blue text-white shadow-xs'
-                : 'text-content-primary hover:bg-slate-100'
+                ? 'bg-navy-deep text-white shadow-xs font-semibold'
+                : 'text-content-primary hover:bg-slate-100 font-medium'
             }`}
             title="Курсы военной подготовки"
           >
