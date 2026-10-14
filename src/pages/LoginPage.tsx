@@ -21,7 +21,7 @@ export const LoginPage: React.FC = () => {
 
   return (
     <div className="relative min-h-screen flex flex-col justify-between bg-surface-bg text-content-primary overflow-x-hidden animate-fade-in">
-      <BackgroundPattern />
+      <BackgroundPattern showStar={false} />
 
       {/* Top Header */}
       <header className="w-full pt-6 sm:pt-8 pb-4">
@@ -44,8 +44,8 @@ export const LoginPage: React.FC = () => {
             <h1 className="text-xl sm:text-2xl font-bold text-navy-deep tracking-tight mb-1.5">
               Вход в систему
             </h1>
-            <p className="text-xs sm:text-sm text-content-secondary">
-              Информационная образовательная система ВУЦ
+            <p className="text-xs sm:text-sm text-content-secondary font-medium">
+              ИОС ВУЦ
             </p>
           </div>
 
