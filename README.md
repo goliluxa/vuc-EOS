@@ -100,13 +100,27 @@ vuc-EOS/
 npm install
 ```
 
-### Запуск сервера разработки
+### Запуск через Docker Compose (Рекомендуется)
 
 ```bash
+docker compose up -d --build
+```
+
+Сервис будет собран в оптимизированном Nginx-контейнере и доступен по адресу: [http://localhost:3000](http://localhost:3000).
+
+Остановка контейнера:
+```bash
+docker compose down
+```
+
+### Локальный запуск без Docker (Dev-режим)
+
+```bash
+npm install
 npm run dev
 ```
 
-Локальный сервер будет доступен по адресу: [http://localhost:3000](http://localhost:3000).
+Локальный dev-сервер будет доступен по адресу: [http://localhost:3000](http://localhost:3000).
 
 ---
 
