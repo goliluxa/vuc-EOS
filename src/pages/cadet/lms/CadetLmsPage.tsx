@@ -108,7 +108,7 @@ export const CadetLmsPage: React.FC = () => {
           onLogout={handleLogout}
         />
 
-        <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-2.5 sm:py-3.5">
+        <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-3 sm:py-4">
           {activeSection === 'schedule' && (
             <CadetScheduleSection initialPlatoon={currentCadet?.unitOrDepartment} />
           )}

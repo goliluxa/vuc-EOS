@@ -18,7 +18,7 @@ export const CadetTopbar: React.FC<CadetTopbarProps> = ({
   onLogout,
 }) => {
   return (
-    <header className="h-13 sm:h-14 bg-white/95 backdrop-blur-md border-b border-surface-border sticky top-0 z-20 shadow-xs flex items-center justify-between px-4 sm:px-6">
+    <header className="h-14 bg-white/95 backdrop-blur-md border-b border-surface-border sticky top-0 z-20 shadow-xs flex items-center justify-between px-4 sm:px-6">
       <div className="flex items-center gap-3">
         <button
           type="button"
@@ -30,11 +30,11 @@ export const CadetTopbar: React.FC<CadetTopbarProps> = ({
         </button>
 
         <div>
-          <h1 className="text-sm sm:text-base font-bold text-navy-deep leading-tight">
+          <h1 className="text-base sm:text-lg font-bold text-navy-deep leading-tight">
             {title}
           </h1>
           {description && (
-            <p className="text-[11px] sm:text-xs text-content-secondary hidden sm:block leading-tight">
+            <p className="text-xs text-content-secondary hidden sm:block leading-tight">
               {description}
             </p>
           )}
