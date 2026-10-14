@@ -1,11 +1,13 @@
 import React from 'react';
-import vucEmblem from '../assets/images/vuc-emblem.png';
+import { useSiteSettings } from '../context/SiteSettingsContext';
 
 interface BackgroundPatternProps {
   showStar?: boolean;
 }
 
 export const BackgroundPattern: React.FC<BackgroundPatternProps> = ({ showStar = true }) => {
+  const { logoUrl } = useSiteSettings();
+
   return (
     <div
       className="absolute inset-0 pointer-events-none overflow-hidden -z-10 select-none"
@@ -23,7 +25,7 @@ export const BackgroundPattern: React.FC<BackgroundPatternProps> = ({ showStar =
       {showStar && (
         <div className="absolute right-6 sm:right-10 lg:right-16 xl:right-24 top-1/2 -translate-y-1/2 w-[15rem] h-[15rem] sm:w-[18rem] sm:h-[18rem] md:w-[21rem] md:h-[21rem] lg:w-[23rem] lg:h-[23rem] xl:w-[26rem] xl:h-[26rem] opacity-20 sm:opacity-25 lg:opacity-90 xl:opacity-95 pointer-events-none transition-opacity duration-300">
           <img
-            src={vucEmblem}
+            src={logoUrl}
             alt=""
             className="w-full h-full object-contain drop-shadow-[0_16px_36px_rgba(15,58,120,0.18)]"
           />

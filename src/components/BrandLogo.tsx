@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import vucEmblem from '../assets/images/vuc-emblem.png';
+import { useSiteSettings } from '../context/SiteSettingsContext';
 
 interface BrandLogoProps {
   asLink?: boolean;
@@ -15,6 +15,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   className = '',
   size = 'md',
 }) => {
+  const { logoUrl } = useSiteSettings();
   const sizeClasses = {
     sm: { img: 'w-8 h-8', red: 'text-[9px]', main: 'text-xs' },
     md: { img: 'w-10 h-10 sm:w-11 sm:h-11', red: 'text-[10px] sm:text-[11px]', main: 'text-xs sm:text-sm' },
@@ -24,7 +25,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   const content = (
     <div className={`flex items-center gap-2.5 sm:gap-3 select-none ${className}`}>
       <img
-        src={vucEmblem}
+        src={logoUrl}
         alt="Эмблема Военного учебного центра ЧувГУ"
         className={`${sizeClasses.img} object-contain shrink-0 drop-shadow-xs transition-transform duration-200 group-hover:scale-105`}
         loading="eager"
