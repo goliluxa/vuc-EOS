@@ -107,7 +107,7 @@ export const CadetPortalPage: React.FC = () => {
               </div>
 
               <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-military-red mt-4 pt-2.5 border-t border-surface-border/60">
-                <span>Войти в LMS</span>
+                <span>Перейти к программе</span>
                 <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
               </div>
             </button>
