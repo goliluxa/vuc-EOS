@@ -7,25 +7,30 @@ interface CadetScheduleSectionProps {
   initialPlatoon?: string;
 }
 
-const renderDayCardBadge = (isNearest: boolean, isPast: boolean, isSelected: boolean) => {
+const renderDayCardBadge = (
+  isNearest: boolean,
+  isPast: boolean,
+  isSelected: boolean,
+  isCompact: boolean
+) => {
   if (isNearest) {
     return (
       <span
-        className={`text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded uppercase tracking-wider shrink-0 ${
+        className={`text-[9px] sm:text-[10px] font-bold px-1.5 py-0.2 rounded uppercase tracking-wider shrink-0 whitespace-nowrap ${
           isSelected ? 'bg-white/25 text-white' : 'bg-blue-100 text-military-blue'
         }`}
       >
-        Ближайший
+        {isCompact ? 'Ближ.' : 'Ближайший'}
       </span>
     );
   }
   return (
     <span
-      className={`text-[10px] sm:text-[11px] font-medium px-1.5 py-0.5 rounded shrink-0 ${
+      className={`text-[9px] sm:text-[10px] font-medium px-1.5 py-0.2 rounded shrink-0 whitespace-nowrap ${
         isSelected ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-500'
       }`}
     >
-      {isPast ? 'Проведён' : 'План'}
+      {isPast ? (isCompact ? 'Пров.' : 'Проведён') : 'План'}
     </span>
   );
 };
@@ -129,65 +134,87 @@ export const CadetScheduleSection: React.FC<CadetScheduleSectionProps> = ({
       </div>
 
       {/* Days Grid */}
-      <div
-        className={`grid gap-2.5 ${
-          visibleDays.length > 8
-            ? 'grid-cols-2 sm:grid-cols-4 lg:grid-cols-8'
-            : visibleDays.length > 4
-            ? 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-6'
-            : 'grid-cols-2 lg:grid-cols-4'
-        }`}
-      >
-        {visibleDays.map((d) => {
-          const isSelected = d.dayNumber === selectedDayNumber;
-          const isNearest = d.dayNumber === nearestDay.dayNumber;
-          const isPast = (d.isoDate || '') < '2026-10-14';
+      {(() => {
+        const isCompact = visibleDays.length > 4;
+        return (
+          <div
+            className={`grid gap-2 sm:gap-2.5 ${
+              visibleDays.length > 8
+                ? 'grid-cols-2 sm:grid-cols-4 lg:grid-cols-8'
+                : visibleDays.length > 4
+                ? 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-6'
+                : 'grid-cols-2 lg:grid-cols-4'
+            }`}
+          >
+            {visibleDays.map((d) => {
+              const isSelected = d.dayNumber === selectedDayNumber;
+              const isNearest = d.dayNumber === nearestDay.dayNumber;
+              const isPast = (d.isoDate || '') < '2026-10-14';
 
-          return (
-            <button
-              key={d.id}
-              type="button"
-              onClick={() => setSelectedDayNumber(d.dayNumber)}
-              className={`p-2.5 sm:p-3 rounded-lg border text-left transition-all ${
-                isSelected
-                  ? 'bg-military-blue text-white border-military-blue shadow-sm'
-                  : isNearest
-                  ? 'bg-blue-50/70 border-blue-300 text-navy-deep hover:bg-blue-100/60 shadow-xs'
-                  : 'bg-white border-surface-border text-navy-deep hover:bg-slate-50 shadow-xs'
-              }`}
-            >
-              <div className="flex items-center justify-between gap-1 mb-1">
-                <span
-                  className={`text-xs sm:text-sm font-bold tracking-tight ${
-                    isSelected ? 'text-white' : 'text-navy-deep'
+              const shortDate = isCompact
+                ? d.date
+                    .replace(' 2026', '')
+                    .replace('сентября', 'сен')
+                    .replace('октября', 'окт')
+                    .replace('ноября', 'ноя')
+                    .replace('декабря', 'дек')
+                : d.date.replace(' 2026', '');
+
+              const shortDayOfWeek = isCompact
+                ? d.dayOfWeek === 'Суббота'
+                  ? 'Сб'
+                  : 'Пн'
+                : d.dayOfWeek;
+
+              return (
+                <button
+                  key={d.id}
+                  type="button"
+                  onClick={() => setSelectedDayNumber(d.dayNumber)}
+                  className={`rounded-lg border text-left transition-all ${
+                    isCompact ? 'p-2 sm:p-2.5' : 'p-2.5 sm:p-3'
+                  } ${
+                    isSelected
+                      ? 'bg-military-blue text-white border-military-blue shadow-sm'
+                      : isNearest
+                      ? 'bg-blue-50/70 border-blue-300 text-navy-deep hover:bg-blue-100/60 shadow-xs'
+                      : 'bg-white border-surface-border text-navy-deep hover:bg-slate-50 shadow-xs'
                   }`}
                 >
-                  День {d.dayNumber}
-                </span>
-                <span
-                  className={`text-[11px] sm:text-xs font-medium ${
-                    isSelected ? 'text-white/80' : 'text-content-secondary'
-                  }`}
-                >
-                  {d.dayOfWeek}
-                </span>
-              </div>
+                  <div className="flex items-center justify-between gap-1 mb-1">
+                    <span
+                      className={`text-xs sm:text-sm font-bold tracking-tight whitespace-nowrap shrink-0 ${
+                        isSelected ? 'text-white' : 'text-navy-deep'
+                      }`}
+                    >
+                      День&nbsp;{d.dayNumber}
+                    </span>
+                    <span
+                      className={`text-[11px] sm:text-xs font-medium whitespace-nowrap shrink-0 ${
+                        isSelected ? 'text-white/80' : 'text-content-secondary'
+                      }`}
+                    >
+                      {shortDayOfWeek}
+                    </span>
+                  </div>
 
-              <div className="flex items-center justify-between gap-1">
-                <span
-                  className={`text-xs sm:text-sm font-medium truncate ${
-                    isSelected ? 'text-white/95' : 'text-slate-700'
-                  }`}
-                >
-                  {d.date.replace(' 2026', '')}
-                </span>
+                  <div className="flex items-center justify-between gap-1">
+                    <span
+                      className={`text-xs sm:text-sm font-medium whitespace-nowrap truncate ${
+                        isSelected ? 'text-white/95' : 'text-slate-700'
+                      }`}
+                    >
+                      {shortDate}
+                    </span>
 
-                {renderDayCardBadge(isNearest, isPast, isSelected)}
-              </div>
-            </button>
-          );
-        })}
-      </div>
+                    {renderDayCardBadge(isNearest, isPast, isSelected, isCompact)}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        );
+      })()}
 
       {/* Daily Schedule Detailed Table */}
       <div className="bg-white border border-surface-border rounded-lg shadow-card overflow-hidden">
