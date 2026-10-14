@@ -1,6 +1,7 @@
 import React from 'react';
-import { Calendar, BookMarked, UserCircle, CalendarCheck, ChevronLeft, ChevronRight, BookOpen, ArrowLeft } from 'lucide-react';
+import { Calendar, BookMarked, UserCircle, CalendarCheck, ChevronLeft, ChevronRight, BookOpen, ArrowLeft, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { libraryService } from '../../../services/libraryService';
 
 export type CadetLmsSection = 'schedule' | 'courses' | 'profile' | 'events';
 
@@ -118,14 +119,17 @@ export const CadetSidebar: React.FC<CadetSidebarProps> = ({
 
       {/* Bottom Hub & Library links */}
       <div className="p-2 border-t border-surface-border space-y-1">
-        <Link
-          to="/library"
-          className="flex items-center gap-3 px-3 py-2 rounded-md text-xs text-content-secondary hover:text-military-blue hover:bg-blue-50/60 transition-colors"
-          title="Открыть библиотеку"
+        <a
+          href={libraryService.getLibraryUrl()}
+          className="flex items-center justify-between px-3 py-2 rounded-md text-xs text-content-secondary hover:text-military-blue hover:bg-blue-50/60 transition-colors"
+          title="Открыть библиотеку ВУЦ (библиотека.вуц21.рф)"
         >
-          <BookOpen className="w-4 h-4 shrink-0" />
-          {!isCollapsed && <span>Библиотека ВУЦ</span>}
-        </Link>
+          <div className="flex items-center gap-3">
+            <BookOpen className="w-4 h-4 shrink-0" />
+            {!isCollapsed && <span>Библиотека ВУЦ</span>}
+          </div>
+          {!isCollapsed && <ExternalLink className="w-3 h-3 text-content-secondary/60" />}
+        </a>
 
         <Link
           to="/portal"

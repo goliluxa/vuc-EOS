@@ -6,7 +6,14 @@ import { LoginPage } from './pages/LoginPage';
 import { SettingPanelPage } from './pages/settingpanel/SettingPanelPage';
 import { CadetPortalPage } from './pages/cadet/CadetPortalPage';
 import { CadetLmsPage } from './pages/cadet/lms/CadetLmsPage';
-import { LibraryPage } from './pages/library/LibraryPage';
+import { libraryService } from './services/libraryService';
+
+const LibraryRedirect: React.FC = () => {
+  React.useEffect(() => {
+    window.location.href = libraryService.getLibraryUrl();
+  }, []);
+  return null;
+};
 
 export const App: React.FC = () => {
   return (
@@ -18,7 +25,7 @@ export const App: React.FC = () => {
         <Route path="/cadet" element={<Navigate to="/portal" replace />} />
         <Route path="/cadet/lms" element={<CadetLmsPage />} />
         <Route path="/lms" element={<Navigate to="/cadet/lms" replace />} />
-        <Route path="/library" element={<LibraryPage />} />
+        <Route path="/library" element={<LibraryRedirect />} />
         <Route path="/settingpanel" element={<SettingPanelPage />} />
         <Route path="/settingspanel" element={<Navigate to="/settingpanel" replace />} />
         <Route path="*" element={<Navigate to="/" replace />} />

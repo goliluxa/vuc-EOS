@@ -57,14 +57,3 @@ export interface ScheduleDay {
   platoon: string;
   sessions: ScheduleSession[];
 }
-
-export interface LibraryBook {
-  id: string;
-  title: string;
-  author: string;
-  category: 'Уставы' | 'Тактика' | 'Огневая подготовка' | 'Связь' | 'Общевоенная';
-  year: number;
-  pages: number;
-  format: 'PDF';
-  description: string;
-}
