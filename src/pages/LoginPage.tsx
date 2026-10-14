@@ -145,15 +145,8 @@ export const LoginPage: React.FC = () => {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="w-full py-4 text-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-xs text-content-secondary/70">
-            Военный учебный центр Чувашского государственного университета им.
-            И. Н. Ульянова
-          </p>
-        </div>
-      </footer>
+      {/* Bottom spacer */}
+      <div className="h-4 sm:h-6" aria-hidden="true" />
     </div>
   );
 };
