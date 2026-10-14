@@ -9,10 +9,10 @@ interface CadetScheduleSectionProps {
 export const CadetScheduleSection: React.FC<CadetScheduleSectionProps> = ({
   initialPlatoon = 'Взвод 141 (Связь)',
 }) => {
-  const [selectedPlatoon, setSelectedPlatoon] = useState(initialPlatoon);
+  const platoon = initialPlatoon;
 
-  // All 16 semester days for the selected platoon
-  const allDays = scheduleService.getSemesterSchedule(selectedPlatoon);
+  // All 16 semester days for the cadet's platoon
+  const allDays = scheduleService.getSemesterSchedule(platoon);
   const nearestDay = scheduleService.getNearestUpcomingDay(allDays);
 
   const [selectedMonth, setSelectedMonth] = useState<MonthOption['key']>(
@@ -29,17 +29,8 @@ export const CadetScheduleSection: React.FC<CadetScheduleSectionProps> = ({
   // Currently inspected day
   const currentDay = allDays.find((d) => d.dayNumber === selectedDayNumber) || nearestDay;
 
-  const isMonday = !selectedPlatoon.includes('142');
   const isNearestDay = currentDay.dayNumber === nearestDay.dayNumber;
   const isCurrentDayPast = (currentDay.isoDate || '') < '2026-10-14';
-
-  const handlePlatoonChange = (platoon: string) => {
-    setSelectedPlatoon(platoon);
-    const newDays = scheduleService.getSemesterSchedule(platoon);
-    const newNearest = scheduleService.getNearestUpcomingDay(newDays);
-    setSelectedDayNumber(newNearest.dayNumber);
-    setSelectedMonth((newNearest.monthKey as MonthOption['key']) || 'oct');
-  };
 
   const handleSelectMonth = (monthKey: MonthOption['key']) => {
     setSelectedMonth(monthKey);
@@ -58,10 +49,10 @@ export const CadetScheduleSection: React.FC<CadetScheduleSectionProps> = ({
 
   return (
     <div className="space-y-4 animate-fade-in">
-      {/* Top Controls: Platoon Toggle and Month / Semester Selector */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 bg-white border border-surface-border p-3 rounded-lg shadow-xs">
+      {/* Top Controls: Month / Semester Selector and Jump to Nearest */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white border border-surface-border p-3 rounded-lg shadow-xs">
         {/* Month & Semester Tabs */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 lg:pb-0">
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
           <div className="flex items-center gap-1 text-xs font-semibold text-navy-deep mr-2 shrink-0">
             <Calendar className="w-3.5 h-3.5 text-military-blue" />
             <span>Период:</span>
@@ -95,45 +86,18 @@ export const CadetScheduleSection: React.FC<CadetScheduleSectionProps> = ({
           })}
         </div>
 
-        {/* Right: Platoon Switcher and Jump to Nearest Button */}
-        <div className="flex items-center gap-2 shrink-0 self-start lg:self-auto">
-          {selectedDayNumber !== nearestDay.dayNumber && (
-            <button
-              type="button"
-              onClick={handleJumpToNearest}
-              className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium text-military-blue bg-blue-50 hover:bg-blue-100 rounded-md border border-blue-200 transition-colors"
-              title="Перейти к ближайшему будущему дню занятий"
-            >
-              <Sparkles className="w-3 h-3 text-military-blue" />
-              <span>К ближайшему</span>
-            </button>
-          )}
-
-          <div className="flex items-center gap-1 bg-slate-50 border border-surface-border p-0.5 rounded-md">
-            <button
-              type="button"
-              onClick={() => handlePlatoonChange('Взвод 141 (Связь)')}
-              className={`px-2.5 py-1 text-xs font-semibold rounded transition-colors ${
-                isMonday
-                  ? 'bg-military-blue text-white shadow-xs'
-                  : 'text-content-secondary hover:text-navy-deep'
-              }`}
-            >
-              Взвод 141 (Пн)
-            </button>
-            <button
-              type="button"
-              onClick={() => handlePlatoonChange('Взвод 142 (Командный)')}
-              className={`px-2.5 py-1 text-xs font-semibold rounded transition-colors ${
-                !isMonday
-                  ? 'bg-military-blue text-white shadow-xs'
-                  : 'text-content-secondary hover:text-navy-deep'
-              }`}
-            >
-              Взвод 142 (Сб)
-            </button>
-          </div>
-        </div>
+        {/* Right: Jump to Nearest Button */}
+        {selectedDayNumber !== nearestDay.dayNumber && (
+          <button
+            type="button"
+            onClick={handleJumpToNearest}
+            className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium text-military-blue bg-blue-50 hover:bg-blue-100 rounded-md border border-blue-200 transition-colors shrink-0 self-start sm:self-auto"
+            title="Перейти к ближайшему будущему дню занятий"
+          >
+            <Sparkles className="w-3 h-3 text-military-blue" />
+            <span>К ближайшему</span>
+          </button>
+        )}
       </div>
 
       {/* Days Grid: 4 days of month OR all 16 days of semester */}
@@ -213,7 +177,7 @@ export const CadetScheduleSection: React.FC<CadetScheduleSectionProps> = ({
               Распорядок {currentDay.dayNumber}-го учебного дня ({currentDay.date}, {currentDay.dayOfWeek})
             </h3>
             <span className="text-xs text-content-secondary">
-              Учебная группа: {selectedPlatoon} • {currentDay.monthName}
+              Учебная группа: {platoon} • {currentDay.monthName}
             </span>
           </div>
 
