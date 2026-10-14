@@ -132,16 +132,6 @@ export const LoginPage: React.FC = () => {
               </button>
             </div>
           </form>
-
-          <div className="mt-6 pt-5 border-t border-surface-border text-center">
-            <Link
-              to="/"
-              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-military-blue hover:text-navy-brand transition-colors focus-visible:rounded-md"
-            >
-              <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>Вернуться на главную</span>
-            </Link>
-          </div>
         </div>
       </main>
 
