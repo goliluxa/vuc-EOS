@@ -7,23 +7,20 @@ export const BackgroundPattern: React.FC = () => {
       className="absolute inset-0 pointer-events-none overflow-hidden -z-10 select-none"
       aria-hidden="true"
     >
-      {/* Top subtle tricolor accent line with gentle shimmer */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-military-red/70 via-military-blue/60 to-transparent bg-[length:200%_100%] animate-subtle-gradient" />
+      {/* Top subtle tricolor accent line */}
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-military-red/70 via-military-blue/60 to-transparent" />
 
-      {/* Living iridescent aurora gradient shimmering wash */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-blue-200/40 via-indigo-100/35 via-rose-100/25 to-sky-200/40 animate-aurora pointer-events-none" />
+      {/* Atmospheric soft static lighting gradients */}
+      <div className="absolute -top-36 -left-36 w-[32rem] h-[32rem] bg-blue-100/50 rounded-full blur-3xl" />
+      <div className="absolute top-1/4 right-8 w-[36rem] h-[36rem] bg-slate-200/50 rounded-full blur-3xl" />
+      <div className="absolute -bottom-28 left-1/3 w-[26rem] h-[26rem] bg-blue-50/60 rounded-full blur-3xl" />
 
-      {/* Atmospheric lighting gradients with organic drift */}
-      <div className="absolute -top-36 -left-36 w-[34rem] h-[34rem] bg-gradient-to-br from-blue-300/45 via-indigo-200/35 to-transparent rounded-full blur-3xl animate-ambient-slow" />
-      <div className="absolute top-1/4 right-4 w-[42rem] h-[42rem] bg-gradient-to-bl from-sky-300/40 via-blue-200/40 to-rose-200/25 rounded-full blur-3xl animate-ambient-reverse" />
-      <div className="absolute -bottom-28 left-1/4 w-[30rem] h-[30rem] bg-gradient-to-tr from-indigo-200/40 via-blue-100/45 to-transparent rounded-full blur-3xl animate-ambient-slow" />
-
-      {/* Authentic VUC colored star emblem (compact, static, perfectly proportioned) */}
-      <div className="absolute right-4 sm:right-8 lg:right-12 xl:right-20 top-1/2 -translate-y-1/2 w-[18rem] h-[18rem] sm:w-[22rem] sm:h-[22rem] md:w-[26rem] md:h-[26rem] lg:w-[29rem] lg:h-[29rem] xl:w-[33rem] xl:h-[33rem] opacity-20 sm:opacity-25 lg:opacity-90 xl:opacity-95 pointer-events-none transition-opacity duration-500">
+      {/* Authentic VUC colored star emblem (compact, static, elegant) */}
+      <div className="absolute right-6 sm:right-10 lg:right-16 xl:right-24 top-1/2 -translate-y-1/2 w-[15rem] h-[15rem] sm:w-[18rem] sm:h-[18rem] md:w-[21rem] md:h-[21rem] lg:w-[23rem] lg:h-[23rem] xl:w-[26rem] xl:h-[26rem] opacity-20 sm:opacity-25 lg:opacity-90 xl:opacity-95 pointer-events-none transition-opacity duration-300">
         <img
           src={vucEmblem}
           alt=""
-          className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(15,58,120,0.20)]"
+          className="w-full h-full object-contain drop-shadow-[0_16px_36px_rgba(15,58,120,0.18)]"
         />
       </div>
 
