@@ -42,10 +42,10 @@ export const LoginPage: React.FC = () => {
         <div className="w-full max-w-md bg-white border border-surface-border rounded-lg shadow-card p-6 sm:p-8 animate-slide-up">
           <div className="text-center mb-6 sm:mb-8">
             <h1 className="text-xl sm:text-2xl font-bold text-navy-deep tracking-tight mb-1.5">
-              Вход в систему
+              ИОС ВУЦ
             </h1>
             <p className="text-xs sm:text-sm text-content-secondary font-medium">
-              ИОС ВУЦ
+              Вход в систему
             </p>
           </div>
 
