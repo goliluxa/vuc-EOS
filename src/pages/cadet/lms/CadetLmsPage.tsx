@@ -50,14 +50,7 @@ export const CadetLmsPage: React.FC = () => {
     if (activeSection === 'courses' && selectedCourse) {
       return 'Учебная программа и материалы дисциплины';
     }
-    switch (activeSection) {
-      case 'schedule':
-        return '';
-      case 'courses':
-        return 'Учебные программы, тематические занятия и презентации лекций';
-      default:
-        return '';
-    }
+    return '';
   };
 
   return (
