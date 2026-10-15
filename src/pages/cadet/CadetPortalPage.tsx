@@ -114,11 +114,6 @@ export const CadetPortalPage: React.FC = () => {
           </a>
         </div>
       </main>
-
-      {/* Footer */}
-      <footer className="w-full py-4 text-center text-xs text-content-secondary/60 border-t border-surface-border/80">
-        Военный учебный центр Чувашского государственного университета им. И. Н. Ульянова
-      </footer>
     </div>
   );
 };
