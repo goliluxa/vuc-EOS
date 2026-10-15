@@ -86,12 +86,16 @@ export const CadetSidebar: React.FC<CadetSidebarProps> = ({
             onClick={() => onSelectSection('schedule')}
             className={`w-full flex items-center gap-3 px-3 py-2 rounded-md text-xs sm:text-sm transition-colors ${
               activeSection === 'schedule'
-                ? 'bg-navy-deep text-white shadow-xs font-semibold'
+                ? 'bg-blue-50/90 text-military-blue font-semibold border border-blue-200/70 shadow-xs'
                 : 'text-content-primary hover:bg-slate-100 font-medium'
             }`}
             title="Расписание занятий"
           >
-            <Calendar className="w-4 h-4 shrink-0" />
+            <Calendar
+              className={`w-4 h-4 shrink-0 ${
+                activeSection === 'schedule' ? 'text-military-blue' : 'text-slate-500'
+              }`}
+            />
             {!isCollapsed && <span>Расписание занятий</span>}
           </button>
 
@@ -101,12 +105,16 @@ export const CadetSidebar: React.FC<CadetSidebarProps> = ({
             onClick={() => onSelectSection('courses')}
             className={`w-full flex items-center gap-3 px-3 py-2 rounded-md text-xs sm:text-sm transition-colors ${
               activeSection === 'courses'
-                ? 'bg-navy-deep text-white shadow-xs font-semibold'
+                ? 'bg-blue-50/90 text-military-blue font-semibold border border-blue-200/70 shadow-xs'
                 : 'text-content-primary hover:bg-slate-100 font-medium'
             }`}
             title="Курсы военной подготовки"
           >
-            <BookMarked className="w-4 h-4 shrink-0" />
+            <BookMarked
+              className={`w-4 h-4 shrink-0 ${
+                activeSection === 'courses' ? 'text-military-blue' : 'text-slate-500'
+              }`}
+            />
             {!isCollapsed && <span>Курсы и материалы</span>}
           </button>
 

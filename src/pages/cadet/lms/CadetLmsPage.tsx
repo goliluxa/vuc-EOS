@@ -48,7 +48,7 @@ export const CadetLmsPage: React.FC = () => {
 
   const getSectionDescription = () => {
     if (activeSection === 'courses' && selectedCourse) {
-      return `${selectedCourse.code} • ${selectedCourse.department}`;
+      return 'Учебная программа и материалы дисциплины';
     }
     switch (activeSection) {
       case 'schedule':

@@ -18,7 +18,7 @@ const renderDayCardBadge = (
       <span
         className={`text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wider shrink-0 whitespace-nowrap ${
           isSelected
-            ? 'bg-blue-500/25 text-blue-200 border border-blue-400/30'
+            ? 'bg-blue-100 text-military-blue border border-blue-300'
             : 'bg-blue-50 text-military-blue border border-blue-200'
         }`}
       >
@@ -32,7 +32,7 @@ const renderDayCardBadge = (
       <span
         className={`text-[9px] sm:text-[10px] font-medium px-1.5 py-0.5 rounded shrink-0 whitespace-nowrap ${
           isSelected
-            ? 'bg-white/20 text-white/90'
+            ? 'bg-white text-slate-700 border border-slate-200'
             : 'bg-slate-100 text-slate-600'
         }`}
       >
@@ -45,7 +45,7 @@ const renderDayCardBadge = (
     <span
       className={`text-[9px] sm:text-[10px] font-medium px-1.5 py-0.5 rounded shrink-0 whitespace-nowrap ${
         isSelected
-          ? 'bg-white/15 text-white/80'
+          ? 'bg-white text-slate-500 border border-slate-200'
           : 'bg-slate-50 text-slate-500 border border-slate-200/50'
       }`}
     >
@@ -106,7 +106,7 @@ export const CadetScheduleSection: React.FC<CadetScheduleSectionProps> = ({
             <span>Период:</span>
           </div>
 
-          <div className="flex items-center gap-1 bg-slate-100/80 p-0.5 rounded-lg">
+          <div className="flex items-center gap-1 bg-slate-100 p-0.5 rounded-lg border border-slate-200/60">
             {SEMESTER_MONTHS.map((m) => {
               const isActive = selectedMonth === m.key;
               const isOct = m.key === 'oct';
@@ -117,18 +117,18 @@ export const CadetScheduleSection: React.FC<CadetScheduleSectionProps> = ({
                   onClick={() => handleSelectMonth(m.key)}
                   className={`px-3 py-1.5 text-xs sm:text-sm rounded-md transition-all shrink-0 flex items-center gap-1.5 ${
                     isActive
-                      ? 'bg-navy-deep text-white shadow-xs font-semibold'
-                      : 'text-content-secondary hover:text-navy-deep hover:bg-white/60 font-medium'
+                      ? 'bg-white text-navy-deep shadow-xs font-semibold border border-slate-200/80'
+                      : 'text-content-secondary hover:text-navy-deep hover:bg-white/50 font-medium'
                   }`}
                   title={m.fullName}
                 >
                   <span>{m.label}</span>
                   {isOct && (
                     <span
-                      className={`text-[10px] px-1 py-0.2 rounded font-semibold ${
+                      className={`text-[10px] px-1.5 py-0.2 rounded font-semibold ${
                         isActive
-                          ? 'bg-blue-500/30 text-blue-200'
-                          : 'bg-blue-100 text-military-blue'
+                          ? 'bg-blue-50 text-military-blue border border-blue-200/60'
+                          : 'bg-slate-200/70 text-slate-600'
                       }`}
                     >
                       тек.
@@ -196,23 +196,23 @@ export const CadetScheduleSection: React.FC<CadetScheduleSectionProps> = ({
                     isCompact ? 'p-2 sm:p-2.5' : 'p-3 sm:p-3.5'
                   } ${
                     isSelected
-                      ? 'bg-navy-deep text-white border-navy-deep shadow-sm ring-1 ring-navy-deep'
+                      ? 'bg-blue-50/80 border-military-blue ring-2 ring-military-blue/20 text-navy-deep shadow-xs'
                       : isNearest
-                      ? 'bg-blue-50/60 border-blue-300 text-navy-deep hover:bg-blue-100/60 shadow-xs'
+                      ? 'bg-white border-blue-200 text-navy-deep hover:bg-blue-50/40 shadow-xs'
                       : 'bg-white border-surface-border text-navy-deep hover:bg-slate-50 hover:border-slate-300 shadow-xs'
                   }`}
                 >
                   <div className="flex items-center justify-between gap-1 mb-1.5">
                     <span
                       className={`text-xs sm:text-sm font-bold tracking-tight whitespace-nowrap shrink-0 ${
-                        isSelected ? 'text-white' : 'text-navy-deep'
+                        isSelected ? 'text-military-blue' : 'text-navy-deep'
                       }`}
                     >
                       День&nbsp;{d.dayNumber}
                     </span>
                     <span
                       className={`text-[11px] sm:text-xs font-medium whitespace-nowrap shrink-0 ${
-                        isSelected ? 'text-blue-200' : 'text-content-secondary'
+                        isSelected ? 'text-military-blue/80' : 'text-content-secondary'
                       }`}
                     >
                       {shortDayOfWeek}
@@ -222,7 +222,7 @@ export const CadetScheduleSection: React.FC<CadetScheduleSectionProps> = ({
                   <div className="flex items-center justify-between gap-1">
                     <span
                       className={`text-xs sm:text-sm font-semibold whitespace-nowrap truncate ${
-                        isSelected ? 'text-white/95' : 'text-slate-700'
+                        isSelected ? 'text-navy-deep' : 'text-slate-700'
                       }`}
                     >
                       {shortDate}
