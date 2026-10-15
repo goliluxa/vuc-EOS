@@ -4,14 +4,12 @@ import { ScheduleSession } from '../../../types/cadet';
 
 interface CadetSessionRowProps {
   session: ScheduleSession;
-  isCurrentSession: boolean;
   isFirst?: boolean;
   isLast?: boolean;
 }
 
 export const CadetSessionRow: React.FC<CadetSessionRowProps> = ({
   session,
-  isCurrentSession,
   isFirst = false,
   isLast = false,
 }) => {
@@ -21,32 +19,19 @@ export const CadetSessionRow: React.FC<CadetSessionRowProps> = ({
     <div className="flex items-start gap-3 sm:gap-6 py-4 sm:py-5 border-b border-slate-100 last:border-b-0 group">
       {/* 1. Left Column: Time & Duration */}
       <div className="w-28 sm:w-36 shrink-0 text-left">
-        <div
-          className={`font-mono text-sm sm:text-base font-bold tracking-tight ${
-            isCurrentSession ? 'text-military-blue' : 'text-navy-deep'
-          }`}
-        >
+        <div className="font-mono text-sm sm:text-base font-bold tracking-tight text-navy-deep">
           {session.time}
         </div>
         <div className="text-xs text-slate-500 font-medium mt-0.5">
           {isInspection ? '20 минут' : `${session.sessionNumber}-я пара  •  1 ч 35 мин`}
         </div>
-        {isCurrentSession && (
-          <span className="inline-block mt-2 px-2 py-0.5 text-[11px] font-bold text-white bg-military-red rounded shadow-xs tracking-wide">
-            Сейчас
-          </span>
-        )}
       </div>
 
       {/* 2. Timeline Track: Vertical connector & Dot */}
       <div className="relative self-stretch flex flex-col items-center justify-start w-6 shrink-0">
         {/* Connector line above dot */}
         {!isFirst && (
-          <div
-            className={`w-0.5 absolute top-0 h-4.5 ${
-              isCurrentSession ? 'bg-military-red' : 'bg-slate-200'
-            }`}
-          />
+          <div className="w-0.5 absolute top-0 h-4.5 bg-slate-200" />
         )}
         {/* Connector line below dot */}
         {!isLast && (
@@ -54,9 +39,7 @@ export const CadetSessionRow: React.FC<CadetSessionRowProps> = ({
         )}
         {/* Dot bullet */}
         <div className="relative z-10 mt-2">
-          {isCurrentSession ? (
-            <span className="block w-3 h-3 rounded-full bg-military-red ring-4 ring-red-100" />
-          ) : isInspection ? (
+          {isInspection ? (
             <span className="block w-2.5 h-2.5 rounded-full bg-slate-300 ring-4 ring-white" />
           ) : (
             <span className="block w-2.5 h-2.5 rounded-full bg-military-blue ring-4 ring-white" />

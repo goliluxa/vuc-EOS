@@ -44,8 +44,6 @@ export const CadetScheduleSection: React.FC<CadetScheduleSectionProps> = ({
   // Currently inspected day
   const currentDay = allDays.find((d) => d.dayNumber === selectedDayNumber) || nearestDay;
 
-  const isNearestDay = currentDay.dayNumber === nearestDay.dayNumber;
-
   const handlePrevDay = () => {
     if (currentDay.dayNumber > 1) {
       setSelectedDayNumber(currentDay.dayNumber - 1);
@@ -202,14 +200,11 @@ export const CadetScheduleSection: React.FC<CadetScheduleSectionProps> = ({
           {currentDay.sessions.map((sess, idx) => {
             const isFirst = idx === 0;
             const isLast = idx === currentDay.sessions.length - 1;
-            // On nearestDay (Day 7), pair 2 (10:45 - 12:20) is marked as "Сейчас"
-            const isCurrentSession = isNearestDay && sess.sessionNumber === 2;
 
             return (
               <React.Fragment key={sess.id}>
                 <CadetSessionRow
                   session={sess}
-                  isCurrentSession={isCurrentSession}
                   isFirst={isFirst}
                   isLast={isLast}
                 />
