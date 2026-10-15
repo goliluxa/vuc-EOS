@@ -54,13 +54,10 @@ export const CadetPortalPage: React.FC = () => {
 
       {/* Main Choice Hub */}
       <main className="flex-1 flex flex-col items-center justify-center max-w-4xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12">
-        <div className="text-center max-w-2xl mb-8 sm:mb-10">
-          <h1 className="text-2xl sm:text-3xl font-bold text-navy-deep tracking-tight mb-2">
-            Информационная образовательная система
+        <div className="text-center mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-navy-deep tracking-tight">
+            Навигация
           </h1>
-          <p className="text-xs sm:text-sm text-content-secondary leading-relaxed">
-            Выберите необходимый сервис для работы с учебными материалами или расписанием военной подготовки
-          </p>
         </div>
 
         {/* 2 Primary Choice Cards */}
@@ -75,13 +72,10 @@ export const CadetPortalPage: React.FC = () => {
               <div className="w-12 h-12 rounded-lg bg-red-50 text-military-red flex items-center justify-center mb-5 group-hover:scale-105 group-hover:bg-military-red group-hover:text-white transition-all duration-200">
                 <GraduationCap className="w-6 h-6" />
               </div>
-              <div className="flex items-center justify-between mb-2">
-                <h2 className="text-lg font-bold text-navy-deep group-hover:text-military-red transition-colors">
+              <div className="mb-2">
+                <h2 className="text-lg font-bold text-navy-deep group-hover:text-military-red transition-colors whitespace-nowrap">
                   Учебная программа
                 </h2>
-                <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded bg-red-50 text-military-red border border-red-200">
-                  LMS
-                </span>
               </div>
               <p className="text-xs sm:text-sm text-content-secondary leading-relaxed mb-6">
                 Расписание учебного военного дня (1 день в неделю), курсы военной подготовки (ОВП, тактика, огневая), презентации лекций и учебные материалы.
@@ -103,13 +97,10 @@ export const CadetPortalPage: React.FC = () => {
               <div className="w-12 h-12 rounded-lg bg-blue-50 text-military-blue flex items-center justify-center mb-5 group-hover:scale-105 group-hover:bg-military-blue group-hover:text-white transition-all duration-200">
                 <BookOpen className="w-6 h-6" />
               </div>
-              <div className="flex items-center justify-between mb-2">
-                <h2 className="text-lg font-bold text-navy-deep group-hover:text-military-blue transition-colors">
+              <div className="mb-2">
+                <h2 className="text-lg font-bold text-navy-deep group-hover:text-military-blue transition-colors whitespace-nowrap">
                   Электронная библиотека
                 </h2>
-                <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded bg-blue-50 text-military-blue border border-blue-200 inline-flex items-center gap-1">
-                  <span>библиотека.вуц21.рф</span>
-                </span>
               </div>
               <p className="text-xs sm:text-sm text-content-secondary leading-relaxed mb-6">
                 Действующий электронный фонд учебных изданий, общевоинских уставов Вооруженных Сил РФ, наставлений по стрелковому делу и методических пособий.
