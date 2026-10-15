@@ -9,21 +9,6 @@ interface CadetSessionRowProps {
   isLast?: boolean;
 }
 
-const getSessionTypeBadgeClass = (type: ScheduleSession['type']) => {
-  switch (type) {
-    case 'Лекция':
-      return 'bg-blue-50 text-military-blue border-blue-200/80';
-    case 'Практическое занятие':
-      return 'bg-emerald-50 text-emerald-700 border-emerald-200/80';
-    case 'Самоподготовка':
-      return 'bg-purple-50 text-purple-700 border-purple-200/80';
-    case 'Тренировка':
-      return 'bg-amber-50 text-amber-700 border-amber-200/80';
-    default:
-      return 'bg-slate-100 text-slate-700 border-slate-200';
-  }
-};
-
 export const CadetSessionRow: React.FC<CadetSessionRowProps> = ({
   session,
   isCurrentSession,
@@ -81,20 +66,11 @@ export const CadetSessionRow: React.FC<CadetSessionRowProps> = ({
 
       {/* 3. Middle & Right: Subject, Topic & Location/Instructor */}
       <div className="flex-1 min-w-0 flex flex-col lg:flex-row lg:items-start justify-between gap-3 lg:gap-6">
-        {/* Middle: Subject, Type Badge & Topic */}
+        {/* Middle: Subject & Topic */}
         <div className="flex-1 min-w-0">
-          <div className="flex flex-wrap items-center gap-2 mb-1">
-            <h4 className="text-sm sm:text-base font-bold text-navy-deep leading-snug">
-              {session.subject}
-            </h4>
-            <span
-              className={`text-xs font-medium px-2 py-0.5 rounded border ${getSessionTypeBadgeClass(
-                session.type
-              )}`}
-            >
-              {session.type}
-            </span>
-          </div>
+          <h4 className="text-sm sm:text-base font-bold text-navy-deep leading-snug mb-1">
+            {session.subject}
+          </h4>
           <p className="text-xs sm:text-sm text-slate-500 leading-normal font-normal">
             {session.topic}
           </p>
