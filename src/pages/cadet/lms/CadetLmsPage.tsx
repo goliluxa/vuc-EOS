@@ -13,7 +13,6 @@ export const CadetLmsPage: React.FC = () => {
 
   const [activeSection, setActiveSection] = useState<CadetLmsSection>('schedule');
   const [selectedCourseId, setSelectedCourseId] = useState<string | null>(null);
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const selectedCourse = selectedCourseId
@@ -60,8 +59,6 @@ export const CadetLmsPage: React.FC = () => {
         <CadetSidebar
           activeSection={activeSection}
           onSelectSection={handleSelectSection}
-          isCollapsed={isSidebarCollapsed}
-          onToggleCollapse={() => setIsSidebarCollapsed((prev) => !prev)}
         />
       </div>
 
@@ -84,8 +81,6 @@ export const CadetLmsPage: React.FC = () => {
                 handleSelectSection(sec);
                 setIsMobileMenuOpen(false);
               }}
-              isCollapsed={false}
-              onToggleCollapse={() => {}}
             />
           </div>
         </div>
