@@ -12,7 +12,7 @@ export const CadetPortalPage: React.FC = () => {
 
   const handleLogout = () => {
     cadetAuthService.logoutCadet();
-    navigate('/login');
+    navigate('/');
   };
 
   return (

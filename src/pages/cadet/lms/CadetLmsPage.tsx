@@ -21,7 +21,7 @@ export const CadetLmsPage: React.FC = () => {
 
   const handleLogout = () => {
     cadetAuthService.logoutCadet();
-    navigate('/login');
+    navigate('/');
   };
 
   const handleSelectSection = (sec: CadetLmsSection) => {
