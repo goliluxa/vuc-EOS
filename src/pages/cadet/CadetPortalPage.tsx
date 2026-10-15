@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BookOpen, GraduationCap, LogOut, ArrowRight, User, ExternalLink, Compass } from 'lucide-react';
+import { BookOpen, GraduationCap, LogOut, ArrowRight, User, Compass } from 'lucide-react';
 import { BrandLogo } from '../../components/BrandLogo';
 import { BackgroundPattern } from '../../components/BackgroundPattern';
 import { cadetAuthService } from '../../services/cadetAuthService';
@@ -23,26 +23,6 @@ export const CadetPortalPage: React.FC = () => {
       <header className="w-full bg-white/90 backdrop-blur-md border-b border-surface-border sticky top-0 z-20 shadow-xs">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
           <BrandLogo size="sm" asLink={false} />
-
-          {/* Quick Header Navigation */}
-          <nav aria-label="Навигация по сервисам" className="hidden md:flex items-center gap-1.5 text-xs">
-            <button
-              type="button"
-              onClick={() => navigate('/cadet/lms')}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md font-medium text-navy-deep hover:text-military-red hover:bg-slate-100 transition-colors"
-            >
-              <GraduationCap className="w-4 h-4 text-military-red" />
-              <span>Учебная программа</span>
-            </button>
-            <a
-              href={libraryService.getLibraryUrl()}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md font-medium text-navy-deep hover:text-military-blue hover:bg-slate-100 transition-colors"
-            >
-              <BookOpen className="w-4 h-4 text-military-blue" />
-              <span>Библиотека</span>
-              <ExternalLink className="w-3 h-3 text-content-secondary" />
-            </a>
-          </nav>
 
           <div className="flex items-center gap-3">
             <div className="hidden sm:flex items-center gap-2 pl-3 border-l border-surface-border text-xs">
