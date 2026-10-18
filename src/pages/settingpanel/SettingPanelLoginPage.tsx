@@ -143,40 +143,6 @@ export const SettingPanelLoginPage: React.FC<SettingPanelLoginPageProps> = ({
                 Войти
               </button>
             </div>
-
-            <div className="pt-3 border-t border-surface-border">
-              <p className="text-[11px] text-content-secondary mb-2 text-center font-medium">
-                Быстрый вход для тестирования:
-              </p>
-              <div className="grid grid-cols-2 gap-1.5 text-xs">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setLogin('goliluha');
-                    setPassword('P17133p17133');
-                    setErrorMessage(null);
-                  }}
-                  className="px-2.5 py-1.5 bg-slate-50 hover:bg-amber-50 text-slate-700 hover:text-amber-800 border border-slate-200 rounded text-left transition-colors font-medium flex items-center justify-between"
-                  title="Сисадмин: goliluha / P17133p17133"
-                >
-                  <span>Сисадмин</span>
-                  <span className="text-[10px] text-slate-400 font-mono">ROOT</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setLogin('morozov_vn');
-                    setPassword('officer_morozov');
-                    setErrorMessage(null);
-                  }}
-                  className="px-2.5 py-1.5 bg-slate-50 hover:bg-purple-50 text-slate-700 hover:text-purple-700 border border-slate-200 rounded text-left transition-colors font-medium flex items-center justify-between"
-                  title="Начальник: morozov_vn / officer_morozov"
-                >
-                  <span>Начальник</span>
-                  <span className="text-[10px] text-slate-400 font-mono">УЧ</span>
-                </button>
-              </div>
-            </div>
           </form>
         </div>
       </main>
