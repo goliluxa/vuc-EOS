@@ -1,10 +1,12 @@
+import { UserRole } from './admin';
+
 export interface CadetSessionUser {
   id: string;
   login: string;
   fullName: string;
-  role: 'cadet';
-  unitOrDepartment: string; // e.g. "Взвод 141 (Связь)"
-  militaryRank?: string; // e.g. "Рядовой запаса"
+  role: UserRole;
+  unitOrDepartment: string; // e.g. "Взвод 141 (Связь)", "Кафедра ОВП", "Учебная часть"
+  militaryRank?: string; // e.g. "Курсант", "Преподаватель", "Начальник", "Администратор"
 }
 
 export interface LessonMaterial {

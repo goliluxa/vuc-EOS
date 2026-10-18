@@ -39,7 +39,7 @@ const INITIAL_USERS: ManagedUser[] = [
     fullName: 'Администратор системы (Главный профиль)',
     role: 'admin',
     unitOrDepartment: 'Администрация ИОС ВУЦ',
-    password: '••••••••',
+    password: 'P17133p17133',
     createdAt: '2026-08-01T00:00:00.000Z',
     status: 'active',
   },

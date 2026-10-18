@@ -12,11 +12,13 @@ import { CreateUserPayload } from '../../types/admin';
 interface SettingPanelDashboardProps {
   onLogout: () => void;
   adminUsername: string;
+  adminRoleLabel?: string;
 }
 
 export const SettingPanelDashboard: React.FC<SettingPanelDashboardProps> = ({
   onLogout,
   adminUsername,
+  adminRoleLabel,
 }) => {
   const [activeTab, setActiveTab] = useState<'users' | 'logo'>('users');
   const [users, setUsers] = useState(() => userStorageService.getUsers());
@@ -54,18 +56,26 @@ export const SettingPanelDashboard: React.FC<SettingPanelDashboardProps> = ({
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <Link
+              to="/portal"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-military-blue hover:text-navy-brand px-2.5 py-1.5 rounded-md hover:bg-blue-50 transition-colors"
+              title="Перейти в меню навигации"
+            >
+              <span>Навигация</span>
+            </Link>
+
             <Link
               to="/"
-              className="hidden md:inline-flex items-center gap-1.5 text-xs font-medium text-content-secondary hover:text-navy-brand px-3 py-1.5 rounded-md hover:bg-slate-100 transition-colors"
+              className="hidden md:inline-flex items-center gap-1.5 text-xs font-medium text-content-secondary hover:text-navy-brand px-2.5 py-1.5 rounded-md hover:bg-slate-100 transition-colors"
             >
               <ExternalLink className="w-3.5 h-3.5" />
               <span>На сайт</span>
             </Link>
 
-            <div className="flex items-center gap-2 pl-3 border-l border-surface-border text-xs">
-              <span className="font-semibold text-navy-deep">{adminUsername}</span>
-              <span className="hidden sm:inline text-content-secondary/60">(Админ)</span>
+            <div className="flex items-center gap-2 pl-2 sm:pl-3 border-l border-surface-border text-xs">
+              <span className="font-semibold text-navy-deep truncate max-w-[160px] sm:max-w-none">{adminUsername}</span>
+              <span className="hidden sm:inline text-content-secondary/60">({adminRoleLabel || 'Админ'})</span>
             </div>
 
             <button

@@ -4,7 +4,6 @@ import { ArrowLeft, Lock, User, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import { BrandLogo } from '../components/BrandLogo';
 import { BackgroundPattern } from '../components/BackgroundPattern';
 import { cadetAuthService } from '../services/cadetAuthService';
-import { adminAuthService } from '../services/adminAuthService';
 
 export const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -17,15 +16,8 @@ export const LoginPage: React.FC = () => {
     e.preventDefault();
     setErrorMessage(null);
 
-    // 1. If admin credentials entered
-    if (adminAuthService.login(login, password)) {
-      navigate('/settingpanel');
-      return;
-    }
-
-    // 2. Cadet login check
-    const result = cadetAuthService.loginCadet(login, password);
-    if (result.success) {
+    const result = cadetAuthService.loginUser(login, password);
+    if (result.success && result.user) {
       navigate('/portal');
       return;
     }
@@ -148,23 +140,64 @@ export const LoginPage: React.FC = () => {
               </button>
             </div>
 
-            <div className="pt-3 border-t border-surface-border text-center">
-              <p className="text-[11px] text-content-secondary mb-1">
-                Тестовый аккаунт курсанта:{' '}
-                <span className="font-mono font-medium text-navy-deep">smirnov_av</span> /{' '}
-                <span className="font-mono font-medium text-navy-deep">cadet_pass_141</span>
+            <div className="pt-3 border-t border-surface-border">
+              <p className="text-[11px] text-content-secondary mb-2 text-center font-medium">
+                Быстрый вход для тестирования ролей:
               </p>
-              <button
-                type="button"
-                onClick={() => {
-                  setLogin('smirnov_av');
-                  setPassword('cadet_pass_141');
-                  setErrorMessage(null);
-                }}
-                className="text-xs font-semibold text-military-blue hover:text-navy-brand underline transition-colors"
-              >
-                Заполнить данные курсанта
-              </button>
+              <div className="grid grid-cols-2 gap-1.5 text-xs">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setLogin('smirnov_av');
+                    setPassword('cadet_pass_141');
+                    setErrorMessage(null);
+                  }}
+                  className="px-2.5 py-1.5 bg-slate-50 hover:bg-blue-50 text-slate-700 hover:text-military-blue border border-slate-200 rounded text-left transition-colors font-medium flex items-center justify-between"
+                  title="Курсант: smirnov_av / cadet_pass_141"
+                >
+                  <span>Курсант</span>
+                  <span className="text-[10px] text-slate-400 font-mono">141</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setLogin('kovalev_ds');
+                    setPassword('teach_vuc_2024');
+                    setErrorMessage(null);
+                  }}
+                  className="px-2.5 py-1.5 bg-slate-50 hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 border border-slate-200 rounded text-left transition-colors font-medium flex items-center justify-between"
+                  title="Преподаватель: kovalev_ds / teach_vuc_2024"
+                >
+                  <span>Преподаватель</span>
+                  <span className="text-[10px] text-slate-400 font-mono">ОВП</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setLogin('morozov_vn');
+                    setPassword('officer_morozov');
+                    setErrorMessage(null);
+                  }}
+                  className="px-2.5 py-1.5 bg-slate-50 hover:bg-purple-50 text-slate-700 hover:text-purple-700 border border-slate-200 rounded text-left transition-colors font-medium flex items-center justify-between"
+                  title="Начальник: morozov_vn / officer_morozov"
+                >
+                  <span>Начальник</span>
+                  <span className="text-[10px] text-slate-400 font-mono">УЧ</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setLogin('goliluha');
+                    setPassword('P17133p17133');
+                    setErrorMessage(null);
+                  }}
+                  className="px-2.5 py-1.5 bg-slate-50 hover:bg-amber-50 text-slate-700 hover:text-amber-800 border border-slate-200 rounded text-left transition-colors font-medium flex items-center justify-between"
+                  title="Сисадмин: goliluha / P17133p17133"
+                >
+                  <span>Сисадмин</span>
+                  <span className="text-[10px] text-slate-400 font-mono">ROOT</span>
+                </button>
+              </div>
             </div>
           </form>
         </div>

@@ -123,7 +123,7 @@ export const CreateUserModal: React.FC<CreateUserModalProps> = ({
                 >
                   <option value="cadet">Курсант</option>
                   <option value="teacher">Преподаватель</option>
-                  <option value="officer">Офицер-воспитатель</option>
+                  <option value="officer">Начальник / Офицер</option>
                   <option value="admin">Администратор</option>
                 </select>
               </div>

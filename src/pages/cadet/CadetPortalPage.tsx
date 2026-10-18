@@ -1,19 +1,38 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BookOpen, GraduationCap, LogOut, ArrowRight, User } from 'lucide-react';
+import { BookOpen, GraduationCap, LogOut, ArrowRight, User, Shield } from 'lucide-react';
 import { BrandLogo } from '../../components/BrandLogo';
 import { BackgroundPattern } from '../../components/BackgroundPattern';
 import { cadetAuthService } from '../../services/cadetAuthService';
 import { libraryService } from '../../services/libraryService';
+import { UserRole } from '../../types/admin';
 
 export const CadetPortalPage: React.FC = () => {
   const navigate = useNavigate();
-  const currentCadet = cadetAuthService.getCurrentCadet();
+  const currentUser = cadetAuthService.getCurrentUser();
 
   const handleLogout = () => {
-    cadetAuthService.logoutCadet();
+    cadetAuthService.logout();
     navigate('/');
   };
+
+  const getRoleBadgeText = (role?: UserRole): string => {
+    switch (role) {
+      case 'cadet':
+        return 'Курсант';
+      case 'teacher':
+        return 'Преподаватель';
+      case 'officer':
+        return 'Начальник';
+      case 'admin':
+        return 'Администратор';
+      default:
+        return 'Курсант';
+    }
+  };
+
+  const canAccessSettings =
+    currentUser?.role === 'admin' || currentUser?.role === 'officer';
 
   return (
     <div className="relative min-h-screen flex flex-col justify-between bg-surface-bg text-content-primary">
@@ -31,10 +50,14 @@ export const CadetPortalPage: React.FC = () => {
               </div>
               <div className="flex flex-col text-left">
                 <span className="font-semibold text-navy-deep leading-tight">
-                  {currentCadet?.fullName || 'Курсант ВУЦ'}
+                  {currentUser?.fullName || 'Курсант ВУЦ'}
                 </span>
                 <span className="text-[11px] text-content-secondary leading-tight">
-                  {currentCadet?.unitOrDepartment || 'Взвод 141'}
+                  {currentUser?.unitOrDepartment || 'Взвод 141'}
+                  <span className="mx-1 text-slate-300">•</span>
+                  <span className="font-medium text-military-blue">
+                    {getRoleBadgeText(currentUser?.role)}
+                  </span>
                 </span>
               </div>
             </div>
@@ -53,15 +76,23 @@ export const CadetPortalPage: React.FC = () => {
       </header>
 
       {/* Main Choice Hub */}
-      <main className="flex-1 flex flex-col items-center justify-center max-w-4xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12">
+      <main
+        className={`flex-1 flex flex-col items-center justify-center ${
+          canAccessSettings ? 'max-w-5xl' : 'max-w-4xl'
+        } w-full mx-auto px-4 sm:px-6 py-8 sm:py-12`}
+      >
         <div className="text-center mb-6 sm:mb-8">
           <h1 className="text-2xl sm:text-3xl font-bold text-navy-deep tracking-tight">
             Навигация
           </h1>
         </div>
 
-        {/* 2 Primary Choice Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 w-full">
+        {/* Primary Choice Cards */}
+        <div
+          className={`grid grid-cols-1 ${
+            canAccessSettings ? 'md:grid-cols-3' : 'md:grid-cols-2'
+          } gap-5 sm:gap-6 w-full`}
+        >
           {/* Card 1: Учебная программа (LMS) */}
           <button
             type="button"
@@ -112,6 +143,34 @@ export const CadetPortalPage: React.FC = () => {
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </div>
           </a>
+
+          {/* Card 3: Панель настроек (для начальника и сисадмина) */}
+          {canAccessSettings && (
+            <button
+              type="button"
+              onClick={() => navigate('/settingpanel')}
+              className="group relative bg-white border border-surface-border rounded-xl p-6 sm:p-7 shadow-card hover:shadow-cardHover hover:border-purple-400/60 transition-all duration-200 cursor-pointer flex flex-col justify-between text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500"
+            >
+              <div>
+                <div className="w-12 h-12 rounded-lg bg-purple-50 text-purple-700 flex items-center justify-center mb-5 group-hover:scale-105 group-hover:bg-purple-700 group-hover:text-white transition-all duration-200">
+                  <Shield className="w-6 h-6" />
+                </div>
+                <div className="mb-2">
+                  <h2 className="text-lg font-bold text-navy-deep group-hover:text-purple-700 transition-colors whitespace-nowrap">
+                    Панель настроек
+                  </h2>
+                </div>
+                <p className="text-xs sm:text-sm text-content-secondary leading-relaxed mb-6">
+                  Управление учётными записями курсантов, преподавателей и администрации, редактирование логотипа и системных параметров ИОС ВУЦ.
+                </p>
+              </div>
+
+              <div className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-purple-700 group-hover:text-purple-900 transition-colors pt-3 border-t border-surface-border/60">
+                <span>Перейти к панели</span>
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </div>
+            </button>
+          )}
         </div>
       </main>
     </div>

@@ -48,10 +48,16 @@ export const CadetTopbar: React.FC<CadetTopbarProps> = ({
           </div>
           <div className="hidden sm:flex flex-col text-left">
             <span className="font-semibold text-navy-deep leading-tight">
-              {cadet?.fullName || 'Курсант'}
+              {cadet?.fullName || 'Пользователь'}
             </span>
             <span className="text-[11px] text-content-secondary leading-tight">
               {cadet?.unitOrDepartment || 'Взвод 141'}
+              {cadet?.militaryRank && (
+                <>
+                  <span className="mx-1 text-slate-300">•</span>
+                  <span className="font-medium text-military-blue">{cadet.militaryRank}</span>
+                </>
+              )}
             </span>
           </div>
         </div>
