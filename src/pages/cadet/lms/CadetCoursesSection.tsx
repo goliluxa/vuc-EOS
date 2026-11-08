@@ -6,11 +6,15 @@ import { CadetCourseDetail } from './CadetCourseDetail';
 interface CadetCoursesSectionProps {
   selectedCourseId?: string | null;
   onSelectCourse?: (courseId: string | null) => void;
+  isTeacher?: boolean;
+  instructorName?: string;
 }
 
 export const CadetCoursesSection: React.FC<CadetCoursesSectionProps> = ({
   selectedCourseId: controlledCourseId,
   onSelectCourse: controlledOnSelectCourse,
+  isTeacher = false,
+  instructorName,
 }) => {
   const [internalCourseId, setInternalCourseId] = useState<string | null>(null);
 
@@ -35,6 +39,8 @@ export const CadetCoursesSection: React.FC<CadetCoursesSectionProps> = ({
       <CadetCourseDetail
         course={selectedCourse}
         onBack={() => handleSelectCourse(null)}
+        isTeacher={isTeacher}
+        instructorName={instructorName}
       />
     );
   }

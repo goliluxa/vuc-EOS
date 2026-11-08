@@ -21,6 +21,8 @@ node_modules
 dist
 dist-ssr
 *.local
+storage_data/
+*.db
 *.tsbuildinfo
 
 # Environment variables

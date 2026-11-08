@@ -1,7 +1,9 @@
-import { CadetCourse } from '../types/cadet';
+import { CadetCourse, CourseLesson } from '../types/cadet';
+
+const COURSES_STORAGE_KEY = 'vuc_unified_courses_list';
 
 export const courseService = {
-  getCadetCourses(): CadetCourse[] {
+  getDefaultCourses(): CadetCourse[] {
     return [
       {
         id: 'course-ovp',
@@ -333,5 +335,64 @@ export const courseService = {
 
   getCourseById(courseId: string): CadetCourse | undefined {
     return this.getCadetCourses().find((c) => c.id === courseId);
+  },
+
+  getCadetCourses(): CadetCourse[] {
+    try {
+      const raw = localStorage.getItem(COURSES_STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed;
+        }
+      }
+    } catch {
+      // Fallback
+    }
+    const defaults = this.getDefaultCourses();
+    try {
+      localStorage.setItem(COURSES_STORAGE_KEY, JSON.stringify(defaults));
+    } catch {
+      // Ignore
+    }
+    return defaults;
+  },
+
+  saveCourses(courses: CadetCourse[]): void {
+    try {
+      localStorage.setItem(COURSES_STORAGE_KEY, JSON.stringify(courses));
+    } catch {
+      // Ignore
+    }
+  },
+
+  addLessonToCourse(courseId: string, lesson: Omit<CourseLesson, 'id' | 'number'>): CourseLesson {
+    const courses = this.getCadetCourses();
+    const target = courses.find((c) => c.id === courseId);
+    if (!target) throw new Error('Курс не найден');
+
+    const newNumber = target.lessons.length + 1;
+    const newLesson: CourseLesson = {
+      ...lesson,
+      id: `les-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+      number: newNumber,
+      status: lesson.status || 'published',
+    };
+
+    target.lessons.push(newLesson);
+    this.saveCourses(courses);
+    return newLesson;
+  },
+
+  updateLessonStatus(courseId: string, lessonId: string, status: 'published' | 'draft' | 'scheduled', date?: string): void {
+    const courses = this.getCadetCourses();
+    const target = courses.find((c) => c.id === courseId);
+    if (!target) return;
+    const les = target.lessons.find((l) => l.id === lessonId);
+    if (les) {
+      les.status = status;
+      if (date !== undefined) les.scheduledDate = date;
+      this.saveCourses(courses);
+    }
   },
 };

@@ -10,6 +10,8 @@ const ROLE_LABELS: Record<UserRole, string> = {
   cadet: 'Курсант',
   teacher: 'Преподаватель',
   officer: 'Начальник',
+  methodist: 'Методист',
+  deputy: 'Зам. начальника',
   admin: 'Администратор',
 };
 
@@ -36,6 +38,9 @@ export const cadetAuthService = {
     loginInput: string,
     passwordInput: string
   ): { success: boolean; user?: CadetSessionUser; error?: string } {
+    // Clear previous sessions to prevent role or name contamination
+    this.logout();
+
     const cleanLogin = loginInput.trim().toLowerCase();
     const cleanPass = passwordInput.trim();
     const users = userStorageService.getUsers();

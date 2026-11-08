@@ -4,14 +4,25 @@ import { CadetSidebar, CadetLmsSection } from './CadetSidebar';
 import { CadetTopbar } from './CadetTopbar';
 import { CadetScheduleSection } from './CadetScheduleSection';
 import { CadetCoursesSection } from './CadetCoursesSection';
+import { CadetProfileSection } from './CadetProfileSection';
+import { TeacherProfileSection } from './TeacherProfileSection';
+import { CadetEventsSection } from './CadetEventsSection';
+import { CadetStorageSection } from './CadetStorageSection';
 import { cadetAuthService } from '../../../services/cadetAuthService';
 import { courseService } from '../../../services/courseService';
 
 export const CadetLmsPage: React.FC = () => {
   const navigate = useNavigate();
   const currentCadet = cadetAuthService.getCurrentCadet();
+  const isTeacher = currentCadet?.role === 'teacher';
+  const isMethodist = currentCadet?.role === 'methodist';
+  const isDeputy = currentCadet?.role === 'deputy';
+  const isCadet = currentCadet?.role === 'cadet';
+  const canManageCourses = isTeacher || isMethodist || isDeputy;
 
-  const [activeSection, setActiveSection] = useState<CadetLmsSection>('schedule');
+  const [activeSection, setActiveSection] = useState<CadetLmsSection>(() =>
+    isCadet ? 'schedule' : 'courses'
+  );
   const [selectedCourseId, setSelectedCourseId] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -39,7 +50,13 @@ export const CadetLmsPage: React.FC = () => {
       case 'schedule':
         return 'Расписание учебного военного дня';
       case 'courses':
-        return 'Курсы военной подготовки и материалы';
+        return 'Курсы военной подготовки';
+      case 'storage':
+        return 'Облачное файловое хранилище ВУЦ';
+      case 'profile':
+        return isDeputy ? 'Профиль заместителя начальника ВУЦ' : isTeacher ? 'Личный профиль преподавателя' : isMethodist ? 'Профиль методиста учебной части' : 'Личный профиль курсанта';
+      case 'events':
+        return 'Военные мероприятия и смотры';
       default:
         return 'Учебный процесс';
     }
@@ -59,6 +76,7 @@ export const CadetLmsPage: React.FC = () => {
         <CadetSidebar
           activeSection={activeSection}
           onSelectSection={handleSelectSection}
+          userRole={currentCadet?.role}
         />
       </div>
 
@@ -77,6 +95,7 @@ export const CadetLmsPage: React.FC = () => {
           <div className="relative z-10 h-full w-64 bg-white animate-slide-up">
             <CadetSidebar
               activeSection={activeSection}
+              userRole={currentCadet?.role}
               onSelectSection={(sec) => {
                 handleSelectSection(sec);
                 setIsMobileMenuOpen(false);
@@ -104,7 +123,25 @@ export const CadetLmsPage: React.FC = () => {
             <CadetCoursesSection
               selectedCourseId={selectedCourseId}
               onSelectCourse={(id) => setSelectedCourseId(id)}
+              isTeacher={canManageCourses}
+              instructorName={currentCadet?.fullName}
             />
+          )}
+          {activeSection === 'storage' && (
+            <CadetStorageSection />
+          )}
+          {activeSection === 'events' && (
+            <CadetEventsSection />
+          )}
+          {activeSection === 'profile' && (
+            isTeacher ? (
+              <TeacherProfileSection
+                user={currentCadet}
+                onNavigateToCourses={() => handleSelectSection('courses')}
+              />
+            ) : (
+              <CadetProfileSection user={currentCadet} />
+            )
           )}
         </main>
       </div>

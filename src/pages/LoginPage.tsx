@@ -156,11 +156,10 @@ export const LoginPage: React.FC = () => {
                     setPassword('cadet_pass_141');
                     setErrorMessage(null);
                   }}
-                  className="px-2 py-1.5 bg-slate-50 hover:bg-blue-50 text-slate-700 hover:text-military-blue border border-slate-200 rounded text-center transition-colors font-medium flex flex-col items-center"
+                  className="px-2 py-2 bg-slate-50 hover:bg-blue-50 text-slate-700 hover:text-military-blue border border-slate-200 rounded text-center transition-colors font-semibold flex flex-col items-center justify-center focus:outline-none focus:ring-1 focus:ring-military-blue"
                   title="Курсант: smirnov_av / cadet_pass_141"
                 >
-                  <span className="font-semibold text-xs">Курсант</span>
-                  <span className="text-[10px] text-slate-400 font-mono">Взвод 141</span>
+                  <span className="text-xs">Курсант</span>
                 </button>
                 <button
                   type="button"
@@ -169,11 +168,10 @@ export const LoginPage: React.FC = () => {
                     setPassword('teach_vuc_2024');
                     setErrorMessage(null);
                   }}
-                  className="px-2 py-1.5 bg-slate-50 hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 border border-slate-200 rounded text-center transition-colors font-medium flex flex-col items-center"
+                  className="px-2 py-2 bg-slate-50 hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 border border-slate-200 rounded text-center transition-colors font-semibold flex flex-col items-center justify-center focus:outline-none focus:ring-1 focus:ring-emerald-600"
                   title="Преподаватель: kovalev_ds / teach_vuc_2024"
                 >
-                  <span className="font-semibold text-xs">Преподаватель</span>
-                  <span className="text-[10px] text-slate-400 font-mono">Кафедра ОВП</span>
+                  <span className="text-xs">Преподаватель</span>
                 </button>
                 <button
                   type="button"
@@ -182,11 +180,10 @@ export const LoginPage: React.FC = () => {
                     setPassword('officer_morozov');
                     setErrorMessage(null);
                   }}
-                  className="px-2 py-1.5 bg-slate-50 hover:bg-purple-50 text-slate-700 hover:text-purple-700 border border-slate-200 rounded text-center transition-colors font-medium flex flex-col items-center"
+                  className="px-2 py-2 bg-slate-50 hover:bg-purple-50 text-slate-700 hover:text-purple-700 border border-slate-200 rounded text-center transition-colors font-semibold flex flex-col items-center justify-center focus:outline-none focus:ring-1 focus:ring-purple-600"
                   title="Начальник: morozov_vn / officer_morozov"
                 >
-                  <span className="font-semibold text-xs">Начальник</span>
-                  <span className="text-[10px] text-slate-400 font-mono">Учебная часть</span>
+                  <span className="text-xs">Начальник</span>
                 </button>
               </div>
             </div>

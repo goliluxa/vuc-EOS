@@ -6,6 +6,7 @@ import { LoginPage } from './pages/LoginPage';
 import { SettingPanelPage } from './pages/settingpanel/SettingPanelPage';
 import { CadetPortalPage } from './pages/cadet/CadetPortalPage';
 import { CadetLmsPage } from './pages/cadet/lms/CadetLmsPage';
+import { StoragePage } from './pages/storage/StoragePage';
 import { libraryService } from './services/libraryService';
 
 const LibraryRedirect: React.FC = () => {
@@ -25,6 +26,7 @@ export const App: React.FC = () => {
         <Route path="/cadet" element={<Navigate to="/portal" replace />} />
         <Route path="/cadet/lms" element={<CadetLmsPage />} />
         <Route path="/lms" element={<Navigate to="/cadet/lms" replace />} />
+        <Route path="/storage" element={<StoragePage />} />
         <Route path="/library" element={<LibraryRedirect />} />
         <Route path="/settingpanel" element={<SettingPanelPage />} />
         <Route path="/settingspanel" element={<Navigate to="/settingpanel" replace />} />

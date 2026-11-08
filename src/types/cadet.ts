@@ -26,6 +26,8 @@ export interface CourseLesson {
   hours: number;
   instructor: string;
   materials: LessonMaterial[];
+  status?: 'published' | 'draft' | 'scheduled';
+  scheduledDate?: string;
 }
 
 export interface CadetCourse {

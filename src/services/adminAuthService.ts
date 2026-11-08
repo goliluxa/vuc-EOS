@@ -33,7 +33,7 @@ export const adminAuthService = {
   getCurrentAdminRoleLabel(): string {
     const current = this.getCurrentAdminInfo();
     if (current) {
-      if (current.role === 'officer') return 'Начальник';
+      if (current.role === 'officer') return 'Начальник ВУЦ';
       if (current.role === 'admin') return 'Администратор';
     }
     return 'Администратор';

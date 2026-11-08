@@ -10,6 +10,7 @@ import { UserRole } from '../../types/admin';
 export const CadetPortalPage: React.FC = () => {
   const navigate = useNavigate();
   const currentUser = cadetAuthService.getCurrentUser();
+  const isTeacher = currentUser?.role === 'teacher';
 
   const handleLogout = () => {
     cadetAuthService.logout();
@@ -94,16 +95,18 @@ export const CadetPortalPage: React.FC = () => {
               </div>
               <div className="mb-2">
                 <h2 className="text-lg font-bold text-navy-deep group-hover:text-military-red transition-colors whitespace-nowrap">
-                  Учебная программа
+                  {isTeacher ? 'Учебный процесс' : 'Учебная программа'}
                 </h2>
               </div>
               <p className="text-xs sm:text-sm text-content-secondary leading-relaxed mb-6">
-                Расписание учебного военного дня (1 день в неделю), курсы военной подготовки (ОВП, тактика, огневая), презентации лекций и учебные материалы.
+                {isTeacher
+                  ? 'Управление курсами военной подготовки (ОВП, тактика, огневая), лекции, презентации, публикация тем и профиль преподавателя.'
+                  : 'Расписание учебного военного дня (1 день в неделю), курсы военной подготовки (ОВП, тактика, огневая), презентации лекций и учебные материалы.'}
               </p>
             </div>
 
             <div className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-military-red group-hover:text-military-redHover transition-colors pt-3 border-t border-surface-border/60">
-              <span>Перейти к программе</span>
+              <span>{isTeacher ? 'Войти в портал' : 'Перейти к программе'}</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </div>
           </button>

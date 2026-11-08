@@ -23,7 +23,10 @@ export const UsersTable: React.FC<UsersTableProps> = ({
     setVisiblePasswords((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
-  const filteredUsers = users.filter((u) => {
+  // Hidden role: System admin should never be displayed in the users management table
+  const visibleUsers = users.filter((u) => u.role !== 'admin');
+
+  const filteredUsers = visibleUsers.filter((u) => {
     const matchesSearch =
       u.fullName.toLowerCase().includes(search.toLowerCase()) ||
       u.login.toLowerCase().includes(search.toLowerCase()) ||
@@ -52,6 +55,18 @@ export const UsersTable: React.FC<UsersTableProps> = ({
         return (
           <span className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-purple-50 text-purple-700 border border-purple-200">
             Начальник / Офицер
+          </span>
+        );
+      case 'methodist':
+        return (
+          <span className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
+            Методист
+          </span>
+        );
+      case 'deputy':
+        return (
+          <span className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-sky-50 text-sky-700 border border-sky-200">
+            Зам. начальника
           </span>
         );
       case 'admin':
@@ -122,13 +137,14 @@ export const UsersTable: React.FC<UsersTableProps> = ({
         </div>
 
         <div className="flex items-center gap-2 shrink-0 overflow-x-auto pb-1 sm:pb-0">
-          {(['all', 'cadet', 'teacher', 'officer', 'admin'] as const).map((r) => {
+          {(['all', 'cadet', 'teacher', 'methodist', 'deputy', 'officer'] as const).map((r) => {
             const labels = {
               all: 'Все',
               cadet: 'Курсанты',
               teacher: 'Преподаватели',
+              methodist: 'Методисты',
+              deputy: 'Зам. начальника',
               officer: 'Офицеры',
-              admin: 'Админы',
             };
             const active = roleFilter === r;
             return (

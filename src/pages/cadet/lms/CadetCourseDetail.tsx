@@ -1,19 +1,27 @@
 import React, { useState } from 'react';
-import { ArrowLeft, CheckCircle, ChevronsUpDown } from 'lucide-react';
+import { ArrowLeft, CheckCircle, ChevronsUpDown, Plus } from 'lucide-react';
 import { CadetCourse, LessonMaterial } from '../../../types/cadet';
 import { CadetCourseHero } from './CadetCourseHero';
 import { CadetLessonItem } from './CadetLessonItem';
 import { CadetMaterialPreviewModal } from './CadetMaterialPreviewModal';
+import { AddLessonModal } from './AddLessonModal';
+import { courseService } from '../../../services/courseService';
 
 interface CadetCourseDetailProps {
   course: CadetCourse;
   onBack: () => void;
+  isTeacher?: boolean;
+  instructorName?: string;
 }
 
 export const CadetCourseDetail: React.FC<CadetCourseDetailProps> = ({
   course,
   onBack,
+  isTeacher = false,
+  instructorName = 'Преподаватель',
 }) => {
+  const [currentCourse, setCurrentCourse] = useState<CadetCourse>(course);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [expandedLessonId, setExpandedLessonId] = useState<string>(
     course.lessons[0]?.id || ''
   );
@@ -111,6 +119,16 @@ export const CadetCourseDetail: React.FC<CadetCourseDetailProps> = ({
           </div>
 
           <div className="flex items-center gap-2 self-start sm:self-auto">
+            {isTeacher && (
+              <button
+                type="button"
+                onClick={() => setIsAddModalOpen(true)}
+                className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-bold text-white bg-military-blue hover:bg-navy-deep rounded-md transition-colors shadow-2xs"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                <span>Добавить занятие</span>
+              </button>
+            )}
             <button
               type="button"
               onClick={handleToggleAll}
@@ -121,17 +139,29 @@ export const CadetCourseDetail: React.FC<CadetCourseDetailProps> = ({
             </button>
 
             <span className="text-xs font-semibold text-military-blue bg-blue-50 px-2.5 py-1 rounded-md border border-blue-200">
-              {course.lessons.length} занятий
+              {currentCourse.lessons.length} занятий
             </span>
           </div>
         </div>
 
         {/* Lessons List */}
         <div className="space-y-3">
-          {course.lessons.map((lesson) => (
+          {currentCourse.lessons.map((lesson) => (
             <CadetLessonItem
               key={lesson.id}
               lesson={lesson}
+              isTeacher={isTeacher}
+              onStatusChange={(newStatus) => {
+                courseService.updateLessonStatus(currentCourse.id, lesson.id, newStatus);
+                setCurrentCourse((prev) => ({
+                  ...prev,
+                  lessons: prev.lessons.map((l) =>
+                    l.id === lesson.id ? { ...l, status: newStatus } : l
+                  ),
+                }));
+                setActionNotice(`Статус занятия «${lesson.title}» изменен на «${newStatus === 'published' ? 'Открыто' : newStatus === 'scheduled' ? 'По расписанию' : 'Черновик'}»`);
+                setTimeout(() => setActionNotice(null), 3000);
+              }}
               isExpanded={lesson.id === expandedLessonId}
               onToggleExpand={() =>
                 setExpandedLessonId(
@@ -147,6 +177,22 @@ export const CadetCourseDetail: React.FC<CadetCourseDetailProps> = ({
         </div>
       </div>
 
+      {/* Bottom Navigation & Summary Bar */}
+      <div className="pt-3 flex flex-col sm:flex-row items-center justify-between gap-3 bg-white p-4 rounded-xl border border-surface-border shadow-xs">
+        <button
+          type="button"
+          onClick={onBack}
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-semibold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg shadow-2xs transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4 text-slate-500" />
+          <span>Вернуться к списку курсов</span>
+        </button>
+
+        <div className="text-xs text-content-secondary font-medium">
+          Всего тем в дисциплине: <span className="font-bold text-navy-deep">{course.lessons.length}</span> (108 акад. часов)
+        </div>
+      </div>
+
       {/* Quick Preview Modal */}
       {previewMaterial && (
         <CadetMaterialPreviewModal
@@ -154,6 +200,25 @@ export const CadetCourseDetail: React.FC<CadetCourseDetailProps> = ({
           lessonTitle={previewMaterial.lessonTitle}
           onClose={() => setPreviewMaterial(null)}
           onDownload={handleDownload}
+        />
+      )}
+
+      {/* Modal for adding lesson (Teacher / Management) */}
+      {isTeacher && (
+        <AddLessonModal
+          isOpen={isAddModalOpen}
+          onClose={() => setIsAddModalOpen(false)}
+          instructorName={instructorName}
+          onAddLesson={(lessonData) => {
+            const newLesson = courseService.addLessonToCourse(currentCourse.id, lessonData);
+            setCurrentCourse((prev) => ({
+              ...prev,
+              lessons: [...prev.lessons, newLesson],
+            }));
+            setExpandedLessonId(newLesson.id);
+            setActionNotice(`Занятие «${newLesson.title}» успешно создано и сохранено!`);
+            setTimeout(() => setActionNotice(null), 4000);
+          }}
         />
       )}
     </div>
