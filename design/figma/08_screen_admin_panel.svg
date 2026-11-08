@@ -1,0 +1,88 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1440" height="900" fill="#F8FAFC" />
+
+  <!-- Admin Topbar -->
+  <rect x="0" y="0" width="1440" height="64" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+  <g transform="translate(80, 16)">
+    <circle cx="16" cy="16" r="14" fill="#0F3A78" />
+    <path d="M16 8 L18 14 L24 15 L20 19 L21 24 L16 21 L11 24 L12 19 L8 15 L14 14 Z" fill="#DC2626" />
+    <text x="40" y="15" font-family="Inter, sans-serif" font-size="13" font-weight="800" fill="#071E3D">ИОС ВУЦ — Панель управления</text>
+    <text x="40" y="27" font-family="Inter, sans-serif" font-size="10" fill="#64748B">Учебная часть и администрирование</text>
+  </g>
+  <g transform="translate(1120, 16)">
+    <text x="0" y="15" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#071E3D">Подполковник Морозов В. Н.</text>
+    <text x="0" y="27" font-family="Inter, sans-serif" font-size="11" fill="#8B5CF6">Начальник учебной части</text>
+    <text x="210" y="21" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#DC2626">Выход</text>
+  </g>
+
+  <!-- Admin Content Container -->
+  <g transform="translate(140, 90)">
+    <!-- Tabs Header -->
+    <rect x="0" y="0" width="160" height="38" rx="6" fill="#0F3A78" />
+    <text x="80" y="24" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">👥 Пользователи</text>
+
+    <rect x="170" y="0" width="180" height="38" rx="6" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+    <text x="260" y="24" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#0F172A" text-anchor="middle">🎨 Символика ВУЦ</text>
+
+    <!-- Action Button (Create User) -->
+    <rect x="990" y="0" width="170" height="38" rx="6" fill="#DC2626" />
+    <text x="1075" y="24" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle">+ Добавить пользователя</text>
+
+    <!-- Table Container -->
+    <g transform="translate(0, 56)">
+      <rect x="0" y="0" width="1160" height="660" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" filter="drop-shadow(0px 4px 12px rgba(15, 23, 42, 0.04))" />
+      
+      <!-- Table Header -->
+      <rect x="0" y="0" width="1160" height="48" rx="10" fill="#F8FAFC" />
+      <text x="30" y="30" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#64748B">ФИО СОТРУДНИКА / КУРСАНТА</text>
+      <text x="380" y="30" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#64748B">ЛОГИН</text>
+      <text x="560" y="30" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#64748B">РОЛЬ В СИСТЕМЕ</text>
+      <text x="760" y="30" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#64748B">ПОДРАЗДЕЛЕНИЕ / ВЗВОД</text>
+      <text x="1050" y="30" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#64748B" text-anchor="end">ДЕЙСТВИЯ</text>
+
+      <!-- Row 1: Cadet -->
+      <g transform="translate(0, 48)">
+        <line x1="0" y1="0" x2="1160" y2="0" stroke="#E2E8F0" stroke-width="1" />
+        <text x="30" y="38" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#071E3D">Смирнов Алексей Владимирович</text>
+        <text x="380" y="38" font-family="monospace" font-size="13" fill="#64748B">smirnov_av</text>
+        <rect x="560" y="22" width="90" height="26" rx="13" fill="#EFF6FF" />
+        <text x="605" y="39" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#2563EB" text-anchor="middle">Курсант</text>
+        <text x="760" y="38" font-family="Inter, sans-serif" font-size="13" fill="#64748B">Взвод 141 (Связь)</text>
+        <text x="1050" y="38" font-family="Inter, sans-serif" font-size="13" fill="#DC2626" text-anchor="end">Удалить</text>
+      </g>
+
+      <!-- Row 2: Teacher -->
+      <g transform="translate(0, 118)">
+        <line x1="0" y1="0" x2="1160" y2="0" stroke="#E2E8F0" stroke-width="1" />
+        <text x="30" y="38" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#071E3D">Майор Ковалёв Дмитрий Сергеевич</text>
+        <text x="380" y="38" font-family="monospace" font-size="13" fill="#64748B">kovalev_ds</text>
+        <rect x="560" y="22" width="120" height="26" rx="13" fill="#ECFDF5" />
+        <text x="620" y="39" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#10B981" text-anchor="middle">Преподаватель</text>
+        <text x="760" y="38" font-family="Inter, sans-serif" font-size="13" fill="#64748B">Кафедра общевоенной подготовки</text>
+        <text x="1050" y="38" font-family="Inter, sans-serif" font-size="13" fill="#DC2626" text-anchor="end">Удалить</text>
+      </g>
+
+      <!-- Row 3: Officer -->
+      <g transform="translate(0, 188)">
+        <line x1="0" y1="0" x2="1160" y2="0" stroke="#E2E8F0" stroke-width="1" />
+        <text x="30" y="38" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#071E3D">Подполковник Морозов Виктор Николаевич</text>
+        <text x="380" y="38" font-family="monospace" font-size="13" fill="#64748B">morozov_vn</text>
+        <rect x="560" y="22" width="105" height="26" rx="13" fill="#F5F3FF" />
+        <text x="612" y="39" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#8B5CF6" text-anchor="middle">Начальник</text>
+        <text x="760" y="38" font-family="Inter, sans-serif" font-size="13" fill="#64748B">Учебная часть ВУЦ</text>
+        <text x="1050" y="38" font-family="Inter, sans-serif" font-size="13" fill="#DC2626" text-anchor="end">Удалить</text>
+      </g>
+
+      <!-- Row 4: Admin -->
+      <g transform="translate(0, 258)">
+        <line x1="0" y1="0" x2="1160" y2="0" stroke="#E2E8F0" stroke-width="1" />
+        <text x="30" y="38" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#071E3D">Администратор системы (Главный профиль)</text>
+        <text x="380" y="38" font-family="monospace" font-size="13" fill="#64748B">goliluha</text>
+        <rect x="560" y="22" width="125" height="26" rx="13" fill="#FEF2F2" />
+        <text x="622" y="39" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#DC2626" text-anchor="middle">Администратор</text>
+        <text x="760" y="38" font-family="Inter, sans-serif" font-size="13" fill="#64748B">Служба безопасности и ИТ</text>
+        <text x="1050" y="38" font-family="Inter, sans-serif" font-size="12" fill="#94A3B8" text-anchor="end">Системный</text>
+      </g>
+    </g>
+  </g>
+</svg>

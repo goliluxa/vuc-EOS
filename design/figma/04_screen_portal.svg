@@ -1,0 +1,77 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1440" height="900" fill="#F8FAFC" />
+
+  <!-- Header -->
+  <rect width="1440" height="64" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+  <g transform="translate(80, 16)">
+    <circle cx="16" cy="16" r="14" fill="#0F3A78" />
+    <path d="M16 8 L18 14 L24 15 L20 19 L21 24 L16 21 L11 24 L12 19 L8 15 L14 14 Z" fill="#DC2626" />
+    <text x="40" y="15" font-family="Inter, sans-serif" font-size="13" font-weight="800" fill="#DC2626">ИОС ВУЦ</text>
+    <text x="40" y="27" font-family="Inter, sans-serif" font-size="10" fill="#64748B">Образовательный портал</text>
+  </g>
+
+  <!-- User info in topbar -->
+  <g transform="translate(1040, 16)">
+    <circle cx="16" cy="16" r="16" fill="#EFF6FF" />
+    <text x="16" y="20" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#2563EB" text-anchor="middle">СА</text>
+    <text x="42" y="14" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#071E3D">Смирнов Алексей Владимирович</text>
+    <text x="42" y="27" font-family="Inter, sans-serif" font-size="11" fill="#64748B">Курсант • Взвод 141 (Связь)</text>
+    <!-- Logout -->
+    <text x="280" y="21" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#DC2626">Выход</text>
+  </g>
+
+  <!-- Main Portal Hub Container (Max-w-5xl) -->
+  <g transform="translate(200, 150)">
+    <text x="0" y="40" font-family="Inter, sans-serif" font-size="32" font-weight="900" fill="#071E3D">Навигация по образовательным сервисам</text>
+    <text x="0" y="70" font-family="Inter, sans-serif" font-size="15" fill="#64748B">Выберите требуемую подсистему для продолжения работы</text>
+
+    <!-- Two Main Hub Cards -->
+    <g transform="translate(0, 110)">
+      <!-- Card 1: LMS / ИОС -->
+      <g transform="translate(0, 0)">
+        <rect x="0" y="0" width="500" height="340" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" filter="drop-shadow(0px 8px 20px rgba(15, 23, 42, 0.05))" />
+        <rect x="0" y="0" width="500" height="6" rx="3" fill="#0F3A78" />
+        
+        <!-- Icon Badge -->
+        <rect x="36" y="40" width="56" height="56" rx="12" fill="#EFF6FF" />
+        <text x="64" y="74" font-family="Inter, sans-serif" font-size="24" text-anchor="middle">🎓</text>
+
+        <text x="36" y="135" font-family="Inter, sans-serif" font-size="22" font-weight="800" fill="#071E3D">Система обучения (СДО / ИОС)</text>
+        <text x="36" y="170" font-family="Inter, sans-serif" font-size="14" fill="#64748B" width="428">
+          <tspan x="36" dy="0">Электронные курсы, тематические планы дисциплин,</tspan>
+          <tspan x="36" dy="24">расписание учебного военного дня, лекционные</tspan>
+          <tspan x="36" dy="24">материалы и контрольные точки.</tspan>
+        </text>
+
+        <!-- CTA Action Row -->
+        <g transform="translate(36, 265)">
+          <rect x="0" y="0" width="220" height="42" rx="6" fill="#0F3A78" />
+          <text x="110" y="26" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">Перейти к занятиям →</text>
+        </g>
+      </g>
+
+      <!-- Card 2: Library -->
+      <g transform="translate(540, 0)">
+        <rect x="0" y="0" width="500" height="340" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" filter="drop-shadow(0px 8px 20px rgba(15, 23, 42, 0.05))" />
+        <rect x="0" y="0" width="500" height="6" rx="3" fill="#DC2626" />
+
+        <!-- Icon Badge -->
+        <rect x="36" y="40" width="56" height="56" rx="12" fill="#FEF2F2" />
+        <text x="64" y="74" font-family="Inter, sans-serif" font-size="24" text-anchor="middle">📚</text>
+
+        <text x="36" y="135" font-family="Inter, sans-serif" font-size="22" font-weight="800" fill="#071E3D">Электронная библиотека ВУЦ</text>
+        <text x="36" y="170" font-family="Inter, sans-serif" font-size="14" fill="#64748B">
+          <tspan x="36" dy="0">Каталог специализированной военной литературы,</tspan>
+          <tspan x="36" dy="24">уставов Вооруженных Сил РФ, наставлений,</tspan>
+          <tspan x="36" dy="24">учебников и методических пособий кафедр.</tspan>
+        </text>
+
+        <!-- CTA Action Row -->
+        <g transform="translate(36, 265)">
+          <rect x="0" y="0" width="220" height="42" rx="6" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+          <text x="110" y="26" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#0F172A" text-anchor="middle">Открыть библиотеку ↗</text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

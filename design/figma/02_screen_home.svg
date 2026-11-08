@@ -1,0 +1,51 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with subtle dot grid -->
+  <rect width="1440" height="900" fill="#F8FAFC" />
+  <defs>
+    <pattern id="grid-dots" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#E2E8F0" />
+    </pattern>
+    <linearGradient id="redBtn" x1="0" y1="0" x2="240" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#DC2626" />
+      <stop offset="100%" stop-color="#B91C1C" />
+    </linearGradient>
+    <linearGradient id="barGrad" x1="0" y1="0" x2="110" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#DC2626" />
+      <stop offset="50%" stop-color="#2563EB" />
+      <stop offset="100%" stop-color="#0F3A78" />
+    </linearGradient>
+  </defs>
+  <rect width="1440" height="900" fill="url(#grid-dots)" opacity="0.6" />
+
+  <!-- Hero Content (Centered left aligned container max-w-2xl) -->
+  <g transform="translate(140, 240)">
+    <!-- Overline Badge -->
+    <rect x="0" y="0" width="320" height="34" rx="17" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+    <circle cx="16" cy="17" r="4" fill="#DC2626" />
+    <text x="30" y="22" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="1" fill="#0F3A78">ИНФОРМАЦИОННАЯ ОБРАЗОВАТЕЛЬНАЯ СИСТЕМА</text>
+
+    <!-- Dominant Headline -->
+    <text x="0" y="140" font-family="Inter, sans-serif" font-size="112" font-weight="900" letter-spacing="-3" fill="#071E3D">ИОС</text>
+    <rect x="0" y="160" width="100" height="6" rx="3" fill="url(#barGrad)" />
+
+    <!-- Description -->
+    <text x="0" y="215" font-family="Inter, sans-serif" font-size="18" font-weight="400" fill="#64748B" width="620">
+      <tspan x="0" dy="0">Единое цифровое пространство для образовательной деятельности</tspan>
+      <tspan x="0" dy="28">Военного учебного центра Чувашского государственного университета.</tspan>
+    </text>
+
+    <!-- CTA Button -->
+    <g transform="translate(0, 290)">
+      <rect x="0" y="0" width="230" height="52" rx="6" fill="url(#redBtn)" filter="drop-shadow(0px 8px 16px rgba(220, 38, 38, 0.25))" />
+      <text x="105" y="32" font-family="Inter, sans-serif" font-size="16" font-weight="600" fill="#FFFFFF" text-anchor="middle">Войти в систему</text>
+      <!-- Arrow icon -->
+      <path d="M185 26 L195 26 M191 22 L195 26 L191 30" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+
+    <!-- Trust Notes -->
+    <g transform="translate(0, 390)">
+      <circle cx="6" cy="6" r="3" fill="#10B981" />
+      <text x="18" y="10" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#64748B">Доступно для курсантов, преподавателей и учебной части ВУЦ</text>
+    </g>
+  </g>
+</svg>

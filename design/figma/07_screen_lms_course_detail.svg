@@ -1,0 +1,85 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1440" height="900" fill="#F8FAFC" />
+
+  <!-- Topbar with Back button -->
+  <rect x="0" y="0" width="1440" height="64" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+  <g transform="translate(40, 20)">
+    <text x="0" y="16" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#0F3A78">← Назад ко всем курсам</text>
+  </g>
+
+  <!-- Hero Course Card -->
+  <g transform="translate(140, 88)">
+    <rect x="0" y="0" width="1160" height="150" rx="12" fill="#071E3D" />
+    <g transform="translate(36, 30)">
+      <rect x="0" y="0" width="70" height="24" rx="4" fill="rgba(255,255,255,0.15)" />
+      <text x="35" y="16" font-family="monospace" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">ОВП-101</text>
+      <text x="0" y="55" font-family="Inter, sans-serif" font-size="26" font-weight="900" fill="#FFFFFF">Общая военная подготовка</text>
+      <text x="0" y="80" font-family="Inter, sans-serif" font-size="14" fill="#94A3B8">Кафедра ОВП • Майор Ковалёв Д. С. • 72 учебных часа (24 пройдено)</text>
+    </g>
+
+    <!-- Lessons Accordion & Materials -->
+    <g transform="translate(0, 180)">
+      <text x="0" y="24" font-family="Inter, sans-serif" font-size="20" font-weight="800" fill="#071E3D">Темы и материалы дисциплины</text>
+
+      <!-- Lesson 1 (Expanded) -->
+      <g transform="translate(0, 45)">
+        <rect x="0" y="0" width="1160" height="340" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+        
+        <!-- Lesson Header -->
+        <rect x="0" y="0" width="1160" height="60" rx="8" fill="#F8FAFC" />
+        <circle cx="36" cy="30" r="14" fill="#2563EB" />
+        <text x="36" y="35" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+        <text x="64" y="35" font-family="Inter, sans-serif" font-size="16" font-weight="700" fill="#071E3D">Тема №1. Организационная структура ВС РФ и воинские звания</text>
+        <text x="1120" y="35" font-family="Inter, sans-serif" font-size="14" fill="#64748B">▲</text>
+
+        <!-- Materials List inside Lesson 1 -->
+        <g transform="translate(24, 80)">
+          <!-- Material 1: PPTX -->
+          <rect x="0" y="0" width="1112" height="70" rx="6" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+          <rect x="16" y="16" width="38" height="38" rx="6" fill="#FFF7ED" />
+          <text x="35" y="40" font-family="monospace" font-size="11" font-weight="700" fill="#EA580C" text-anchor="middle">PPTX</text>
+          <text x="70" y="33" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#071E3D">Презентация лекции: Организационная структура ВС РФ (Слайды 1–45)</text>
+          <text x="70" y="50" font-family="Inter, sans-serif" font-size="12" fill="#64748B">14.2 МБ • Презентация к занятию №1</text>
+          <!-- Actions -->
+          <rect x="910" y="18" width="90" height="34" rx="4" fill="#F1F5F9" />
+          <text x="955" y="40" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#0F3A78" text-anchor="middle">Просмотр</text>
+          <rect x="1010" y="18" width="86" height="34" rx="4" fill="#EFF6FF" />
+          <text x="1053" y="40" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#2563EB" text-anchor="middle">Скачать</text>
+
+          <!-- Material 2: PDF -->
+          <g transform="translate(0, 80)">
+            <rect x="0" y="0" width="1112" height="70" rx="6" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+            <rect x="16" y="16" width="38" height="38" rx="6" fill="#FEF2F2" />
+            <text x="35" y="40" font-family="monospace" font-size="11" font-weight="700" fill="#DC2626" text-anchor="middle">PDF</text>
+            <text x="70" y="33" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#071E3D">Учебное пособие: Основы военной службы, Глава 1 (Вооруженные Силы)</text>
+            <text x="70" y="50" font-family="Inter, sans-serif" font-size="12" fill="#64748B">3.8 МБ • Официальное пособие ВУЦ</text>
+            <rect x="910" y="18" width="90" height="34" rx="4" fill="#F1F5F9" />
+            <text x="955" y="40" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#0F3A78" text-anchor="middle">Просмотр</text>
+            <rect x="1010" y="18" width="86" height="34" rx="4" fill="#EFF6FF" />
+            <text x="1053" y="40" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#2563EB" text-anchor="middle">Скачать</text>
+          </g>
+
+          <!-- Material 3: Test -->
+          <g transform="translate(0, 160)">
+            <rect x="0" y="0" width="1112" height="70" rx="6" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+            <rect x="16" y="16" width="38" height="38" rx="6" fill="#F5F3FF" />
+            <text x="35" y="40" font-family="monospace" font-size="11" font-weight="700" fill="#8B5CF6" text-anchor="middle">ТЕСТ</text>
+            <text x="70" y="33" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#071E3D">Контрольный тест: Знаки различия и субординация в ВС РФ</text>
+            <text x="70" y="50" font-family="Inter, sans-serif" font-size="12" fill="#64748B">15 вопросов • 20 минут • Самопроверка</text>
+            <rect x="990" y="18" width="106" height="34" rx="4" fill="#DC2626" />
+            <text x="1043" y="40" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle">Пройти тест</text>
+          </g>
+        </g>
+      </g>
+
+      <!-- Lesson 2 (Collapsed) -->
+      <g transform="translate(0, 400)">
+        <rect x="0" y="0" width="1160" height="60" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+        <circle cx="36" cy="30" r="14" fill="#F1F5F9" />
+        <text x="36" y="35" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#64748B" text-anchor="middle">2</text>
+        <text x="64" y="35" font-family="Inter, sans-serif" font-size="16" font-weight="600" fill="#0F172A">Тема №2. Общевоинские уставы Вооруженных Сил РФ</text>
+        <text x="1120" y="35" font-family="Inter, sans-serif" font-size="14" fill="#64748B">▼</text>
+      </g>
+    </g>
+  </g>
+</svg>

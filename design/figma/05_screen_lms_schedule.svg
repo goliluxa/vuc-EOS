@@ -1,0 +1,126 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1440" height="900" fill="#F8FAFC" />
+
+  <!-- Sidebar (256px) -->
+  <rect x="0" y="0" width="256" height="900" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+  <g transform="translate(24, 20)">
+    <circle cx="16" cy="16" r="14" fill="#0F3A78" />
+    <path d="M16 8 L18 14 L24 15 L20 19 L21 24 L16 21 L11 24 L12 19 L8 15 L14 14 Z" fill="#DC2626" />
+    <text x="40" y="15" font-family="Inter, sans-serif" font-size="13" font-weight="800" fill="#DC2626">ИОС ВУЦ</text>
+    <text x="40" y="27" font-family="Inter, sans-serif" font-size="11" fill="#64748B">Учебный портал</text>
+  </g>
+
+  <!-- Sidebar Nav Links -->
+  <g transform="translate(16, 90)">
+    <!-- Active: Расписание -->
+    <rect x="0" y="0" width="224" height="42" rx="6" fill="#EFF6FF" />
+    <text x="40" y="26" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#2563EB">📅 Расписание дня</text>
+
+    <!-- Inactive: Курсы -->
+    <text x="40" y="70" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#64748B">📖 Курсы и материалы</text>
+
+    <!-- Inactive: События -->
+    <text x="40" y="114" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#64748B">🎖 События и зачеты</text>
+
+    <!-- Inactive: Профиль -->
+    <text x="40" y="158" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#64748B">👤 Профиль курсанта</text>
+  </g>
+
+  <!-- Sidebar Bottom Link: Back to Hub -->
+  <g transform="translate(16, 830)">
+    <line x1="0" y1="0" x2="224" y2="0" stroke="#E2E8F0" stroke-width="1" />
+    <text x="16" y="35" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#0F3A78">← В главное меню</text>
+  </g>
+
+  <!-- Main Content Area -->
+  <!-- Topbar -->
+  <rect x="256" y="0" width="1184" height="64" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+  <g transform="translate(288, 20)">
+    <text x="0" y="18" font-family="Inter, sans-serif" font-size="18" font-weight="800" fill="#071E3D">Расписание учебного военного дня</text>
+    <text x="0" y="32" font-family="Inter, sans-serif" font-size="12" fill="#64748B">Взвод 141 (Связь) • Осенний семестр 2026</text>
+  </g>
+  <g transform="translate(1220, 20)">
+    <text x="0" y="16" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#071E3D">Смирнов А. В.</text>
+    <text x="0" y="30" font-family="Inter, sans-serif" font-size="11" fill="#2563EB">Курсант</text>
+  </g>
+
+  <!-- Schedule Body -->
+  <g transform="translate(288, 88)">
+    <!-- Date Selector Card -->
+    <rect x="0" y="0" width="1120" height="60" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+    <g transform="translate(20, 16)">
+      <!-- Day Navigation -->
+      <rect x="0" y="0" width="30" height="28" rx="4" fill="#F1F5F9" />
+      <text x="15" y="19" font-family="Inter, sans-serif" font-size="13" font-weight="700" text-anchor="middle">‹</text>
+      <text x="50" y="19" font-family="Inter, sans-serif" font-size="15" font-weight="800" fill="#071E3D">Учебный день № 1 — 05 сентября 2026 (Суббота)</text>
+      <rect x="430" y="0" width="30" height="28" rx="4" fill="#F1F5F9" />
+      <text x="445" y="19" font-family="Inter, sans-serif" font-size="13" font-weight="700" text-anchor="middle">›</text>
+
+      <rect x="940" y="0" width="140" height="28" rx="4" fill="#EFF6FF" />
+      <text x="1010" y="18" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#2563EB" text-anchor="middle">Сентябрь 2026 ▾</text>
+    </g>
+
+    <!-- Sessions List (5 items + lunch) -->
+    <g transform="translate(0, 80)">
+      <!-- 08:30 - 08:50 Утренний осмотр -->
+      <rect x="0" y="0" width="1120" height="80" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+      <text x="24" y="35" font-family="monospace" font-size="14" font-weight="700" fill="#071E3D">08:30 – 08:50</text>
+      <text x="24" y="55" font-family="Inter, sans-serif" font-size="12" fill="#64748B">20 минут</text>
+      <rect x="160" y="24" width="80" height="24" rx="4" fill="#F1F5F9" />
+      <text x="200" y="40" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#64748B" text-anchor="middle">Осмотр</text>
+      <text x="260" y="35" font-family="Inter, sans-serif" font-size="15" font-weight="700" fill="#071E3D">Утренний осмотр и построение личного состава взвода</text>
+      <text x="260" y="55" font-family="Inter, sans-serif" font-size="13" fill="#64748B">Строевой плац ВУЦ • Дежурный по ВУЦ</text>
+
+      <!-- 09:00 - 10:35 1 пара: ОВП -->
+      <g transform="translate(0, 95)">
+        <rect x="0" y="0" width="1120" height="85" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+        <text x="24" y="35" font-family="monospace" font-size="14" font-weight="700" fill="#071E3D">09:00 – 10:35</text>
+        <text x="24" y="55" font-family="Inter, sans-serif" font-size="12" fill="#64748B">1 пара (2 ч)</text>
+        <rect x="160" y="24" width="80" height="24" rx="4" fill="#EFF6FF" />
+        <text x="200" y="40" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#2563EB" text-anchor="middle">Лекция</text>
+        <text x="260" y="35" font-family="Inter, sans-serif" font-size="15" font-weight="700" fill="#071E3D">Общая военная подготовка: Организационная структура ВС РФ</text>
+        <text x="260" y="58" font-family="Inter, sans-serif" font-size="13" fill="#64748B">Ауд. 204 • Майор Ковалёв Д. С.</text>
+      </g>
+
+      <!-- 10:45 - 12:20 2 пара: Огневая -->
+      <g transform="translate(0, 195)">
+        <rect x="0" y="0" width="1120" height="85" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+        <text x="24" y="35" font-family="monospace" font-size="14" font-weight="700" fill="#071E3D">10:45 – 12:20</text>
+        <text x="24" y="55" font-family="Inter, sans-serif" font-size="12" fill="#64748B">2 пара (2 ч)</text>
+        <rect x="160" y="24" width="80" height="24" rx="4" fill="#ECFDF5" />
+        <text x="200" y="40" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#10B981" text-anchor="middle">Практика</text>
+        <text x="260" y="35" font-family="Inter, sans-serif" font-size="15" font-weight="700" fill="#071E3D">Огневая подготовка: Назначение, ТТХ и устройство АК-74М</text>
+        <text x="260" y="58" font-family="Inter, sans-serif" font-size="13" fill="#64748B">Ауд. 108 (Оружейная) • Подполковник Морозов В. Н.</text>
+      </g>
+
+      <!-- 12:20 - 13:00 Обед -->
+      <g transform="translate(0, 295)">
+        <rect x="0" y="0" width="1120" height="50" rx="8" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="4 4" />
+        <text x="24" y="30" font-family="monospace" font-size="13" font-weight="600" fill="#64748B">12:20 – 13:00</text>
+        <text x="160" y="30" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#64748B">🍽 Обед и отдых личного состава</text>
+      </g>
+
+      <!-- 13:00 - 14:35 3 пара: Тактическая -->
+      <g transform="translate(0, 360)">
+        <rect x="0" y="0" width="1120" height="85" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+        <text x="24" y="35" font-family="monospace" font-size="14" font-weight="700" fill="#071E3D">13:00 – 14:35</text>
+        <text x="24" y="55" font-family="Inter, sans-serif" font-size="12" fill="#64748B">3 пара (2 ч)</text>
+        <rect x="160" y="24" width="80" height="24" rx="4" fill="#EFF6FF" />
+        <text x="200" y="40" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#2563EB" text-anchor="middle">Лекция</text>
+        <text x="260" y="35" font-family="Inter, sans-serif" font-size="15" font-weight="700" fill="#071E3D">Тактическая подготовка: Основы общевойскового боя</text>
+        <text x="260" y="58" font-family="Inter, sans-serif" font-size="13" fill="#64748B">Ауд. 206 • Майор Ковалёв Д. С.</text>
+      </g>
+
+      <!-- 14:45 - 16:20 4 пара: Самоподготовка -->
+      <g transform="translate(0, 460)">
+        <rect x="0" y="0" width="1120" height="85" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+        <text x="24" y="35" font-family="monospace" font-size="14" font-weight="700" fill="#071E3D">14:45 – 16:20</text>
+        <text x="24" y="55" font-family="Inter, sans-serif" font-size="12" fill="#64748B">4 пара (2 ч)</text>
+        <rect x="160" y="24" width="80" height="24" rx="4" fill="#FFFBEB" />
+        <text x="200" y="40" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#F59E0B" text-anchor="middle">Самоподготовка</text>
+        <text x="260" y="35" font-family="Inter, sans-serif" font-size="15" font-weight="700" fill="#071E3D">Самостоятельная подготовка: Изучение статей Устава ВС РФ</text>
+        <text x="260" y="58" font-family="Inter, sans-serif" font-size="13" fill="#64748B">Читальный зал • Командир взвода</text>
+      </g>
+    </g>
+  </g>
+</svg>

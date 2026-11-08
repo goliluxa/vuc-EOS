@@ -1,0 +1,65 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1440" height="900" fill="#F8FAFC" />
+  <rect width="1440" height="900" fill="url(#grid-dots)" opacity="0.6" />
+
+  <!-- Top Bar -->
+  <g transform="translate(80, 30)">
+    <circle cx="20" cy="20" r="18" fill="#0F3A78" />
+    <path d="M20 10 L23 17 L30 18 L25 23 L26 30 L20 26 L14 30 L15 23 L10 18 L17 17 Z" fill="#DC2626" />
+    <text x="48" y="18" font-family="Inter, sans-serif" font-size="14" font-weight="800" fill="#DC2626">ИОС ВУЦ</text>
+    <text x="48" y="32" font-family="Inter, sans-serif" font-size="11" fill="#64748B">Военный учебный центр ЧГУ</text>
+
+    <!-- Return link -->
+    <text x="1240" y="25" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#64748B">← На главную</text>
+  </g>
+
+  <!-- Login Card (Centered 460px width) -->
+  <g transform="translate(490, 150)">
+    <!-- Card Surface -->
+    <rect x="0" y="0" width="460" height="600" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" filter="drop-shadow(0px 10px 25px rgba(15, 23, 42, 0.06))" />
+    
+    <!-- Red Top Accent Bar -->
+    <rect x="0" y="0" width="460" height="4" rx="2" fill="#DC2626" />
+
+    <!-- Card Header -->
+    <text x="40" y="55" font-family="Inter, sans-serif" font-size="24" font-weight="800" fill="#071E3D">Вход в систему</text>
+    <text x="40" y="80" font-family="Inter, sans-serif" font-size="13" fill="#64748B">Используйте служебные учетные данные ВУЦ</text>
+
+    <!-- Field 1: Login -->
+    <text x="40" y="130" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#0F172A">Логин или военный билет</text>
+    <rect x="40" y="142" width="380" height="46" rx="6" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+    <text x="56" y="171" font-family="Inter, sans-serif" font-size="14" fill="#0F172A">smirnov_av</text>
+
+    <!-- Field 2: Password -->
+    <text x="40" y="222" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#0F172A">Пароль</text>
+    <rect x="40" y="234" width="380" height="46" rx="6" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+    <text x="56" y="263" font-family="Inter, sans-serif" font-size="14" fill="#0F172A">••••••••••••</text>
+    <text x="390" y="262" font-family="Inter, sans-serif" font-size="14" fill="#64748B">👁</text>
+
+    <!-- Submit Button -->
+    <rect x="40" y="315" width="380" height="48" rx="6" fill="#DC2626" />
+    <text x="230" y="345" font-family="Inter, sans-serif" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">Войти</text>
+
+    <!-- Divider -->
+    <line x1="40" y1="395" x2="420" y2="395" stroke="#E2E8F0" stroke-width="1" />
+    <text x="230" y="420" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#64748B" text-anchor="middle">Быстрый вход для тестирования:</text>
+
+    <!-- Quick Role Buttons -->
+    <g transform="translate(40, 440)">
+      <!-- Cadet -->
+      <rect x="0" y="0" width="118" height="54" rx="6" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1" />
+      <text x="59" y="24" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#2563EB" text-anchor="middle">Курсант</text>
+      <text x="59" y="40" font-family="monospace" font-size="10" fill="#94A3B8" text-anchor="middle">Взвод 141</text>
+
+      <!-- Teacher -->
+      <rect x="131" y="0" width="118" height="54" rx="6" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1" />
+      <text x="190" y="24" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#10B981" text-anchor="middle">Преподаватель</text>
+      <text x="190" y="40" font-family="monospace" font-size="10" fill="#94A3B8" text-anchor="middle">Кафедра ОВП</text>
+
+      <!-- Officer -->
+      <rect x="262" y="0" width="118" height="54" rx="6" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1" />
+      <text x="321" y="24" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#8B5CF6" text-anchor="middle">Начальник</text>
+      <text x="321" y="40" font-family="monospace" font-size="10" fill="#94A3B8" text-anchor="middle">Учебная часть</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,115 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1440" height="900" fill="#F8FAFC" />
+
+  <!-- Sidebar (256px) -->
+  <rect x="0" y="0" width="256" height="900" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+  <g transform="translate(24, 20)">
+    <circle cx="16" cy="16" r="14" fill="#0F3A78" />
+    <path d="M16 8 L18 14 L24 15 L20 19 L21 24 L16 21 L11 24 L12 19 L8 15 L14 14 Z" fill="#DC2626" />
+    <text x="40" y="15" font-family="Inter, sans-serif" font-size="13" font-weight="800" fill="#DC2626">ИОС ВУЦ</text>
+    <text x="40" y="27" font-family="Inter, sans-serif" font-size="11" fill="#64748B">Учебный портал</text>
+  </g>
+  <g transform="translate(16, 90)">
+    <text x="40" y="26" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#64748B">📅 Расписание дня</text>
+    <rect x="0" y="44" width="224" height="42" rx="6" fill="#EFF6FF" />
+    <text x="40" y="70" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#2563EB">📖 Курсы и материалы</text>
+    <text x="40" y="114" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#64748B">🎖 События и зачеты</text>
+    <text x="40" y="158" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#64748B">👤 Профиль курсанта</text>
+  </g>
+
+  <!-- Topbar -->
+  <rect x="256" y="0" width="1184" height="64" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+  <g transform="translate(288, 20)">
+    <text x="0" y="18" font-family="Inter, sans-serif" font-size="18" font-weight="800" fill="#071E3D">Курсы военной подготовки</text>
+    <text x="0" y="32" font-family="Inter, sans-serif" font-size="12" fill="#64748B">Учебные программы, лекции и методические материалы</text>
+  </g>
+
+  <!-- 4 Course Cards Grid (2x2) -->
+  <g transform="translate(288, 88)">
+    <!-- Course 1: ОВП -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="545" height="320" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" filter="drop-shadow(0px 4px 12px rgba(15, 23, 42, 0.04))" />
+      <rect x="0" y="0" width="545" height="4" rx="2" fill="#2563EB" />
+      <g transform="translate(24, 28)">
+        <rect x="0" y="0" width="70" height="24" rx="4" fill="#EFF6FF" />
+        <text x="35" y="16" font-family="monospace" font-size="11" font-weight="700" fill="#2563EB" text-anchor="middle">ОВП-101</text>
+        <text x="0" y="55" font-family="Inter, sans-serif" font-size="20" font-weight="800" fill="#071E3D">Общая военная подготовка</text>
+        <text x="0" y="80" font-family="Inter, sans-serif" font-size="13" fill="#64748B">Кафедра общевоенной подготовки • Майор Ковалёв Д. С.</text>
+        
+        <!-- Progress Bar (24 / 72 ч = 33%) -->
+        <rect x="0" y="110" width="497" height="8" rx="4" fill="#F1F5F9" />
+        <rect x="0" y="110" width="165" height="8" rx="4" fill="#2563EB" />
+        <text x="0" y="138" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#64748B">Пройдено: 24 из 72 часов (33%)</text>
+        <text x="497" y="138" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#2563EB" text-anchor="end">4 урока • 8 файлов</text>
+
+        <!-- Button -->
+        <rect x="0" y="180" width="200" height="42" rx="6" fill="#0F3A78" />
+        <text x="100" y="206" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">Открыть материалы →</text>
+      </g>
+    </g>
+
+    <!-- Course 2: Тактическая -->
+    <g transform="translate(575, 0)">
+      <rect x="0" y="0" width="545" height="320" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" filter="drop-shadow(0px 4px 12px rgba(15, 23, 42, 0.04))" />
+      <rect x="0" y="0" width="545" height="4" rx="2" fill="#10B981" />
+      <g transform="translate(24, 28)">
+        <rect x="0" y="0" width="70" height="24" rx="4" fill="#ECFDF5" />
+        <text x="35" y="16" font-family="monospace" font-size="11" font-weight="700" fill="#10B981" text-anchor="middle">ТАКТ-201</text>
+        <text x="0" y="55" font-family="Inter, sans-serif" font-size="20" font-weight="800" fill="#071E3D">Тактическая подготовка</text>
+        <text x="0" y="80" font-family="Inter, sans-serif" font-size="13" fill="#64748B">Кафедра тактики • Майор Ковалёв Д. С.</text>
+
+        <!-- Progress Bar (36 / 108 ч = 33%) -->
+        <rect x="0" y="110" width="497" height="8" rx="4" fill="#F1F5F9" />
+        <rect x="0" y="110" width="165" height="8" rx="4" fill="#10B981" />
+        <text x="0" y="138" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#64748B">Пройдено: 36 из 108 часов (33%)</text>
+        <text x="497" y="138" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#10B981" text-anchor="end">4 урока • 7 файлов</text>
+
+        <!-- Button -->
+        <rect x="0" y="180" width="200" height="42" rx="6" fill="#0F3A78" />
+        <text x="100" y="206" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">Открыть материалы →</text>
+      </g>
+    </g>
+
+    <!-- Course 3: Огневая -->
+    <g transform="translate(0, 350)">
+      <rect x="0" y="0" width="545" height="320" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" filter="drop-shadow(0px 4px 12px rgba(15, 23, 42, 0.04))" />
+      <rect x="0" y="0" width="545" height="4" rx="2" fill="#DC2626" />
+      <g transform="translate(24, 28)">
+        <rect x="0" y="0" width="70" height="24" rx="4" fill="#FEF2F2" />
+        <text x="35" y="16" font-family="monospace" font-size="11" font-weight="700" fill="#DC2626" text-anchor="middle">ОГН-102</text>
+        <text x="0" y="55" font-family="Inter, sans-serif" font-size="20" font-weight="800" fill="#071E3D">Огневая подготовка</text>
+        <text x="0" y="80" font-family="Inter, sans-serif" font-size="13" fill="#64748B">Кафедра вооружения • Подполковник Морозов В. Н.</text>
+
+        <!-- Progress Bar (18 / 54 ч = 33%) -->
+        <rect x="0" y="110" width="497" height="8" rx="4" fill="#F1F5F9" />
+        <rect x="0" y="110" width="165" height="8" rx="4" fill="#DC2626" />
+        <text x="0" y="138" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#64748B">Пройдено: 18 из 54 часов (33%)</text>
+        <text x="497" y="138" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#DC2626" text-anchor="end">4 урока • 8 файлов</text>
+
+        <rect x="0" y="180" width="200" height="42" rx="6" fill="#0F3A78" />
+        <text x="100" y="206" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">Открыть материалы →</text>
+      </g>
+    </g>
+
+    <!-- Course 4: Топография -->
+    <g transform="translate(575, 350)">
+      <rect x="0" y="0" width="545" height="320" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" filter="drop-shadow(0px 4px 12px rgba(15, 23, 42, 0.04))" />
+      <rect x="0" y="0" width="545" height="4" rx="2" fill="#8B5CF6" />
+      <g transform="translate(24, 28)">
+        <rect x="0" y="0" width="70" height="24" rx="4" fill="#F5F3FF" />
+        <text x="35" y="16" font-family="monospace" font-size="11" font-weight="700" fill="#8B5CF6" text-anchor="middle">ТОПО-101</text>
+        <text x="0" y="55" font-family="Inter, sans-serif" font-size="20" font-weight="800" fill="#071E3D">Военная топография</text>
+        <text x="0" y="80" font-family="Inter, sans-serif" font-size="13" fill="#64748B">Кафедра управления • Капитан Ильин С. А.</text>
+
+        <!-- Progress Bar (12 / 36 ч = 33%) -->
+        <rect x="0" y="110" width="497" height="8" rx="4" fill="#F1F5F9" />
+        <rect x="0" y="110" width="165" height="8" rx="4" fill="#8B5CF6" />
+        <text x="0" y="138" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#64748B">Пройдено: 12 из 36 часов (33%)</text>
+        <text x="497" y="138" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#8B5CF6" text-anchor="end">4 урока • 7 файлов</text>
+
+        <rect x="0" y="180" width="200" height="42" rx="6" fill="#0F3A78" />
+        <text x="100" y="206" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">Открыть материалы →</text>
+      </g>
+    </g>
+  </g>
+</svg>
