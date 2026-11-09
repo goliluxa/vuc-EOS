@@ -36,9 +36,9 @@ services:
       - "traefik.docker.network=dokploy-network"
       - "traefik.http.routers.vuc-eos-web.entrypoints=web"
       - "traefik.http.routers.vuc-eos-web.middlewares=redirect-to-https@file"
-      - "traefik.http.routers.vuc-eos-web.rule=Host(`xn--h1aen.xn--21-6kc3b0a.xn--p1ai`) || Host(`ios.vuc21.ru`)"
+      - "traefik.http.routers.vuc-eos-web.rule=Host(`xn--h1amj.xn--21-dlc2ep.xn--p1ai`)"
       - "traefik.http.routers.vuc-eos-websecure.entrypoints=websecure"
-      - "traefik.http.routers.vuc-eos-websecure.rule=Host(`xn--h1aen.xn--21-6kc3b0a.xn--p1ai`) || Host(`ios.vuc21.ru`)"
+      - "traefik.http.routers.vuc-eos-websecure.rule=Host(`xn--h1amj.xn--21-dlc2ep.xn--p1ai`)"
       - "traefik.http.routers.vuc-eos-websecure.tls.certresolver=letsencrypt"
       - "traefik.http.services.vuc-eos-websecure.loadbalancer.server.port=3000"
 

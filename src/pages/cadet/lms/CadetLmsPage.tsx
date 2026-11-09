@@ -43,6 +43,10 @@ export const CadetLmsPage: React.FC = () => {
   };
 
   const handleSelectSection = (sec: CadetLmsSection) => {
+    if (isCadet && sec === 'storage') {
+      setActiveSection('schedule');
+      return;
+    }
     setActiveSection(sec);
     if (sec === 'courses') {
       setSelectedCourseId(null);
@@ -141,7 +145,7 @@ export const CadetLmsPage: React.FC = () => {
           {activeSection === 'grades' && (
             <CadetZachetkaSection />
           )}
-          {activeSection === 'storage' && (
+          {activeSection === 'storage' && !isCadet && (
             <CadetStorageSection />
           )}
           {activeSection === 'events' && (

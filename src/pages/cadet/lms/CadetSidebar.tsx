@@ -114,6 +114,7 @@ export const CadetSidebar: React.FC<CadetSidebarProps> = ({
           )}
 
           {/* 2.5 Хранилище файлов (внутренняя секция LMS) */}
+          {!isCadet && (
           <button
             type="button"
             onClick={() => onSelectSection('storage')}
@@ -131,6 +132,7 @@ export const CadetSidebar: React.FC<CadetSidebarProps> = ({
             />
             <span>Хранилище</span>
           </button>
+          )}
 
           {/* 3. Профиль */}
           {isOfficer && (
