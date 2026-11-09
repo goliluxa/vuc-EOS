@@ -24,7 +24,8 @@ export const CreateUserModal: React.FC<CreateUserModalProps> = ({
   const generateLoginFromFio = (fio: string): string => {
     const parts = fio.trim().split(/\s+/);
     if (parts.length === 0 || !parts[0]) return '';
-    const surname = parts[0];
+    const rawSurname = parts[0];
+    const surname = rawSurname.charAt(0).toUpperCase() + rawSurname.slice(1);
     const nameInitial = parts[1] ? parts[1].charAt(0).toUpperCase() : '';
     const patronymicInitial = parts[2] ? parts[2].charAt(0).toUpperCase() : '';
     return `${surname}${nameInitial}${patronymicInitial}`;
@@ -53,6 +54,13 @@ export const CreateUserModal: React.FC<CreateUserModalProps> = ({
     if (!fullName.trim() || !login.trim() || !password.trim()) return;
     setErrorMessage(null);
 
+    // Strict FIO validation (at least Surname and First name)
+    const fioWords = fullName.trim().split(/\s+/);
+    if (fioWords.length < 2 || fioWords[0].length < 2 || fioWords[1].length < 2) {
+      setErrorMessage('Введите полное ФИО (как минимум Фамилия и Имя через пробел, например: Иванов Иван Иванович)');
+      return;
+    }
+
     const existingUsers = userStorageService.getUsers();
     const isDuplicate = existingUsers.some(
       (u) => u.login.toLowerCase() === login.trim().toLowerCase()
@@ -64,7 +72,7 @@ export const CreateUserModal: React.FC<CreateUserModalProps> = ({
 
     onCreate({
       fullName: fullName.trim(),
-      login: login.trim().toLowerCase(),
+      login: login.trim(),
       password: password.trim(),
       role,
       unitOrDepartment: 'Учебный отдел',

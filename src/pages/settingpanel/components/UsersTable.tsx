@@ -54,7 +54,7 @@ export const UsersTable: React.FC<UsersTableProps> = ({
       case 'officer':
         return (
           <span className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-purple-50 text-purple-700 border border-purple-200">
-            Начальник / Офицер
+            Начальник ВУЦ
           </span>
         );
       case 'methodist':
@@ -144,7 +144,7 @@ export const UsersTable: React.FC<UsersTableProps> = ({
               teacher: 'Преподаватели',
               methodist: 'Методисты',
               deputy: 'Зам. начальника',
-              officer: 'Офицеры',
+              officer: 'Начальник ВУЦ',
             };
             const active = roleFilter === r;
             return (

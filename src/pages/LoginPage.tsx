@@ -148,7 +148,7 @@ export const LoginPage: React.FC = () => {
               <p className="text-[11px] text-content-secondary mb-2 text-center font-medium">
                 Быстрый вход для тестирования:
               </p>
-              <div className="grid grid-cols-3 gap-1.5 text-xs">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 text-xs">
                 <button
                   type="button"
                   onClick={() => {
@@ -176,14 +176,38 @@ export const LoginPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => {
+                    setLogin('petrova_es');
+                    setPassword('methodist_vuc');
+                    setErrorMessage(null);
+                  }}
+                  className="px-2 py-2 bg-slate-50 hover:bg-indigo-50 text-slate-700 hover:text-indigo-700 border border-slate-200 rounded text-center transition-colors font-semibold flex flex-col items-center justify-center focus:outline-none focus:ring-1 focus:ring-indigo-600"
+                  title="Методист: petrova_es / methodist_vuc"
+                >
+                  <span className="text-xs">Методист</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setLogin('semenov_ip');
+                    setPassword('deputy_semenov');
+                    setErrorMessage(null);
+                  }}
+                  className="px-2 py-2 bg-slate-50 hover:bg-sky-50 text-slate-700 hover:text-sky-700 border border-slate-200 rounded text-center transition-colors font-semibold flex flex-col items-center justify-center focus:outline-none focus:ring-1 focus:ring-sky-600"
+                  title="Зам. начальника: semenov_ip / deputy_semenov"
+                >
+                  <span className="text-xs">Зам. начальника</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
                     setLogin('morozov_vn');
                     setPassword('officer_morozov');
                     setErrorMessage(null);
                   }}
-                  className="px-2 py-2 bg-slate-50 hover:bg-purple-50 text-slate-700 hover:text-purple-700 border border-slate-200 rounded text-center transition-colors font-semibold flex flex-col items-center justify-center focus:outline-none focus:ring-1 focus:ring-purple-600"
+                  className="col-span-2 sm:col-span-1 px-2 py-2 bg-slate-50 hover:bg-purple-50 text-slate-700 hover:text-purple-700 border border-slate-200 rounded text-center transition-colors font-semibold flex flex-col items-center justify-center focus:outline-none focus:ring-1 focus:ring-purple-600"
                   title="Начальник: morozov_vn / officer_morozov"
                 >
-                  <span className="text-xs">Начальник</span>
+                  <span className="text-xs">Начальник ВУЦ</span>
                 </button>
               </div>
             </div>

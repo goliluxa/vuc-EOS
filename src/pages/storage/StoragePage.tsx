@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Folder, Download, Search, HardDrive, LogOut, Upload, FolderPlus, User, LayoutGrid, List, Trash2 } from 'lucide-react';
+import { ArrowLeft, Folder, Download, Search, HardDrive, LogOut, Upload, FolderPlus, User, Trash2 } from 'lucide-react';
 import { BrandLogo } from '../../components/BrandLogo';
 import { cadetAuthService } from '../../services/cadetAuthService';
 
@@ -31,7 +31,6 @@ export const StoragePage: React.FC = () => {
   const [items, setItems] = useState<StorageItem[]>(INITIAL_ITEMS);
   const [search, setSearch] = useState('');
   const [currentFolderId, setCurrentFolderId] = useState<string | null>(null);
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [notice, setNotice] = useState<string | null>(null);
 
   const handleLogout = () => {
@@ -150,25 +149,6 @@ export const StoragePage: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
-            <div className="flex items-center border border-slate-200 rounded-lg p-0.5 bg-slate-50 mr-2">
-              <button
-                type="button"
-                onClick={() => setViewMode('grid')}
-                className={`p-1.5 rounded ${viewMode === 'grid' ? 'bg-white shadow-xs text-military-blue font-bold' : 'text-slate-400 hover:text-slate-700'}`}
-                title="Сетка"
-              >
-                <LayoutGrid className="w-4 h-4" />
-              </button>
-              <button
-                type="button"
-                onClick={() => setViewMode('list')}
-                className={`p-1.5 rounded ${viewMode === 'list' ? 'bg-white shadow-xs text-military-blue font-bold' : 'text-slate-400 hover:text-slate-700'}`}
-                title="Список"
-              >
-                <List className="w-4 h-4" />
-              </button>
-            </div>
-
             <button
               type="button"
               onClick={handleCreateFolder}
