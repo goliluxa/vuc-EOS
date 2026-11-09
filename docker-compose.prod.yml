@@ -1,0 +1,51 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: vuc-eos-backend
+    restart: unless-stopped
+    volumes:
+      - ./storage_data:/app/storage_data
+    environment:
+      - DATABASE_URL=sqlite:////app/storage_data/storage.db
+      - STORAGE_BASE_DIR=/app/storage_data
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD-SHELL", "python3 -c 'import urllib.request; urllib.request.urlopen(\"http://127.0.0.1:8000/health\")' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: vuc-eos-frontend
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - internal
+      - dokploy-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=dokploy-network"
+      - "traefik.http.routers.vuc-eos-web.entrypoints=web"
+      - "traefik.http.routers.vuc-eos-web.middlewares=redirect-to-https@file"
+      - "traefik.http.routers.vuc-eos-web.rule=Host(`xn--h1aen.xn--21-6kc3b0a.xn--p1ai`) || Host(`ios.vuc21.ru`)"
+      - "traefik.http.routers.vuc-eos-websecure.entrypoints=websecure"
+      - "traefik.http.routers.vuc-eos-websecure.rule=Host(`xn--h1aen.xn--21-6kc3b0a.xn--p1ai`) || Host(`ios.vuc21.ru`)"
+      - "traefik.http.routers.vuc-eos-websecure.tls.certresolver=letsencrypt"
+      - "traefik.http.services.vuc-eos-websecure.loadbalancer.server.port=3000"
+
+networks:
+  dokploy-network:
+    external: true
+  internal:
+    driver: bridge
