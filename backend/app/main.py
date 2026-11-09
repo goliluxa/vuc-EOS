@@ -1,10 +1,20 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .database import engine, Base
+from .database import engine, Base, SessionLocal
 from .api.storage import router as storage_router
+from .api.entities import router as entities_router
+from .seed import seed_initial_data
 
 # Create DB tables
 Base.metadata.create_all(bind=engine)
+
+# Seed initial data
+try:
+    db = SessionLocal()
+    seed_initial_data(db)
+    db.close()
+except Exception as e:
+    print("Seed error:", e)
 
 app = FastAPI(
     title="ИОС ВУЦ - API Хранилища и Сервисов",
@@ -21,6 +31,7 @@ app.add_middleware(
 )
 
 app.include_router(storage_router)
+app.include_router(entities_router)
 
 @app.get("/health")
 def health():

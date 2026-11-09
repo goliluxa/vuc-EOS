@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Folder, Download, Search, HardDrive, Upload, FolderPlus, LayoutGrid, List, Trash2 } from 'lucide-react';
+import { Folder, Download, Search, HardDrive, Upload, FolderPlus, Trash2, ArrowUp, ChevronRight } from 'lucide-react';
 import { storageService, ApiStorageFolder, ApiStorageFile } from '../../../services/storageService';
 
 import { cadetAuthService } from '../../../services/cadetAuthService';
@@ -12,7 +12,7 @@ export const CadetStorageSection: React.FC = () => {
   const [search, setSearch] = useState('');
   const [filterType, setFilterType] = useState<string>('all');
   const [currentFolderId, setCurrentFolderId] = useState<string | null>(null);
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [breadcrumbStack, setBreadcrumbStack] = useState<{ id: string; name: string }[]>([]);
   const [notice, setNotice] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -28,6 +28,30 @@ export const CadetStorageSection: React.FC = () => {
     loadContent(currentFolderId);
   }, [currentFolderId]);
 
+  const handleOpenFolder = (folder: ApiStorageFolder) => {
+    setCurrentFolderId(folder.id);
+    setBreadcrumbStack((prev) => [...prev, { id: folder.id, name: folder.name }]);
+  };
+
+  const handleNavigateToBreadcrumb = (index: number) => {
+    if (index === -1) {
+      setCurrentFolderId(null);
+      setBreadcrumbStack([]);
+    } else {
+      const target = breadcrumbStack[index];
+      setCurrentFolderId(target.id);
+      setBreadcrumbStack((prev) => prev.slice(0, index + 1));
+    }
+  };
+
+  const handleNavigateUp = () => {
+    if (breadcrumbStack.length === 0) return;
+    if (breadcrumbStack.length === 1) {
+      handleNavigateToBreadcrumb(-1);
+    } else {
+      handleNavigateToBreadcrumb(breadcrumbStack.length - 2);
+    }
+  };
   const handleCreateFolder = async () => {
     const name = window.prompt('Введите название новой папки:');
     if (name && name.trim()) {
@@ -84,8 +108,6 @@ export const CadetStorageSection: React.FC = () => {
     return true;
   });
 
-  const currentFolderObj = folders.find((f) => f.id === currentFolderId);
-
   return (
     <div className="space-y-4 animate-fade-in pb-12">
       <input
@@ -136,25 +158,6 @@ export const CadetStorageSection: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
-          <div className="flex items-center border border-slate-200 rounded-lg p-0.5 bg-slate-50 mr-2">
-            <button
-              type="button"
-              onClick={() => setViewMode('grid')}
-              className={`p-1.5 rounded ${viewMode === 'grid' ? 'bg-white shadow-xs text-military-blue font-bold' : 'text-slate-400 hover:text-slate-700'}`}
-              title="Сетка"
-            >
-              <LayoutGrid className="w-4 h-4" />
-            </button>
-            <button
-              type="button"
-              onClick={() => setViewMode('list')}
-              className={`p-1.5 rounded ${viewMode === 'list' ? 'bg-white shadow-xs text-military-blue font-bold' : 'text-slate-400 hover:text-slate-700'}`}
-              title="Список"
-            >
-              <List className="w-4 h-4" />
-            </button>
-          </div>
-
           {!isCadet && (
             <button
               type="button"
@@ -178,23 +181,44 @@ export const CadetStorageSection: React.FC = () => {
       </div>
 
       <div className="flex items-center justify-between text-xs text-slate-500 px-1">
-        <div className="flex items-center gap-1.5 font-medium">
+        <div className="flex items-center gap-1.5 font-medium flex-wrap">
+          {breadcrumbStack.length > 0 && (
+            <button
+              type="button"
+              onClick={handleNavigateUp}
+              className="p-1 rounded hover:bg-slate-200/70 text-slate-600 transition-colors mr-1 cursor-pointer"
+              title="На уровень вверх"
+            >
+              <ArrowUp className="w-3.5 h-3.5" />
+            </button>
+          )}
           <HardDrive className="w-4 h-4 text-slate-400" />
           <button
             type="button"
-            onClick={() => setCurrentFolderId(null)}
-            className="hover:text-military-blue hover:underline cursor-pointer"
+            onClick={() => handleNavigateToBreadcrumb(-1)}
+            className={`hover:text-military-blue hover:underline cursor-pointer ${breadcrumbStack.length === 0 ? 'text-navy-deep font-bold' : ''}`}
           >
             Хранилище (Корень)
           </button>
-          {currentFolderObj && (
-            <>
-              <span>/</span>
-              <span className="text-navy-deep font-bold">
-                {currentFolderObj.name}
-              </span>
-            </>
-          )}
+          {breadcrumbStack.map((crumb, idx) => {
+            const isLast = idx === breadcrumbStack.length - 1;
+            return (
+              <React.Fragment key={crumb.id}>
+                <ChevronRight className="w-3.5 h-3.5 text-slate-300" />
+                {isLast ? (
+                  <span className="text-navy-deep font-bold">{crumb.name}</span>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => handleNavigateToBreadcrumb(idx)}
+                    className="hover:text-military-blue hover:underline cursor-pointer"
+                  >
+                    {crumb.name}
+                  </button>
+                )}
+              </React.Fragment>
+            );
+          })}
         </div>
         <span className="text-[11px] text-slate-400">
           Папок: {filteredFolders.length} • Файлов: {filteredFiles.length}
@@ -205,7 +229,7 @@ export const CadetStorageSection: React.FC = () => {
         {filteredFolders.map((folder) => (
           <div
             key={folder.id}
-            onClick={() => setCurrentFolderId(folder.id)}
+            onClick={() => handleOpenFolder(folder)}
             className="p-4 rounded-xl border bg-amber-50/40 hover:bg-amber-50 border-amber-200/60 hover:border-amber-300 transition-all cursor-pointer flex flex-col justify-between"
           >
             <div className="flex items-start gap-3">

@@ -44,7 +44,7 @@ export const TeacherProfileSection: React.FC<TeacherProfileSectionProps> = ({
                 </span>
               </div>
               <p className="text-xs sm:text-sm text-content-secondary mt-0.5">
-                {user?.unitOrDepartment || 'Кафедра общевоенной подготовки'} • Старший преподаватель цикла тактики
+                {user?.unitOrDepartment || 'Военная подготовка'} • Старший преподаватель
               </p>
             </div>
           </div>
@@ -57,8 +57,8 @@ export const TeacherProfileSection: React.FC<TeacherProfileSectionProps> = ({
             <span className="font-semibold text-slate-800 text-sm">Майор</span>
           </div>
           <div className="p-3 rounded-lg bg-slate-50 border border-slate-100">
-            <span className="text-slate-400 block mb-1">Кафедра</span>
-            <span className="font-semibold text-slate-800 text-sm">ОВП</span>
+            <span className="text-slate-400 block mb-1">Профиль</span>
+            <span className="font-semibold text-slate-800 text-sm">Тактическая подготовка</span>
           </div>
           <div className="p-3 rounded-lg bg-slate-50 border border-slate-100">
             <span className="text-slate-400 block mb-1">Аудитория</span>
@@ -116,26 +116,26 @@ export const TeacherProfileSection: React.FC<TeacherProfileSectionProps> = ({
           </div>
         </div>
 
-        {/* 3. Закрепленные подразделения */}
+        {/* 3. Закрепленные группы */}
         <div className="bg-white border border-surface-border rounded-xl p-5 shadow-xs">
           <div className="flex items-center gap-2 mb-4">
             <Users className="w-5 h-5 text-emerald-700" />
-            <h3 className="font-bold text-sm text-navy-deep">Курируемые учебные взводы</h3>
+            <h3 className="font-bold text-sm text-navy-deep">Учебные группы</h3>
           </div>
           <div className="space-y-3 text-xs">
             <div className="p-3 rounded-lg bg-slate-50 border border-slate-100">
               <div className="flex justify-between items-center mb-1">
-                <span className="font-bold text-slate-800">Взвод 141 (Связь)</span>
+                <span className="font-bold text-slate-800">Группа 141 (Связь)</span>
                 <span className="text-[11px] text-slate-500">28 курсантов</span>
               </div>
-              <span className="text-slate-500 block text-[11px]">Командир: Курсант Васильев М. И.</span>
+              <span className="text-slate-500 block text-[11px]">Староста: Курсант Васильев М. И.</span>
             </div>
             <div className="p-3 rounded-lg bg-slate-50 border border-slate-100">
               <div className="flex justify-between items-center mb-1">
-                <span className="font-bold text-slate-800">Взвод 142 (Связь)</span>
+                <span className="font-bold text-slate-800">Группа 142 (Связь)</span>
                 <span className="text-[11px] text-slate-500">30 курсантов</span>
               </div>
-              <span className="text-slate-500 block text-[11px]">Командир: Курсант Николаев Д. С.</span>
+              <span className="text-slate-500 block text-[11px]">Староста: Курсант Николаев Д. С.</span>
             </div>
           </div>
         </div>

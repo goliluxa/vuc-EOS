@@ -79,11 +79,11 @@ export const UsersTable: React.FC<UsersTableProps> = ({
   };
 
   return (
-    <div className="bg-white border border-surface-border rounded-lg shadow-card p-5 sm:p-7">
+    <div className="bg-white border border-surface-border rounded-xl shadow-xs p-5 sm:p-6 space-y-4">
       {/* Top Header & Actions */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 mb-5 border-b border-surface-border">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-surface-border">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-md bg-blue-50 text-military-blue flex items-center justify-center shrink-0">
+          <div className="w-9 h-9 rounded-lg bg-blue-50 text-military-blue flex items-center justify-center shrink-0 font-bold border border-blue-200/60">
             <Users className="w-5 h-5" aria-hidden="true" />
           </div>
           <div>
@@ -92,7 +92,7 @@ export const UsersTable: React.FC<UsersTableProps> = ({
                 Пользователи и аккаунты
               </h2>
               <span className="px-2 py-0.5 text-xs font-semibold rounded-full bg-surface-bg border border-surface-border text-navy-deep">
-                {users.length}
+                {filteredUsers.length}
               </span>
             </div>
             <p className="text-xs sm:text-sm text-content-secondary">
@@ -106,7 +106,7 @@ export const UsersTable: React.FC<UsersTableProps> = ({
             type="button"
             onClick={onResetUsers}
             title="Сбросить список к начальным демо-данным"
-            className="p-2 text-content-secondary hover:text-navy-deep border border-surface-border rounded-md hover:bg-surface-bg transition-colors"
+            className="p-2 text-content-secondary hover:text-navy-deep border border-surface-border rounded-lg hover:bg-surface-bg transition-colors"
             aria-label="Сбросить список пользователей"
           >
             <RotateCcw className="w-4 h-4" />
@@ -115,7 +115,7 @@ export const UsersTable: React.FC<UsersTableProps> = ({
           <button
             type="button"
             onClick={onOpenCreateModal}
-            className="inline-flex items-center gap-2 py-2 px-3.5 text-xs sm:text-sm font-semibold text-white bg-military-red hover:bg-military-redHover active:bg-red-800 rounded-md transition-colors shadow-xs"
+            className="inline-flex items-center gap-2 py-2 px-3.5 text-xs sm:text-sm font-semibold text-white bg-military-blue hover:bg-navy-deep rounded-lg transition-colors shadow-2xs cursor-pointer"
           >
             <UserPlus className="w-4 h-4" aria-hidden="true" />
             <span>Создать пользователя</span>
@@ -131,8 +131,8 @@ export const UsersTable: React.FC<UsersTableProps> = ({
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Поиск по ФИО, логину или подразделению..."
-            className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm text-content-primary bg-white border border-surface-border rounded-md placeholder:text-content-secondary/50 focus:border-military-blue focus:ring-1 focus:ring-military-blue outline-none"
+            placeholder="Поиск по ФИО, логину или группе..."
+            className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm text-content-primary bg-white border border-surface-border rounded-lg placeholder:text-content-secondary/50 focus:border-military-blue focus:ring-1 focus:ring-military-blue outline-none"
           />
         </div>
 
@@ -152,7 +152,7 @@ export const UsersTable: React.FC<UsersTableProps> = ({
                 key={r}
                 type="button"
                 onClick={() => setRoleFilter(r)}
-                className={`px-2.5 py-1.5 text-xs font-medium rounded-md border transition-colors whitespace-nowrap ${
+                className={`px-2.5 py-1.5 text-xs font-semibold rounded-lg border transition-colors whitespace-nowrap cursor-pointer ${
                   active
                     ? 'bg-military-blue text-white border-military-blue'
                     : 'bg-white text-content-secondary border-surface-border hover:bg-surface-bg'
@@ -166,14 +166,13 @@ export const UsersTable: React.FC<UsersTableProps> = ({
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto border border-surface-border rounded-lg">
+      <div className="overflow-x-auto border border-surface-border rounded-xl">
         <table className="w-full text-left text-xs sm:text-sm">
           <thead className="bg-surface-bg/80 border-b border-surface-border text-content-secondary uppercase text-[11px] font-semibold tracking-wider">
             <tr>
               <th className="px-4 py-3">ФИО / Пользователь</th>
               <th className="px-4 py-3">Логин</th>
               <th className="px-4 py-3">Роль</th>
-              <th className="px-4 py-3">Подразделение</th>
               <th className="px-4 py-3">Пароль</th>
               <th className="px-4 py-3 text-right">Действия</th>
             </tr>
@@ -181,7 +180,7 @@ export const UsersTable: React.FC<UsersTableProps> = ({
           <tbody className="divide-y divide-surface-border bg-white">
             {filteredUsers.length === 0 ? (
               <tr>
-                <td colSpan={6} className="px-4 py-8 text-center text-content-secondary">
+                <td colSpan={5} className="px-4 py-8 text-center text-content-secondary">
                   Пользователи не найдены. Попробуйте изменить параметры поиска.
                 </td>
               </tr>
@@ -197,9 +196,6 @@ export const UsersTable: React.FC<UsersTableProps> = ({
                       {u.login}
                     </td>
                     <td className="px-4 py-3">{getRoleBadge(u.role)}</td>
-                    <td className="px-4 py-3 text-content-secondary">
-                      {u.unitOrDepartment}
-                    </td>
                     <td className="px-4 py-3 font-mono text-xs text-content-secondary">
                       <div className="flex items-center gap-2">
                         <span>{isPassVisible ? u.password : '••••••••'}</span>

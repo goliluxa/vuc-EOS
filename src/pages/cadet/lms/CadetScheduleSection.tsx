@@ -8,7 +8,7 @@ interface CadetScheduleSectionProps {
 }
 
 export const CadetScheduleSection: React.FC<CadetScheduleSectionProps> = ({
-  initialPlatoon = 'Взвод 141 (Связь)',
+  initialPlatoon = 'Группа 141 (Связь)',
 }) => {
   const platoon = initialPlatoon;
 

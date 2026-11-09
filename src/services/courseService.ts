@@ -1,4 +1,4 @@
-import { CadetCourse, CourseLesson } from '../types/cadet';
+import { CadetCourse, CourseLesson, CourseSection } from '../types/cadet';
 
 const COURSES_STORAGE_KEY = 'vuc_unified_courses_list';
 
@@ -9,7 +9,7 @@ export const courseService = {
         id: 'course-ovp',
         code: 'ОВП-101',
         title: 'Общая военная подготовка',
-        department: 'Кафедра общевоенной подготовки',
+        department: 'Военная подготовка',
         instructor: 'Майор Ковалёв Д. С.',
         totalHours: 72,
         completedHours: 24,
@@ -130,7 +130,7 @@ export const courseService = {
         id: 'course-ognevaya',
         code: 'ОГН-201',
         title: 'Огневая подготовка',
-        department: 'Кафедра огневой подготовки',
+        department: 'Огневая подготовка',
         instructor: 'Подполковник Морозов В. Н.',
         totalHours: 64,
         completedHours: 16,
@@ -216,7 +216,7 @@ export const courseService = {
         id: 'course-taktika',
         code: 'ТАК-301',
         title: 'Тактическая подготовка',
-        department: 'Кафедра тактики',
+        department: 'Тактическая подготовка',
         instructor: 'Майор Ковалёв Д. С.',
         totalHours: 80,
         completedHours: 20,
@@ -244,7 +244,7 @@ export const courseService = {
                 id: 'm-tak-2',
                 title: 'Боевой устав по подготовке и ведению общевойскового боя (Часть 3)',
                 type: 'manual',
-                fileName: 'Боевой_устав_Отделение_Взвод.pdf',
+                fileName: 'Боевой_устав_мотострелков.pdf',
                 fileSize: '12.1 МБ',
                 format: 'PDF',
               },
@@ -275,7 +275,7 @@ export const courseService = {
         id: 'course-topo',
         code: 'ТОП-102',
         title: 'Военная топография',
-        department: 'Кафедра общевоенной подготовки',
+        department: 'Военная топография',
         instructor: 'Капитан Ильин С. А.',
         totalHours: 36,
         completedHours: 8,
@@ -366,6 +366,50 @@ export const courseService = {
     }
   },
 
+  createCourse(courseData: {
+    code: string;
+    title: string;
+    department: string;
+    instructor: string;
+    description: string;
+    totalHours: number;
+  }): CadetCourse {
+    const courses = this.getCadetCourses();
+    const newCourse: CadetCourse = {
+      id: `course-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+      code: courseData.code.trim().toUpperCase(),
+      title: courseData.title.trim(),
+      department: courseData.department.trim(),
+      instructor: courseData.instructor.trim(),
+      description: courseData.description.trim(),
+      totalHours: courseData.totalHours || 72,
+      completedHours: 0,
+      sections: [
+        { id: 'sec-1', title: 'Раздел 1. Теоретические основы', order: 1 },
+        { id: 'sec-2', title: 'Раздел 2. Практическая отработка', order: 2 },
+      ],
+      lessons: [],
+    };
+    courses.push(newCourse);
+    this.saveCourses(courses);
+    return newCourse;
+  },
+
+  addSectionToCourse(courseId: string, title: string): CourseSection {
+    const courses = this.getCadetCourses();
+    const target = courses.find((c) => c.id === courseId);
+    if (!target) throw new Error('Курс не найден');
+    if (!target.sections) target.sections = [];
+    const newSec: CourseSection = {
+      id: `sec-${Date.now()}`,
+      title: title.trim(),
+      order: target.sections.length + 1,
+    };
+    target.sections.push(newSec);
+    this.saveCourses(courses);
+    return newSec;
+  },
+
   addLessonToCourse(courseId: string, lesson: Omit<CourseLesson, 'id' | 'number'>): CourseLesson {
     const courses = this.getCadetCourses();
     const target = courses.find((c) => c.id === courseId);
@@ -382,6 +426,38 @@ export const courseService = {
     target.lessons.push(newLesson);
     this.saveCourses(courses);
     return newLesson;
+  },
+
+  deleteLessonFromCourse(courseId: string, lessonId: string): void {
+    const courses = this.getCadetCourses();
+    const target = courses.find((c) => c.id === courseId);
+    if (!target) return;
+    target.lessons = target.lessons.filter((l) => l.id !== lessonId);
+    target.lessons.forEach((l, idx) => {
+      l.number = idx + 1;
+    });
+    this.saveCourses(courses);
+  },
+
+  moveLesson(courseId: string, lessonId: string, direction: 'up' | 'down'): void {
+    const courses = this.getCadetCourses();
+    const target = courses.find((c) => c.id === courseId);
+    if (!target) return;
+    const idx = target.lessons.findIndex((l) => l.id === lessonId);
+    if (idx === -1) return;
+    if (direction === 'up' && idx > 0) {
+      const temp = target.lessons[idx];
+      target.lessons[idx] = target.lessons[idx - 1];
+      target.lessons[idx - 1] = temp;
+    } else if (direction === 'down' && idx < target.lessons.length - 1) {
+      const temp = target.lessons[idx];
+      target.lessons[idx] = target.lessons[idx + 1];
+      target.lessons[idx + 1] = temp;
+    }
+    target.lessons.forEach((l, i) => {
+      l.number = i + 1;
+    });
+    this.saveCourses(courses);
   },
 
   updateLessonStatus(courseId: string, lessonId: string, status: 'published' | 'draft' | 'scheduled', date?: string): void {

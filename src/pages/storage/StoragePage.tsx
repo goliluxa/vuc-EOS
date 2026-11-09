@@ -15,8 +15,8 @@ interface StorageItem {
 }
 
 const INITIAL_ITEMS: StorageItem[] = [
-  { id: 'f-1', name: 'Кафедра ОВП (Учебные пособия и уставы)', type: 'folder', updatedAt: '02.11.2026', parentFolderId: null },
-  { id: 'f-2', name: 'Взвод 141 (Служебная документация)', type: 'folder', updatedAt: '06.11.2026', parentFolderId: null },
+  { id: 'f-1', name: 'Учебные пособия и уставы', type: 'folder', updatedAt: '02.11.2026', parentFolderId: null },
+  { id: 'f-2', name: 'Служебная документация', type: 'folder', updatedAt: '06.11.2026', parentFolderId: null },
   { id: 'f-3', name: 'Приказы и директивы начальника ВУЦ', type: 'folder', updatedAt: '01.11.2026', parentFolderId: null },
   { id: 'f-4', name: 'Бланки рапортов и заявлений', type: 'folder', updatedAt: '15.10.2026', parentFolderId: null },
   { id: 'doc-1', name: 'Боевой_устав_СВ_Часть_3.pdf', type: 'file', size: '14.8 МБ', updatedAt: '03.11.2026', extension: 'PDF', parentFolderId: null },

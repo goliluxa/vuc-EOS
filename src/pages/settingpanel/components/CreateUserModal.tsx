@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { X, UserPlus, Key, Shield, User, Sparkles } from 'lucide-react';
+import { X, UserPlus, Key, Shield, User, Sparkles, AlertCircle } from 'lucide-react';
 import { CreateUserPayload, UserRole } from '../../../types/admin';
+import { userStorageService } from '../../../services/userStorageService';
 
 interface CreateUserModalProps {
   isOpen: boolean;
@@ -15,9 +16,26 @@ export const CreateUserModal: React.FC<CreateUserModalProps> = ({
 }) => {
   const [fullName, setFullName] = useState('');
   const [login, setLogin] = useState('');
+  const [isLoginManuallyEdited, setIsLoginManuallyEdited] = useState(false);
   const [password, setPassword] = useState('');
   const [role, setRole] = useState<UserRole>('cadet');
-  const [unitOrDepartment, setUnitOrDepartment] = useState('');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const generateLoginFromFio = (fio: string): string => {
+    const parts = fio.trim().split(/\s+/);
+    if (parts.length === 0 || !parts[0]) return '';
+    const surname = parts[0];
+    const nameInitial = parts[1] ? parts[1].charAt(0).toUpperCase() : '';
+    const patronymicInitial = parts[2] ? parts[2].charAt(0).toUpperCase() : '';
+    return `${surname}${nameInitial}${patronymicInitial}`;
+  };
+
+  const handleFullNameChange = (val: string) => {
+    setFullName(val);
+    if (!isLoginManuallyEdited) {
+      setLogin(generateLoginFromFio(val));
+    }
+  };
 
   if (!isOpen) return null;
 
@@ -33,20 +51,29 @@ export const CreateUserModal: React.FC<CreateUserModalProps> = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!fullName.trim() || !login.trim() || !password.trim()) return;
+    setErrorMessage(null);
+
+    const existingUsers = userStorageService.getUsers();
+    const isDuplicate = existingUsers.some(
+      (u) => u.login.toLowerCase() === login.trim().toLowerCase()
+    );
+    if (isDuplicate) {
+      setErrorMessage(`Логин «${login.trim()}» уже занят в системе. Измените логин.`);
+      return;
+    }
 
     onCreate({
       fullName: fullName.trim(),
       login: login.trim().toLowerCase(),
       password: password.trim(),
       role,
-      unitOrDepartment: unitOrDepartment.trim() || 'Основное подразделение',
+      unitOrDepartment: 'Учебный отдел',
     });
 
     setFullName('');
     setLogin('');
     setPassword('');
     setRole('cadet');
-    setUnitOrDepartment('');
     onClose();
   };
 
@@ -78,6 +105,13 @@ export const CreateUserModal: React.FC<CreateUserModalProps> = ({
 
         {/* Form Body */}
         <form onSubmit={handleSubmit} className="p-5 sm:p-6 space-y-4">
+          {errorMessage && (
+            <div className="p-3 bg-red-50 border border-red-200 text-military-red rounded-lg text-xs flex items-center gap-2">
+              <AlertCircle className="w-4 h-4 shrink-0" />
+              <span>{errorMessage}</span>
+            </div>
+          )}
+
           <div>
             <label className="block text-xs font-semibold uppercase tracking-wider text-content-secondary mb-1">
               ФИО пользователя <span className="text-military-red">*</span>
@@ -88,7 +122,7 @@ export const CreateUserModal: React.FC<CreateUserModalProps> = ({
                 type="text"
                 required
                 value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
+                onChange={(e) => handleFullNameChange(e.target.value)}
                 placeholder="Иванов Иван Иванович"
                 className="w-full pl-9 pr-3 py-2 text-sm text-content-primary bg-white border border-surface-border rounded-md placeholder:text-content-secondary/40 focus:border-military-blue focus:ring-1 focus:ring-military-blue outline-none"
               />
@@ -104,8 +138,11 @@ export const CreateUserModal: React.FC<CreateUserModalProps> = ({
                 type="text"
                 required
                 value={login}
-                onChange={(e) => setLogin(e.target.value)}
-                placeholder="ivanov_ii"
+                onChange={(e) => {
+                  setLogin(e.target.value);
+                  setIsLoginManuallyEdited(true);
+                }}
+                placeholder="ГолубевИЕ"
                 className="w-full px-3 py-2 text-sm text-content-primary bg-white border border-surface-border rounded-md placeholder:text-content-secondary/40 focus:border-military-blue focus:ring-1 focus:ring-military-blue outline-none"
               />
             </div>
@@ -121,11 +158,12 @@ export const CreateUserModal: React.FC<CreateUserModalProps> = ({
                   onChange={(e) => setRole(e.target.value as UserRole)}
                   className="w-full pl-9 pr-8 py-2 text-sm text-content-primary bg-white border border-surface-border rounded-md focus:border-military-blue focus:ring-1 focus:ring-military-blue outline-none appearance-none"
                 >
-                  <option value="cadet">Курсант</option>
-                  <option value="teacher">Преподаватель</option>
-                  <option value="methodist">Методист учебной части</option>
-                  <option value="deputy">Заместитель начальника ВУЦ</option>
-                  <option value="officer">Начальник / Офицер</option>
+                  <option value="cadet">Курсант (обучение, зачётка, материалы)</option>
+                  <option value="teacher">Преподаватель (ведение курсов, оценки)</option>
+                  <option value="methodist">Методист (документооборот, облако)</option>
+                  <option value="deputy">Заместитель начальника ВУЦ (контроль и курсы)</option>
+                  <option value="officer">Начальник ВУЦ (руководство ИОС)</option>
+                  <option value="admin">Системный администратор (техпанель)</option>
                 </select>
               </div>
             </div>
@@ -156,19 +194,6 @@ export const CreateUserModal: React.FC<CreateUserModalProps> = ({
                 className="w-full pl-9 pr-3 py-2 text-sm text-content-primary bg-white border border-surface-border rounded-md placeholder:text-content-secondary/40 focus:border-military-blue focus:ring-1 focus:ring-military-blue outline-none font-mono"
               />
             </div>
-          </div>
-
-          <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-content-secondary mb-1">
-              Взвод / Кафедра / Подразделение
-            </label>
-            <input
-              type="text"
-              value={unitOrDepartment}
-              onChange={(e) => setUnitOrDepartment(e.target.value)}
-              placeholder="Взвод 141 или Кафедра общевоенной подготовки"
-              className="w-full px-3 py-2 text-sm text-content-primary bg-white border border-surface-border rounded-md placeholder:text-content-secondary/40 focus:border-military-blue focus:ring-1 focus:ring-military-blue outline-none"
-            />
           </div>
 
           <div className="pt-4 flex items-center justify-end gap-3 border-t border-surface-border">

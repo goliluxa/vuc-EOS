@@ -8,6 +8,10 @@ import { CadetProfileSection } from './CadetProfileSection';
 import { TeacherProfileSection } from './TeacherProfileSection';
 import { CadetEventsSection } from './CadetEventsSection';
 import { CadetStorageSection } from './CadetStorageSection';
+import { CadetZachetkaSection } from './CadetZachetkaSection';
+import { UsersTable } from '../../settingpanel/components/UsersTable';
+import { CreateUserModal } from '../../settingpanel/components/CreateUserModal';
+import { userStorageService } from '../../../services/userStorageService';
 import { cadetAuthService } from '../../../services/cadetAuthService';
 import { courseService } from '../../../services/courseService';
 
@@ -17,14 +21,17 @@ export const CadetLmsPage: React.FC = () => {
   const isTeacher = currentCadet?.role === 'teacher';
   const isMethodist = currentCadet?.role === 'methodist';
   const isDeputy = currentCadet?.role === 'deputy';
+  const isOfficer = currentCadet?.role === 'officer';
   const isCadet = currentCadet?.role === 'cadet';
-  const canManageCourses = isTeacher || isMethodist || isDeputy;
+  const canManageCourses = isTeacher || isMethodist || isDeputy || isOfficer;
 
   const [activeSection, setActiveSection] = useState<CadetLmsSection>(() =>
     isCadet ? 'schedule' : 'courses'
   );
   const [selectedCourseId, setSelectedCourseId] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [users, setUsers] = useState(() => userStorageService.getUsers());
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
   const selectedCourse = selectedCourseId
     ? courseService.getCourseById(selectedCourseId)
@@ -51,12 +58,16 @@ export const CadetLmsPage: React.FC = () => {
         return 'Расписание учебного военного дня';
       case 'courses':
         return 'Курсы военной подготовки';
+      case 'grades':
+        return 'Электронная зачётная книжка и успеваемость';
       case 'storage':
         return 'Облачное файловое хранилище ВУЦ';
       case 'profile':
         return isDeputy ? 'Профиль заместителя начальника ВУЦ' : isTeacher ? 'Личный профиль преподавателя' : isMethodist ? 'Профиль методиста учебной части' : 'Личный профиль курсанта';
       case 'events':
         return 'Военные мероприятия и смотры';
+      case 'personnel':
+        return 'Реестр личного состава ВУЦ';
       default:
         return 'Учебный процесс';
     }
@@ -127,11 +138,38 @@ export const CadetLmsPage: React.FC = () => {
               instructorName={currentCadet?.fullName}
             />
           )}
+          {activeSection === 'grades' && (
+            <CadetZachetkaSection />
+          )}
           {activeSection === 'storage' && (
             <CadetStorageSection />
           )}
           {activeSection === 'events' && (
             <CadetEventsSection />
+          )}
+          {activeSection === 'personnel' && isOfficer && (
+            <div className="space-y-4">
+              <UsersTable
+                users={users}
+                onOpenCreateModal={() => setIsCreateModalOpen(true)}
+                onDeleteUser={(id) => {
+                  userStorageService.deleteUser(id);
+                  setUsers(userStorageService.getUsers());
+                }}
+                onResetUsers={() => {
+                  const reset = userStorageService.resetToDefaults();
+                  setUsers(reset);
+                }}
+              />
+              <CreateUserModal
+                isOpen={isCreateModalOpen}
+                onClose={() => setIsCreateModalOpen(false)}
+                onCreate={(payload) => {
+                  userStorageService.createUser(payload);
+                  setUsers(userStorageService.getUsers());
+                }}
+              />
+            </div>
           )}
           {activeSection === 'profile' && (
             isTeacher ? (

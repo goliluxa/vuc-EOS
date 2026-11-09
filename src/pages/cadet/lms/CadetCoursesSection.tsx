@@ -49,6 +49,8 @@ export const CadetCoursesSection: React.FC<CadetCoursesSectionProps> = ({
     <CadetCoursesList
       courses={courses}
       onSelectCourse={(id) => handleSelectCourse(id)}
+      isTeacher={isTeacher}
+      instructorName={instructorName}
     />
   );
 };

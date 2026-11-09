@@ -1,9 +1,9 @@
 import React from 'react';
-import { Calendar, BookMarked, UserCircle, CalendarCheck, ArrowLeft, FolderArchive } from 'lucide-react';
+import { Calendar, BookMarked, UserCircle, CalendarCheck, ArrowLeft, FolderArchive, Users, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useSiteSettings } from '../../../context/SiteSettingsContext';
 
-export type CadetLmsSection = 'schedule' | 'courses' | 'storage' | 'profile' | 'events';
+export type CadetLmsSection = 'schedule' | 'courses' | 'grades' | 'storage' | 'personnel' | 'profile' | 'events';
 
 interface CadetSidebarProps {
   activeSection: CadetLmsSection;
@@ -20,6 +20,7 @@ export const CadetSidebar: React.FC<CadetSidebarProps> = ({
   const isCadet = userRole === 'cadet';
   const isMethodist = userRole === 'methodist';
   const isDeputy = userRole === 'deputy';
+  const isOfficer = userRole === 'officer';
 
   return (
     <aside className="h-full w-64 bg-white border-r border-surface-border flex flex-col justify-between select-none">
@@ -91,6 +92,27 @@ export const CadetSidebar: React.FC<CadetSidebarProps> = ({
             <span>Курсы</span>
           </button>
 
+          {/* 2.1 Успеваемость (Зачётка) - только для курсантов */}
+          {isCadet && (
+            <button
+              type="button"
+              onClick={() => onSelectSection('grades')}
+              className={`w-full flex items-center gap-3 px-3 py-2 rounded-md text-xs sm:text-sm transition-colors cursor-pointer ${
+                activeSection === 'grades'
+                  ? 'bg-blue-50/90 text-military-blue font-semibold border border-blue-200/70 shadow-xs'
+                  : 'text-content-primary hover:bg-slate-100 font-medium'
+              }`}
+              title="Электронная зачётная книжка и успеваемость"
+            >
+              <Award
+                className={`w-4 h-4 shrink-0 ${
+                  activeSection === 'grades' ? 'text-military-blue' : 'text-slate-500'
+                }`}
+              />
+              <span>Успеваемость</span>
+            </button>
+          )}
+
           {/* 2.5 Хранилище файлов (внутренняя секция LMS) */}
           <button
             type="button"
@@ -111,6 +133,25 @@ export const CadetSidebar: React.FC<CadetSidebarProps> = ({
           </button>
 
           {/* 3. Профиль */}
+          {isOfficer && (
+            <button
+              type="button"
+              onClick={() => onSelectSection('personnel')}
+              className={`w-full flex items-center gap-3 px-3 py-2 rounded-md text-xs sm:text-sm transition-colors cursor-pointer ${
+                activeSection === 'personnel'
+                  ? 'bg-blue-50/90 text-military-blue font-semibold border border-blue-200/70 shadow-xs'
+                  : 'text-content-primary hover:bg-slate-100 font-medium'
+              }`}
+              title="Реестр личного состава"
+            >
+              <Users
+                className={`w-4 h-4 shrink-0 ${
+                  activeSection === 'personnel' ? 'text-military-blue' : 'text-slate-500'
+                }`}
+              />
+              <span>Личный состав</span>
+            </button>
+          )}
           <button
             type="button"
             onClick={() => onSelectSection('profile')}
@@ -130,7 +171,7 @@ export const CadetSidebar: React.FC<CadetSidebarProps> = ({
           </button>
 
           {/* 4. Мероприятия (В разработке - Disabled / Gray) */}
-          {(isCadet || isMethodist || isDeputy) && (
+          {(isCadet || isMethodist || isDeputy || isOfficer) && (
           <button
             type="button"
             onClick={() => onSelectSection('events')}

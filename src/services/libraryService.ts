@@ -4,14 +4,16 @@ export const LIBRARY_EXTERNAL_URL =
 
 export const libraryService = {
   getLibraryUrl(): string {
-    return LIBRARY_EXTERNAL_URL;
+    const separator = LIBRARY_EXTERNAL_URL.includes('?') ? '&' : '?';
+    return `${LIBRARY_EXTERNAL_URL}${separator}from=vuc_ios`;
   },
 
   redirectToLibrary(newTab = false): void {
+    const targetUrl = this.getLibraryUrl();
     if (newTab) {
-      window.open(LIBRARY_EXTERNAL_URL, '_blank', 'noopener,noreferrer');
+      window.open(targetUrl, '_blank', 'noopener,noreferrer');
     } else {
-      window.location.href = LIBRARY_EXTERNAL_URL;
+      window.location.href = targetUrl;
     }
   },
 };

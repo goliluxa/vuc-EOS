@@ -11,6 +11,17 @@ export const CadetPortalPage: React.FC = () => {
   const navigate = useNavigate();
   const currentUser = cadetAuthService.getCurrentUser();
   const isTeacher = currentUser?.role === 'teacher';
+  const isOfficer = currentUser?.role === 'officer';
+
+  React.useEffect(() => {
+    if (!currentUser) {
+      navigate('/login', { replace: true });
+    }
+  }, [currentUser, navigate]);
+
+  if (!currentUser) {
+    return null;
+  }
 
   const handleLogout = () => {
     cadetAuthService.logout();
@@ -51,7 +62,7 @@ export const CadetPortalPage: React.FC = () => {
                   {currentUser?.fullName || 'Курсант ВУЦ'}
                 </span>
                 <span className="text-[11px] text-content-secondary leading-tight">
-                  {currentUser?.unitOrDepartment || 'Взвод 141'}
+                  {currentUser?.unitOrDepartment || 'Группа 141'}
                   <span className="mx-1 text-slate-300">•</span>
                   <span className="font-medium text-military-blue">
                     {getRoleBadgeText(currentUser?.role)}
@@ -95,18 +106,20 @@ export const CadetPortalPage: React.FC = () => {
               </div>
               <div className="mb-2">
                 <h2 className="text-lg font-bold text-navy-deep group-hover:text-military-red transition-colors whitespace-nowrap">
-                  {isTeacher ? 'Учебный процесс' : 'Учебная программа'}
+                  {isOfficer ? 'Кабинет руководства ВУЦ' : isTeacher ? 'Учебный процесс' : 'Учебная программа'}
                 </h2>
               </div>
               <p className="text-xs sm:text-sm text-content-secondary leading-relaxed mb-6">
-                {isTeacher
+                {isOfficer
+                  ? 'Общее руководство учебным процессом, инспекция дисциплин, планирование мероприятий, облачный фонд документации и личный состав.'
+                  : isTeacher
                   ? 'Управление курсами военной подготовки (ОВП, тактика, огневая), лекции, презентации, публикация тем и профиль преподавателя.'
                   : 'Расписание учебного военного дня (1 день в неделю), курсы военной подготовки (ОВП, тактика, огневая), презентации лекций и учебные материалы.'}
               </p>
             </div>
 
             <div className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-military-red group-hover:text-military-redHover transition-colors pt-3 border-t border-surface-border/60">
-              <span>{isTeacher ? 'Войти в портал' : 'Перейти к программе'}</span>
+              <span>{isOfficer ? 'Войти в кабинет начальника' : isTeacher ? 'Войти в портал' : 'Перейти к программе'}</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </div>
           </button>

@@ -18,7 +18,7 @@ export const LoginPage: React.FC = () => {
 
     const result = cadetAuthService.loginUser(login, password);
     if (result.success && result.user) {
-      if (result.user.role === 'officer' || result.user.role === 'admin') {
+      if (result.user.role === 'admin') {
         navigate('/settingpanel');
       } else {
         navigate('/portal');

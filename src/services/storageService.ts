@@ -43,8 +43,8 @@ export const storageService = {
     return {
       current_folder_id: parentId,
       folders: [
-        { id: 'f-1', name: 'Кафедра ОВП (Учебные пособия и уставы)', space: 'SHARED', created_at: '2026-11-02' },
-        { id: 'f-2', name: 'Взвод 141 (Служебная документация)', space: 'SHARED', created_at: '2026-11-06' },
+        { id: 'f-1', name: 'Учебные пособия и уставы', space: 'SHARED', created_at: '2026-11-02' },
+        { id: 'f-2', name: 'Служебная документация', space: 'SHARED', created_at: '2026-11-06' },
         { id: 'f-3', name: 'Приказы и директивы начальника ВУЦ', space: 'SHARED', created_at: '2026-11-01' },
       ],
       files: [

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { X, Plus, FileText, Upload, Clock } from 'lucide-react';
-import { LessonMaterial } from '../../../types/cadet';
+import { X, Plus, FileText, Upload, Clock, HelpCircle, CheckCircle2 } from 'lucide-react';
+import { LessonMaterial, QuizQuestion } from '../../../types/cadet';
 
 interface AddLessonModalProps {
   isOpen: boolean;
@@ -13,6 +13,7 @@ interface AddLessonModalProps {
     status: 'published' | 'draft' | 'scheduled';
     scheduledDate?: string;
     materials: LessonMaterial[];
+    questions?: QuizQuestion[];
   }) => void;
   instructorName: string;
 }
@@ -28,6 +29,14 @@ export const AddLessonModal: React.FC<AddLessonModalProps> = ({
   const [hours, setHours] = useState(4);
   const [status, setStatus] = useState<'published' | 'draft' | 'scheduled'>('published');
   const [scheduledDate, setScheduledDate] = useState('2026-11-21');
+  const [questions, setQuestions] = useState<QuizQuestion[]>([
+    {
+      id: 'q-1',
+      question: 'Каков порядок выполнения норматива?',
+      options: ['По команде командира', 'Самостоятельно', 'В произвольном порядке'],
+      correctOptionIndex: 0,
+    },
+  ]);
   const [materials, setMaterials] = useState<LessonMaterial[]>([
     {
       id: 'm-new-1',
@@ -52,6 +61,7 @@ export const AddLessonModal: React.FC<AddLessonModalProps> = ({
       status,
       scheduledDate: status === 'scheduled' ? scheduledDate : undefined,
       materials,
+      questions,
     });
     onClose();
   };
@@ -149,6 +159,46 @@ export const AddLessonModal: React.FC<AddLessonModalProps> = ({
           )}
 
           {/* Прикрепленные файлы */}
+          <div className="pt-2 border-t border-slate-100 space-y-2">
+            <div className="flex justify-between items-center">
+              <span className="font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+                <HelpCircle className="w-3.5 h-3.5 text-amber-600" />
+                <span>Контрольные вопросы ({questions.length})</span>
+              </span>
+              <button
+                type="button"
+                onClick={() => {
+                  setQuestions((prev) => [
+                    ...prev,
+                    {
+                      id: `q-${Date.now()}`,
+                      question: 'Новый контрольный вопрос...',
+                      options: ['Вариант А (верный)', 'Вариант Б', 'Вариант В'],
+                      correctOptionIndex: 0,
+                    },
+                  ]);
+                }}
+                className="inline-flex items-center gap-1 text-[11px] text-military-blue hover:underline font-semibold cursor-pointer"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                <span>Добавить вопрос</span>
+              </button>
+            </div>
+            <div className="space-y-1.5">
+              {questions.map((q, qIdx) => (
+                <div key={q.id} className="p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-xs space-y-1">
+                  <div className="font-semibold text-slate-800">
+                    {qIdx + 1}. {q.question}
+                  </div>
+                  <div className="flex items-center gap-2 text-[11px] text-slate-500">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>Верный ответ: {q.options[q.correctOptionIndex]}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
           <div className="pt-2 border-t border-slate-100">
             <div className="flex justify-between items-center mb-2">
               <span className="font-bold text-slate-700 uppercase tracking-wider">Прикреплённые материалы ({materials.length})</span>

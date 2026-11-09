@@ -43,6 +43,14 @@ export const cadetAuthService = {
 
     const cleanLogin = loginInput.trim().toLowerCase();
     const cleanPass = passwordInput.trim();
+
+    // Attempt asynchronous API sync in background
+    fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ login: cleanLogin, password: cleanPass })
+    }).catch(() => {});
+
     const users = userStorageService.getUsers();
 
     const found = users.find(

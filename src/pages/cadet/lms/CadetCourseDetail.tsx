@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, CheckCircle, ChevronsUpDown, Plus } from 'lucide-react';
+import { ArrowLeft, CheckCircle, ChevronsUpDown, Plus, ArrowUp, ArrowDown, Trash2, Edit3, Eye, FolderPlus } from 'lucide-react';
 import { CadetCourse, LessonMaterial } from '../../../types/cadet';
 import { CadetCourseHero } from './CadetCourseHero';
 import { CadetLessonItem } from './CadetLessonItem';
@@ -22,6 +22,7 @@ export const CadetCourseDetail: React.FC<CadetCourseDetailProps> = ({
 }) => {
   const [currentCourse, setCurrentCourse] = useState<CadetCourse>(course);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
   const [expandedLessonId, setExpandedLessonId] = useState<string>(
     course.lessons[0]?.id || ''
   );
@@ -49,6 +50,33 @@ export const CadetCourseDetail: React.FC<CadetCourseDetailProps> = ({
     } else {
       setExpandedLessonId(course.lessons[0]?.id || '');
     }
+  };
+
+  const handleAddSection = () => {
+    const title = window.prompt('Название нового раздела (модуля):');
+    if (title && title.trim()) {
+      courseService.addSectionToCourse(currentCourse.id, title.trim());
+      const updated = courseService.getCourseById(currentCourse.id);
+      if (updated) setCurrentCourse(updated);
+      setActionNotice(`Раздел «${title.trim()}» успешно добавлен.`);
+      setTimeout(() => setActionNotice(null), 3000);
+    }
+  };
+
+  const handleDeleteLesson = (lessonId: string, lessonTitle: string) => {
+    if (window.confirm(`Удалить занятие «${lessonTitle}»?`)) {
+      courseService.deleteLessonFromCourse(currentCourse.id, lessonId);
+      const updated = courseService.getCourseById(currentCourse.id);
+      if (updated) setCurrentCourse(updated);
+      setActionNotice(`Занятие «${lessonTitle}» удалено.`);
+      setTimeout(() => setActionNotice(null), 3000);
+    }
+  };
+
+  const handleMoveLesson = (lessonId: string, direction: 'up' | 'down') => {
+    courseService.moveLesson(currentCourse.id, lessonId, direction);
+    const updated = courseService.getCourseById(currentCourse.id);
+    if (updated) setCurrentCourse(updated);
   };
 
   return (
@@ -120,6 +148,33 @@ export const CadetCourseDetail: React.FC<CadetCourseDetailProps> = ({
 
           <div className="flex items-center gap-2 self-start sm:self-auto">
             {isTeacher && (
+              <>
+                <button
+                  type="button"
+                  onClick={() => setIsEditMode(!isEditMode)}
+                  className={`inline-flex items-center gap-1.5 px-3 py-1 text-xs font-bold rounded-md transition-colors shadow-2xs cursor-pointer ${
+                    isEditMode
+                      ? 'bg-amber-600 text-white hover:bg-amber-700'
+                      : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200'
+                  }`}
+                  title="Переключить режим редактирования (как в Moodle)"
+                >
+                  {isEditMode ? <Eye className="w-3.5 h-3.5" /> : <Edit3 className="w-3.5 h-3.5" />}
+                  <span>{isEditMode ? 'Глазами курсанта' : 'Режим редактирования'}</span>
+                </button>
+
+                {isEditMode && (
+                  <button
+                    type="button"
+                    onClick={handleAddSection}
+                    className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-md transition-colors"
+                    title="Добавить модуль/раздел"
+                  >
+                    <FolderPlus className="w-3.5 h-3.5 text-military-blue" />
+                    <span>Раздел</span>
+                  </button>
+                )}
+
               <button
                 type="button"
                 onClick={() => setIsAddModalOpen(true)}
@@ -128,6 +183,7 @@ export const CadetCourseDetail: React.FC<CadetCourseDetailProps> = ({
                 <Plus className="w-3.5 h-3.5" />
                 <span>Добавить занятие</span>
               </button>
+              </>
             )}
             <button
               type="button"
@@ -146,11 +202,11 @@ export const CadetCourseDetail: React.FC<CadetCourseDetailProps> = ({
 
         {/* Lessons List */}
         <div className="space-y-3">
-          {currentCourse.lessons.map((lesson) => (
+          {currentCourse.lessons.map((lesson, idx) => (
+            <div key={lesson.id} className="relative group/edit">
             <CadetLessonItem
-              key={lesson.id}
               lesson={lesson}
-              isTeacher={isTeacher}
+              isTeacher={isEditMode}
               onStatusChange={(newStatus) => {
                 courseService.updateLessonStatus(currentCourse.id, lesson.id, newStatus);
                 setCurrentCourse((prev) => ({
@@ -173,6 +229,46 @@ export const CadetCourseDetail: React.FC<CadetCourseDetailProps> = ({
               }
               onDownloadMaterial={handleDownload}
             />
+            {isEditMode && (
+              <div className="absolute right-12 top-3.5 z-10 hidden sm:flex items-center gap-1 bg-white/90 backdrop-blur-xs border border-slate-200 rounded-lg p-0.5 shadow-xs">
+                <button
+                  type="button"
+                  disabled={idx === 0}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleMoveLesson(lesson.id, 'up');
+                  }}
+                  className="p-1 text-slate-400 hover:text-military-blue disabled:opacity-30 disabled:cursor-not-allowed"
+                  title="Переместить занятие выше"
+                >
+                  <ArrowUp className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  type="button"
+                  disabled={idx === currentCourse.lessons.length - 1}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleMoveLesson(lesson.id, 'down');
+                  }}
+                  className="p-1 text-slate-400 hover:text-military-blue disabled:opacity-30 disabled:cursor-not-allowed"
+                  title="Переместить занятие ниже"
+                >
+                  <ArrowDown className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDeleteLesson(lesson.id, lesson.title);
+                  }}
+                  className="p-1 text-slate-400 hover:text-military-red ml-0.5"
+                  title="Удалить занятие"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            )}
+            </div>
           ))}
         </div>
       </div>

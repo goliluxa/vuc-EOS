@@ -87,7 +87,7 @@ export const CadetMaterialPreviewModal: React.FC<CadetMaterialPreviewModalProps>
             <BookOpen className="w-5 h-5 text-military-blue shrink-0 mt-0.5" />
             <div className="text-xs sm:text-sm">
               <span className="font-semibold text-navy-deep">
-                Официальный учебный материал кафедры ВУЦ.
+                Официальный учебный материал ВУЦ.
               </span>
               <p className="text-content-secondary mt-0.5">
                 Материал проверен учебно-методическим отделом и допущен к изучению курсантами
@@ -125,7 +125,7 @@ export const CadetMaterialPreviewModal: React.FC<CadetMaterialPreviewModalProps>
             <p>
               В данном файле содержатся ключевые теоретические положения, нормативные таблицы, схемы
               и практические рекомендации к занятию. Рекомендуется изучить материал перед началом
-              практической отработки нормативов на занятиях взвода.
+              практической отработки нормативов на учебных занятиях.
             </p>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, Award, Key, CheckCircle, Building } from 'lucide-react';
+import { User, Key, CheckCircle, Building } from 'lucide-react';
 import { CadetSessionUser } from '../../../types/cadet';
 
 interface CadetProfileSectionProps {
@@ -40,7 +40,7 @@ export const CadetProfileSection: React.FC<CadetProfileSectionProps> = ({ user }
                 </span>
               </div>
               <p className="text-xs sm:text-sm text-content-secondary mt-0.5">
-                {user?.unitOrDepartment || 'Взвод 141 (Связь)'} • ВУС-121800 (Применение подразделений со средствами радиосвязи)
+                {user?.unitOrDepartment || 'Группа 141 (Связь)'} • ВУС-121800 (Специалист средств радиосвязи)
               </p>
             </div>
           </div>
@@ -53,8 +53,8 @@ export const CadetProfileSection: React.FC<CadetProfileSectionProps> = ({ user }
             <span className="font-semibold text-slate-800 text-sm">Курсант</span>
           </div>
           <div className="p-3 rounded-lg bg-slate-50 border border-slate-100">
-            <span className="text-slate-400 block mb-1">Учебный взвод</span>
-            <span className="font-semibold text-slate-800 text-sm">Взвод 141</span>
+            <span className="text-slate-400 block mb-1">Учебная группа</span>
+            <span className="font-semibold text-slate-800 text-sm">Группа 141</span>
           </div>
           <div className="p-3 rounded-lg bg-slate-50 border border-slate-100">
             <span className="text-slate-400 block mb-1">Курс института</span>
@@ -67,60 +67,27 @@ export const CadetProfileSection: React.FC<CadetProfileSectionProps> = ({ user }
         </div>
       </div>
 
-      {/* 2. Блок академической успеваемости и прогресса */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-white border border-surface-border rounded-xl p-5 shadow-xs flex flex-col justify-between">
-          <div>
-            <div className="flex items-center gap-2 mb-4">
-              <Award className="w-5 h-5 text-amber-500" />
-              <h3 className="font-bold text-sm text-navy-deep">Успеваемость и допуск к занятиям</h3>
-            </div>
-            <div className="space-y-3 text-xs">
-              <div className="flex justify-between items-center py-2 border-b border-slate-100">
-                <span className="text-slate-600">Тактическая подготовка</span>
-                <span className="font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">Отлично (5)</span>
-              </div>
-              <div className="flex justify-between items-center py-2 border-b border-slate-100">
-                <span className="text-slate-600">Огневая подготовка</span>
-                <span className="font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">Зачтено</span>
-              </div>
-              <div className="flex justify-between items-center py-2 border-b border-slate-100">
-                <span className="text-slate-600">Военная топография</span>
-                <span className="font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded border border-blue-100">Хорошо (4)</span>
-              </div>
-              <div className="flex justify-between items-center py-2 border-b border-slate-100">
-                <span className="text-slate-600">Общевоинские уставы ВС РФ</span>
-                <span className="font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">Отлично (5)</span>
-              </div>
-            </div>
-          </div>
-          <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-            <span>Средний академический балл:</span>
-            <span className="font-bold text-slate-900 text-sm">4.8 / 5.0</span>
-          </div>
-        </div>
-
-        {/* 3. Служебная карточка взвода */}
-        <div className="bg-white border border-surface-border rounded-xl p-5 shadow-xs">
+      {/* 2. Служебная карточка куратора и руководства */}
+      <div className="bg-white border border-surface-border rounded-xl p-5 sm:p-6 shadow-xs">
           <div className="flex items-center gap-2 mb-4">
             <Building className="w-5 h-5 text-military-blue" />
-            <h3 className="font-bold text-sm text-navy-deep">Командный состав взвода</h3>
+            <h3 className="font-bold text-sm text-navy-deep">Куратор и руководство</h3>
           </div>
-          <div className="space-y-3.5 text-xs">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs">
             <div className="p-3 rounded-lg bg-slate-50 border border-slate-100">
-              <span className="text-[11px] text-slate-400 block font-medium">Куратор / Преподаватель взвода:</span>
+              <span className="text-[11px] text-slate-400 block font-medium">Куратор / Преподаватель:</span>
               <span className="font-semibold text-slate-800 text-sm block mt-0.5">Майор Ковалёв Д. С.</span>
               <span className="text-slate-500 text-[11px] mt-1 block">Кабинет 204 • Вторник / Четверг (15:00 - 17:00)</span>
             </div>
             <div className="p-3 rounded-lg bg-slate-50 border border-slate-100">
-              <span className="text-[11px] text-slate-400 block font-medium">Командир взвода:</span>
+              <span className="text-[11px] text-slate-400 block font-medium">Староста группы:</span>
               <span className="font-semibold text-slate-800 text-sm block mt-0.5">Курсант Васильев М. И.</span>
+              <span className="text-slate-500 text-[11px] mt-1 block">Учебная группа 141 (Связь)</span>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* 4. Безопасность и смена пароля */}
+      {/* 3. Безопасность и смена пароля */}
       <div className="bg-white border border-surface-border rounded-xl p-5 sm:p-6 shadow-xs">
         <div className="flex items-center gap-2 mb-3">
           <Key className="w-5 h-5 text-navy-deep" />

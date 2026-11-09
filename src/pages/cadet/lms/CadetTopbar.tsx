@@ -51,7 +51,7 @@ export const CadetTopbar: React.FC<CadetTopbarProps> = ({
               {cadet?.fullName || 'Пользователь'}
             </span>
             <span className="text-[11px] text-content-secondary leading-tight">
-              {cadet?.unitOrDepartment || 'Взвод 141'}
+              {cadet?.unitOrDepartment || 'Группа 141'}
               {cadet?.militaryRank && (
                 <>
                   <span className="mx-1 text-slate-300">•</span>
