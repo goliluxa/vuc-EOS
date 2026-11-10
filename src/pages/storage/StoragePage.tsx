@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Folder, Download, Search, HardDrive, LogOut, Upload, FolderPlus, User, Trash2 } from 'lucide-react';
 import { BrandLogo } from '../../components/BrandLogo';
 import { cadetAuthService } from '../../services/cadetAuthService';
+import { CreateFolderModal } from './components/CreateFolderModal';
 
 interface StorageItem {
   id: string;
@@ -32,6 +33,7 @@ export const StoragePage: React.FC = () => {
   const [search, setSearch] = useState('');
   const [currentFolderId, setCurrentFolderId] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
+  const [isCreateFolderOpen, setIsCreateFolderOpen] = useState(false);
 
   const handleLogout = () => {
     cadetAuthService.logout();
@@ -39,19 +41,20 @@ export const StoragePage: React.FC = () => {
   };
 
   const handleCreateFolder = () => {
-    const name = window.prompt('Введите название новой папки:');
-    if (name && name.trim()) {
-      const newFolder: StorageItem = {
-          id: `f-${Date.now()}`,
-          name: name.trim(),
-          type: 'folder',
-          updatedAt: 'Сегодня',
-          parentFolderId: currentFolderId,
-      };
-      setItems((prev) => [newFolder, ...prev]);
-      setNotice(`Папка «${name.trim()}» создана.`);
-      setTimeout(() => setNotice(null), 3000);
-    }
+    setIsCreateFolderOpen(true);
+  };
+
+  const handleConfirmCreateFolder = (name: string) => {
+    const newFolder: StorageItem = {
+      id: `f-${Date.now()}`,
+      name: name.trim(),
+      type: 'folder',
+      updatedAt: 'Сегодня',
+      parentFolderId: currentFolderId,
+    };
+    setItems((prev) => [newFolder, ...prev]);
+    setNotice(`Папка «${name.trim()}» создана.`);
+    setTimeout(() => setNotice(null), 3000);
   };
 
   const handleUploadFile = () => {
@@ -256,6 +259,12 @@ export const StoragePage: React.FC = () => {
           ))}
         </div>
       </main>
+
+      <CreateFolderModal
+        isOpen={isCreateFolderOpen}
+        onClose={() => setIsCreateFolderOpen(false)}
+        onCreate={handleConfirmCreateFolder}
+      />
     </div>
   );
 };

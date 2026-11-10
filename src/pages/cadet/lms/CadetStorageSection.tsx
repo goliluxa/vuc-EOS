@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Folder, Download, Search, HardDrive, Upload, FolderPlus, Trash2, ArrowUp, ChevronRight } from 'lucide-react';
 import { storageService, ApiStorageFolder, ApiStorageFile } from '../../../services/storageService';
+import { CreateFolderModal } from '../../storage/components/CreateFolderModal';
 
 import { cadetAuthService } from '../../../services/cadetAuthService';
 
@@ -14,6 +15,7 @@ export const CadetStorageSection: React.FC = () => {
   const [currentFolderId, setCurrentFolderId] = useState<string | null>(null);
   const [breadcrumbStack, setBreadcrumbStack] = useState<{ id: string; name: string }[]>([]);
   const [notice, setNotice] = useState<string | null>(null);
+  const [isCreateFolderOpen, setIsCreateFolderOpen] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const loadContent = async (folderId: string | null = currentFolderId) => {
@@ -52,14 +54,15 @@ export const CadetStorageSection: React.FC = () => {
       handleNavigateToBreadcrumb(breadcrumbStack.length - 2);
     }
   };
-  const handleCreateFolder = async () => {
-    const name = window.prompt('Введите название новой папки:');
-    if (name && name.trim()) {
-      await storageService.createFolder(name.trim(), currentFolderId);
-      await loadContent(currentFolderId);
-      setNotice(`Папка «${name.trim()}» создана.`);
-      setTimeout(() => setNotice(null), 3000);
-    }
+  const handleCreateFolder = () => {
+    setIsCreateFolderOpen(true);
+  };
+
+  const handleConfirmCreateFolder = async (folderName: string) => {
+    await storageService.createFolder(folderName, currentFolderId);
+    await loadContent(currentFolderId);
+    setNotice(`Папка «${folderName}» создана.`);
+    setTimeout(() => setNotice(null), 3000);
   };
 
   const handleFileUploadChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -305,6 +308,12 @@ export const CadetStorageSection: React.FC = () => {
           </div>
         ))}
       </div>
+
+      <CreateFolderModal
+        isOpen={isCreateFolderOpen}
+        onClose={() => setIsCreateFolderOpen(false)}
+        onCreate={handleConfirmCreateFolder}
+      />
     </div>
   );
 };

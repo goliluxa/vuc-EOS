@@ -66,6 +66,32 @@ export const CadetCoursesList: React.FC<CadetCoursesListProps> = ({
               </p>
             </div>
 
+            {/* Компактный прогресс-бар освоения курса для курсанта */}
+            {!isTeacher && (
+              <div className="mt-3.5 pt-3 border-t border-slate-100">
+                {(() => {
+                  const totalLessons = course.lessons.length;
+                  const completedHours = course.completedHours || 0;
+                  const totalHours = course.totalHours || (totalLessons * 4) || 1;
+                  const progressPercent = Math.min(100, Math.max(0, Math.round((completedHours / totalHours) * 100)));
+                  return (
+                    <div className="space-y-1.5">
+                      <div className="flex items-center justify-between text-[11px]">
+                        <span className="text-slate-500 font-medium">Прогресс освоения:</span>
+                        <span className="font-bold text-military-blue">{progressPercent}%</span>
+                      </div>
+                      <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                        <div
+                          className="h-full bg-gradient-to-r from-military-blue to-blue-500 rounded-full transition-all duration-300"
+                          style={{ width: `${progressPercent}%` }}
+                        />
+                      </div>
+                    </div>
+                  );
+                })()}
+              </div>
+            )}
+
             <div className="mt-4 pt-3.5 border-t border-surface-border flex items-center justify-end">
               <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-military-blue group-hover:translate-x-1 transition-transform">
                 <span>Открыть материалы</span>
